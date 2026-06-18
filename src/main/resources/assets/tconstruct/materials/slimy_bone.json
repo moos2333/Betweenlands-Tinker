@@ -1,7 +1,7 @@
 {
-  "type": "colored",
+  "type": "block",
   "suffix": "bone_base",
   "parameters": {
-    "color": "9e9e6a"
+    "texture": "thebetweenlands:blocks/slimy_bone_block"
   }
 }

@@ -20,11 +20,13 @@ Betweenlands’ Tinker integrates the dark swamps of The Betweenlands into Tinke
 
 ## New Materials
 
-- **Weedwood** – Mining Level 0, non-castable, 40 dur, 2.0 spd, 2.0 atk. Traits: Between, Weed Shield.
-- **Slimy Bone** – Mining Level 1, non-castable, 100 dur, 4.0 spd, 2.0 atk. Traits: Between, Splintering (Head), Splinters (All).
-- **Octine** – Mining Level 2, castable, 700 dur, 6.0 spd, 4.0 atk. Traits: Between, Ignition.
-- **Syrmorite** – Mining Level 2, castable, 900 dur, 8.0 spd, 3.0 atk. Traits: Between, Stacking.
-- **Valonite** – Mining Level 3, non-castable, 1300 dur, 8.0 spd, 6.0 atk. Traits: Between, Valor.
+| Material | Mining Level | Castable | Durability | Speed | Attack | Traits |
+|----------|--------------|----------|------------|-------|--------|--------|
+| **Weedwood** | 0 | ❌ | 40 | 2.0 | 2.0 | Between, Weed Shield |
+| **Slimy Bone** | 1 | ❌ | 100 | 4.0 | 2.0 | Between, Splintering (Head), Splinters (All) |
+| **Octine** | 2 | ✅ | 700 | 6.0 | 4.0 | Between, Ignition |
+| **Syrmorite** | 2 | ✅ | 900 | 8.0 | 3.0 | Between, Stacking |
+| **Valonite** | 3 | ❌ | 1300 | 8.0 | 6.0 | Between, Valor |
 
 Octine and Syrmorite are fully castable: ore → 288 mB, ingot → 144 mB, nugget → 16 mB, block → 1296 mB. Use casting table (with casts) or basin (no cast for blocks).
 
@@ -47,11 +49,13 @@ Part conversion is also available: Tool Rod → Betweenlands Handle, Binding →
 
 ## New Traits
 
-- **Between** – Non-Interloper tools bypass weakness but lose 25% damage/speed; Interloper tools unaffected.
-- **Weed Shield** – Generates a shield (max 100) that absorbs durability loss. Regens every 20s (10s in Betweenlands).
-- **Valor** – Gain valor from mining (1) or dealing damage (1 per 5 damage). Every 100 valor gives +1% damage, +1% speed, -1% durability consumption (max 3000).
-- **Ignition** – Every third hit ignites target for 5s, or deals +25% damage if already burning.
-- **Stacking** – Repairs are 50% less effective; repairs over 1000 durability grant 1 stacking point (max 100), each -1% durability consumption.
+| Trait | Effect |
+|-------|--------|
+| **Between** | Non-Interloper tools bypass weakness but lose 25% damage/speed; Interloper tools unaffected. |
+| **Weed Shield** | Generates a shield (max 100) that absorbs durability loss. Regens every 20s (10s in Betweenlands). |
+| **Valor** | Gain valor from mining (1) or dealing damage (1 per 5 damage). Every 100 valor gives +1% damage, +1% speed, -1% durability consumption (max 3000). |
+| **Ignition** | Every third hit ignites target for 5s, or deals +25% damage if already burning. |
+| **Stacking** | Repairs are 50% less effective; repairs over 1000 durability grant 1 stacking point (max 100), each -1% durability consumption. |
 
 ---
 
@@ -85,11 +89,14 @@ MIT
 ---
 
 ## Credits
-- Tinkers’ Construct – Tool system & API
-- The Betweenlands – Dimension & mechanics
-- SlimeKnights & Angry Pixel teams
+
+- **Tinkers’ Construct** – Created by SlimeKnights
+- **The Betweenlands** – Created by Angry Pixel
+- **Mantle** – Created by SlimeKnights
+
+Special thanks to the modding community for their support and contributions.
 
 ---
 
 **Note:**  
-This documentation is written in Markdown. Portions of this code were generated with the assistance of an AI language model.
+Portions of this code were generated with the assistance of an AI language model.

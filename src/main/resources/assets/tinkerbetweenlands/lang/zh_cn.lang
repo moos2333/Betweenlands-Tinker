@@ -36,3 +36,10 @@ modifier.stacking.extra=层叠：+%s%%
 # Betweenlands Tinker - Fluids
 fluid.octine.name=熔融炽炎
 fluid.syrmorite.name=熔融赛摩
+
+#Betweenlands Tinker - Armor Traits
+modifier.weedshield_armor.name=杂草盾
+modifier.weedshield_armor.desc=§o腐生！§r\n穿戴时生成护盾抵消耐久损耗。交错次元中效率翻倍。
+
+modifier.stacking_armor.name=层叠
+modifier.stacking_armor.desc=§o致密而顽固...§r\n盔甲极难被修复，但足量的修复将永久降低其损耗。

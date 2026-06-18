@@ -1,5 +1,6 @@
 package com.npstra.tinkerbetweenlands;
 
+import com.npstra.tinkerbetweenlands.compat.conarm.materials.ArmorMaterial;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.recipe.SmelteryRecipeRegister;
 import net.minecraftforge.fml.common.Mod;
@@ -51,6 +52,7 @@ public class BetweenlandsTinker {
         AnimatorRecipe.addRecipe(new ToolConversionRecipe());
         AnimatorRecipe.addRecipe(new PartConversionRecipe());
         MinecraftForge.EVENT_BUS.register(new BetweenlandsEventHandler());
+        ArmorMaterial.init(event);
     }
 
     @Mod.EventHandler
