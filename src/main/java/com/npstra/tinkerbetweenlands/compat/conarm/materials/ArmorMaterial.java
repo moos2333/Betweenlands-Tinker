@@ -4,31 +4,18 @@ import c4.conarm.lib.materials.ArmorMaterialType;
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
 import c4.conarm.lib.materials.TrimMaterialStats;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.utils.TinkerUtil;
-import slimeknights.tconstruct.library.utils.TagUtil;
 import com.npstra.tinkerbetweenlands.content.materials.MaterialRegister;
 import com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitStackingArmor;
 import com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitWeedShieldArmor;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class ArmorMaterial {
 
     private static final TraitWeedShieldArmor TRAIT_WEED_SHIELD = new TraitWeedShieldArmor();
     private static final TraitStackingArmor TRAIT_STACKING = new TraitStackingArmor();
-    private static final Set<String> OUR_MATERIALS = new HashSet<>();
 
     public static void init(FMLInitializationEvent event) {
         if (!Loader.isModLoaded("conarm")) {
@@ -36,18 +23,6 @@ public class ArmorMaterial {
         }
         registerArmorStats();
         registerArmorTraits();
-        collectOurMaterials();
-        if (FMLCommonHandler.instance().getSide().isClient()) {
-            registerArmorColors();
-        }
-    }
-
-    private static void collectOurMaterials() {
-        if (MaterialRegister.weedwood != null) OUR_MATERIALS.add(MaterialRegister.weedwood.identifier);
-        if (MaterialRegister.slimy_bone != null) OUR_MATERIALS.add(MaterialRegister.slimy_bone.identifier);
-        if (MaterialRegister.valonite != null) OUR_MATERIALS.add(MaterialRegister.valonite.identifier);
-        if (MaterialRegister.octine != null) OUR_MATERIALS.add(MaterialRegister.octine.identifier);
-        if (MaterialRegister.syrmorite != null) OUR_MATERIALS.add(MaterialRegister.syrmorite.identifier);
     }
 
     private static void registerArmorStats() {
@@ -114,26 +89,5 @@ public class ArmorMaterial {
         material.addTrait(trait, ArmorMaterialType.CORE);
         material.addTrait(trait, ArmorMaterialType.PLATES);
         material.addTrait(trait, ArmorMaterialType.TRIM);
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static void registerArmorColors() {
-        ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-        for (Item item : Item.REGISTRY) {
-            if (item instanceof c4.conarm.lib.armor.ArmorCore) {
-                itemColors.registerItemColorHandler((stack, tintIndex) -> {
-                    List<Material> materials = TinkerUtil.getMaterialsFromTagList(
-                            TagUtil.getBaseMaterialsTagList(stack)
-                    );
-                    if (tintIndex < materials.size()) {
-                        Material mat = materials.get(tintIndex);
-                        if (OUR_MATERIALS.contains(mat.identifier)) {
-                            return mat.materialTextColor;
-                        }
-                    }
-                    return -1;
-                }, item);
-            }
-        }
     }
 }
