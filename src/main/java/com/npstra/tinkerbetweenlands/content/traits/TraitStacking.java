@@ -22,7 +22,7 @@ public class TraitStacking extends AbstractTrait {
         super("stacking", 0x00AA00);
     }
 
-    private Data getData(ItemStack tool, boolean createIfMissing) {
+    private ModifierTagHolder getHolder(ItemStack tool, boolean createIfMissing) {
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
         if (data == null && createIfMissing) {
@@ -42,17 +42,18 @@ public class TraitStacking extends AbstractTrait {
                 modtag.save();
             }
         }
-        return data;
+        return modtag;
     }
 
     @Override
     public int onToolHeal(ItemStack tool, int amount, int newAmount, EntityLivingBase entity) {
         int halved = newAmount / 2;
         if (amount > REPAIR_THRESHOLD) {
-            Data data = getData(tool, true);
+            ModifierTagHolder holder = getHolder(tool, true);
+            Data data = holder.getTagData(Data.class);
             if (data != null && data.stack < MAX_STACK) {
                 data.stack++;
-                ModifierTagHolder.getModifier(tool, getModifierIdentifier()).save();
+                holder.save();
             }
         }
         return halved;
@@ -63,7 +64,8 @@ public class TraitStacking extends AbstractTrait {
         if (entity == null) {
             return newDamage;
         }
-        Data data = getData(tool, true);
+        ModifierTagHolder holder = getHolder(tool, true);
+        Data data = holder.getTagData(Data.class);
         if (data != null && data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
