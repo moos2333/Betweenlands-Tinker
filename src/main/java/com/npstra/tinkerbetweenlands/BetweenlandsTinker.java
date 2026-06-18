@@ -1,0 +1,55 @@
+package com.npstra.tinkerbetweenlands;
+
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.util.ResourceLocation;
+import slimeknights.tconstruct.library.tools.ToolCore;
+import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
+import thebetweenlands.common.handler.OverworldItemHandler;
+import com.npstra.tinkerbetweenlands.api.IBetweenlandsTool;
+import com.npstra.tinkerbetweenlands.content.event.BetweenlandsEventHandler;
+import com.npstra.tinkerbetweenlands.content.materials.MaterialRegister;
+import com.npstra.tinkerbetweenlands.content.parts.ModParts;
+import com.npstra.tinkerbetweenlands.content.recipe.PartConversionRecipe;
+import com.npstra.tinkerbetweenlands.content.recipe.ToolConversionRecipe;
+import com.npstra.tinkerbetweenlands.content.tools.ModTools;
+import com.npstra.tinkerbetweenlands.config.ModConfig;
+import thebetweenlands.common.recipe.misc.AnimatorRecipe;
+
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = "required-after:mantle@[1.12-1.3.3.55,);required-after:tconstruct@[1.12.2-2.13.0,);required-after:thebetweenlands@[1.12.2-3.9.0,)")
+public class BetweenlandsTinker {
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        ModConfig.init(event);
+        ModParts.register();
+        ModTools.register();
+        MaterialRegister.preInit();
+        OverworldItemHandler.TOOL_BLACKLIST.put(
+                new ResourceLocation("tinkerbetweenlands", "tinkers_tools"),
+                stack -> {
+                    if (stack.getItem() instanceof ToolCore) {
+                        if (stack.getItem() instanceof IBetweenlandsTool) return false;
+                        if (TinkerUtil.hasTrait(TagUtil.getTagSafe(stack), "between")) return false;
+                        return true;
+                    }
+                    return false;
+                }
+        );
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        MaterialRegister.init();
+        AnimatorRecipe.addRecipe(new ToolConversionRecipe());
+        AnimatorRecipe.addRecipe(new PartConversionRecipe());
+        MinecraftForge.EVENT_BUS.register(new BetweenlandsEventHandler());
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+    }
+}

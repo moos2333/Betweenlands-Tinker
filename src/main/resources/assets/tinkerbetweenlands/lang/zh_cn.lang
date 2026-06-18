@@ -1,0 +1,38 @@
+# Betweenlands Tinker - Items
+item.tinkerbetweenlands.between_head.name=交错顶端
+item.tinkerbetweenlands.between_handle.name=交错手柄
+item.tinkerbetweenlands.between_extra.name=交错附件
+item.tinkerbetweenlands.between_pickaxe.name=交错镐
+item.tinkerbetweenlands.between_shovel.name=交错锹
+item.tinkerbetweenlands.between_hatchet.name=交错斧
+item.tinkerbetweenlands.between_broadsword.name=交错剑
+
+# Betweenlands Tinker - Materials
+material.weedwood.name=杂草木
+material.slimy_bone.name=粘骨
+material.valonite.name=英玫
+material.octine.name=炽炎
+material.syrmorite.name=赛摩
+
+# Betweenlands Tinker - Material Traits
+modifier.between.name=交错
+modifier.between.desc=§o潮湿阴暗之地...§r\n以部分属性为代价，免疫交错次元的工具削弱。交错工具不受影响。
+
+modifier.weedshield.name=杂草盾
+modifier.weedshield.desc=§o腐生！§r\n生成护盾抵消耐久损耗。交错次元中效率翻倍。
+modifier.weedshield.extra=杂草盾：%s / %s
+
+modifier.valor.name=勇气
+modifier.valor.desc=§o挺身而立！§r\n工具将随使用永久提升性能。
+modifier.valor.extra=勇气：+%s%%
+
+modifier.ignition.name=引燃
+modifier.ignition.desc=§o呼！§r\n每三次攻击引燃目标，或对已燃烧的目标造成额外伤害。
+
+modifier.stacking.name=层叠
+modifier.stacking.desc=§o致密而顽固...§r\n工具极难被修复，但足量的修复将永久降低其损耗。
+modifier.stacking.extra=层叠：+%s%%
+
+# Betweenlands Tinker - Fluids
+fluid.octine.name=熔融炽炎
+fluid.syrmorite.name=熔融赛摩

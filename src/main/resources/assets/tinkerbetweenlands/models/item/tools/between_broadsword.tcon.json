@@ -1,0 +1,8 @@
+{
+  "textures": {
+    "layer0": "tinkerbetweenlands:items/tools/betweensword/handle",
+    "layer1": "tinkerbetweenlands:items/tools/betweensword/head",
+    "layer2": "tinkerbetweenlands:items/tools/betweensword/extra",
+    "broken1": "tinkerbetweenlands:items/tools/betweensword/broken_head"
+  }
+}

@@ -1,0 +1,38 @@
+# Betweenlands Tinker - Items
+item.tinkerbetweenlands.between_head.name=Betweenlands Tool Head
+item.tinkerbetweenlands.between_handle.name=Betweenlands Tool Handle
+item.tinkerbetweenlands.between_extra.name=Betweenlands Tool Binding
+item.tinkerbetweenlands.between_pickaxe.name=Betweenlands Pickaxe
+item.tinkerbetweenlands.between_shovel.name=Betweenlands Shovel
+item.tinkerbetweenlands.between_hatchet.name=Betweenlands Hatchet
+item.tinkerbetweenlands.between_broadsword.name=Betweenlands Broadsword
+
+# Betweenlands Tinker - Materials
+material.weedwood.name=Weedwood
+material.slimy_bone.name=Slimy Bone
+material.valonite.name=Valonite
+material.octine.name=Octine
+material.syrmorite.name=Syrmorite
+
+# Betweenlands Tinker - Material Traits
+modifier.between.name=Between
+modifier.between.desc=§oA damp, twilight land...§r\nTrades some attributes to bypass the Betweenlands' tool weakness. Between tools are unaffected.
+
+modifier.weedshield.name=Weed Shield
+modifier.weedshield.desc=§oParasitic!§r\nGenerates a shield that absorbs durability loss. Doubles efficiency in the Betweenlands.
+modifier.weedshield.extra=Weed Shield: %s / %s
+
+modifier.valor.name=Valor
+modifier.valor.desc=§oStand tall!§r\nThe tool permanently improves with use.
+modifier.valor.extra=Valor: +%s%%
+
+modifier.ignition.name=Ignition
+modifier.ignition.desc=§oFwoosh!§r\nEvery third strike ignites the target, or deals bonus damage to those already burning.
+
+modifier.stacking.name=Stacking
+modifier.stacking.desc=§oDense and stubborn...§r\nThe tool is extremely hard to repair, but sufficient mending will permanently reduce its wear.
+modifier.stacking.extra=Stacking: +%s%%.
+
+# Betweenlands Tinker - Fluids
+fluid.octine.name=Molten Octine
+fluid.syrmorite.name=Molten Syrmorite
