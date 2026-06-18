@@ -30,7 +30,7 @@ modifier.ignition.name=引燃
 modifier.ignition.desc=§o呼！§r\n每三次攻击引燃目标，或对已燃烧的目标造成额外伤害。
 
 modifier.stacking.name=层叠
-modifier.stacking.desc=§o致密而顽固...§r\n工具极难被修复，但足量的修复将永久降低其损耗。
+modifier.stacking.desc=§o致密而顽固...§r\n工具更难被修复，但大量使用工具将永久降低其损耗。
 modifier.stacking.extra=层叠：+%s%%
 
 # Betweenlands Tinker - Fluids
@@ -41,5 +41,5 @@ fluid.syrmorite.name=熔融赛摩
 modifier.weedshield_armor.name=杂草盾
 modifier.weedshield_armor.desc=§o腐生！§r\n穿戴时生成护盾抵消耐久损耗。交错次元中效率翻倍。
 
-modifier.stacking_armor.name=层叠
-modifier.stacking_armor.desc=§o致密而顽固...§r\n盔甲极难被修复，但足量的修复将永久降低其损耗。
+modifier.stacking.name=层叠
+modifier.stacking.desc=§o致密而顽固...§r\n盔甲更难被修复，但大量使用盔甲将永久降低其损耗。

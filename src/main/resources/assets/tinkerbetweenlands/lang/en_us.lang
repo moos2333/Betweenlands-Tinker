@@ -30,7 +30,7 @@ modifier.ignition.name=Ignition
 modifier.ignition.desc=§oFwoosh!§r\nEvery third strike ignites the target, or deals bonus damage to those already burning.
 
 modifier.stacking.name=Stacking
-modifier.stacking.desc=§oDense and stubborn...§r\nThe tool is extremely hard to repair, but sufficient mending will permanently reduce its wear.
+modifier.stacking.desc=§oDense and stubborn...§r\nThe tool is harder to repair, but extensive use will permanently reduce its wear.
 modifier.stacking.extra=Stacking: +%s%%.
 
 # Betweenlands Tinker - Fluids
@@ -42,4 +42,4 @@ modifier.weedshield_armor.name=Weed Shield
 modifier.weedshield_armor.desc=§oParasitic!§r\nGenerates a shield that absorbs durability loss while worn. Doubles efficiency in the Betweenlands.
 
 modifier.stacking_armor.name=Stacking
-modifier.stacking_armor.desc=§oDense and stubborn...§r\nThe armor is extremely hard to repair, but sufficient mending will permanently reduce its wear.
+modifier.stacking_armor.desc=§oDense and stubborn...§r\nThe armor is harder to repair, but extensive use will permanently reduce its wear.
