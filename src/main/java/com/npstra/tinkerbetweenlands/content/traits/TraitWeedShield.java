@@ -32,10 +32,14 @@ public class TraitWeedShield extends AbstractTrait {
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
 
-        if (data.shield >= MAX_SHIELD) return;
+        if (data.shield >= MAX_SHIELD) {
+            data.lastTick = world.getTotalWorldTime();
+            modtag.save();
+            return;
+        }
 
         long currentTick = world.getTotalWorldTime();
-        if (data.lastTick == 0) {
+        if (data.lastTick == 0 || data.lastTick > currentTick) {
             data.lastTick = currentTick;
             modtag.save();
             return;
