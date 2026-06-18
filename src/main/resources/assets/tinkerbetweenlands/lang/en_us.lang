@@ -42,4 +42,4 @@ modifier.weedshield_armor.name=Weed Shield
 modifier.weedshield_armor.desc=§oParasitic!§r\nGenerates a shield that absorbs durability loss while worn. Doubles efficiency in the Betweenlands.
 
 modifier.stacking_armor.name=Stacking
-modifier.stacking_armor.desc=§oDense and stubborn...§r\nArmor repairs are half as effective; repairs over 250 durability grant 1 stacking point (max 100), each -1% durability consumption.
+modifier.stacking_armor.desc=§oDense and stubborn...§r\nThe armor is extremely hard to repair, but sufficient mending will permanently reduce its wear.
