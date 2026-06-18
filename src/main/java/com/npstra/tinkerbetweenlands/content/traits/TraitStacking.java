@@ -16,7 +16,7 @@ import java.util.List;
 public class TraitStacking extends AbstractTrait {
     public static final TraitStacking INSTANCE = new TraitStacking();
     private static final int MAX_STACK = 100;
-    private static final int REPAIR_THRESHOLD = 500;
+    private static final int ACCUMULATE_THRESHOLD = 1000;
 
     private TraitStacking() {
         super("stacking", 0x00AA00);
@@ -61,15 +61,7 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public int onToolHeal(ItemStack tool, int amount, int newAmount, EntityLivingBase entity) {
-        int halved = newAmount / 2;
-        if (amount > REPAIR_THRESHOLD) {
-            Data data = getData(tool, true);
-            if (data.stack < MAX_STACK) {
-                data.stack++;
-                saveData(tool, data);
-            }
-        }
-        return halved;
+        return newAmount / 2;
     }
 
     @Override
@@ -81,7 +73,17 @@ public class TraitStacking extends AbstractTrait {
         if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
-        return newDamage;
+        if (damage > 0) {
+            data.accumulated += damage;
+            if (data.accumulated >= ACCUMULATE_THRESHOLD) {
+                if (data.stack < MAX_STACK) {
+                    data.stack++;
+                }
+                data.accumulated -= ACCUMULATE_THRESHOLD;
+            }
+            saveData(tool, data);
+        }
+        return damage;
     }
 
     @Override
@@ -96,17 +98,20 @@ public class TraitStacking extends AbstractTrait {
 
     public static class Data extends ModifierNBT {
         public int stack;
+        public int accumulated;
 
         @Override
         public void read(NBTTagCompound tag) {
             super.read(tag);
             stack = tag.getInteger("stack");
+            accumulated = tag.getInteger("accumulated");
         }
 
         @Override
         public void write(NBTTagCompound tag) {
             super.write(tag);
             tag.setInteger("stack", stack);
+            tag.setInteger("accumulated", accumulated);
         }
     }
 }
