@@ -78,8 +78,8 @@ Full smelting and casting support for Octine and Syrmorite:
 
 ---
 
-## Localization & Resources
-Full localization for English and Chinese Simplified. All modifier textures are registered.
+## Gallery
+![2026-06-18_22.22.14.png](run/screenshots/2026-06-18_22.22.14.png)
 
 ---
 
