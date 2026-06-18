@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.tinkering.Category;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.SwordCore;
 import slimeknights.tconstruct.library.tools.ToolNBT;
@@ -31,6 +32,7 @@ public class BetweenBroadSword extends SwordCore implements ICorrodible, IBetwee
                 PartMaterialType.head(BETWEEN_HEAD),
                 PartMaterialType.extra(BETWEEN_EXTRA)
         );
+        addCategory(Category.WEAPON);
         setTranslationKey("tinkerbetweenlands.between_broadsword");
         CorrosionHelper.addCorrosionPropertyOverrides(this);
         CircleGemHelper.addGemPropertyOverrides(this);
