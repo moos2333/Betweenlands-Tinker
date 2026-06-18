@@ -72,8 +72,10 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        Data data = getData(tool, false);
-        int stackCount = (data == null) ? 0 : data.stack;
+        int stackCount = 0;
+        if (modifierTag != null && modifierTag.hasKey("stack")) {
+            stackCount = modifierTag.getInteger("stack");
+        }
         String loc = String.format(LOC_Extra, getModifierIdentifier());
         return ImmutableList.of(Util.translateFormatted(loc, stackCount));
     }
