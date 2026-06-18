@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.ArrowShaftMaterialStats;
 import slimeknights.tconstruct.library.materials.BowMaterialStats;
@@ -16,8 +17,6 @@ import com.npstra.tinkerbetweenlands.content.traits.TraitWeedShield;
 import com.npstra.tinkerbetweenlands.content.traits.TraitValor;
 import com.npstra.tinkerbetweenlands.content.traits.TraitIgnition;
 import com.npstra.tinkerbetweenlands.content.traits.TraitStacking;
-import slimeknights.tconstruct.tools.traits.TraitSplintering;
-import slimeknights.tconstruct.tools.traits.TraitSplinters;
 
 public class MaterialRegister {
     public static Material weedwood, slimy_bone, valonite, octine, syrmorite;
@@ -44,7 +43,8 @@ public class MaterialRegister {
 
     private static Material createMaterial(String id, int color, boolean castable, int durability, float speed, float attack, int harvest) {
         Material mat = new Material(id, color, castable);
-        mat.setCraftable(true).setCastable(castable);
+        mat.setCraftable(!castable);
+        mat.setCastable(castable);
         mat.addTrait(TraitBetween.INSTANCE, "head");
         if (id.equals("weedwood")) {
             mat.addTrait(TraitWeedShield.INSTANCE, "head");
@@ -93,14 +93,14 @@ public class MaterialRegister {
         if (octine != null)
             TinkerRegistry.addMaterialStats(octine,
                     new HeadMaterialStats(700, 6.0f, 4.0f, 2),
-                    new ExtraMaterialStats(200),
-                    new HandleMaterialStats(1.0f, 200),
+                    new ExtraMaterialStats(100),
+                    new HandleMaterialStats(1.0f, 100),
                     new BowMaterialStats(0.9f, 1.1f, 3.0f)
             );
         if (syrmorite != null)
             TinkerRegistry.addMaterialStats(syrmorite,
                     new HeadMaterialStats(900, 8.0f, 3.0f, 2),
-                    new ExtraMaterialStats(300),
+                    new ExtraMaterialStats(150),
                     new HandleMaterialStats(1.0f, 150),
                     new BowMaterialStats(0.9f, 1.1f, 2.0f)
             );
@@ -117,20 +117,58 @@ public class MaterialRegister {
     }
 
     private static void setMaterialItems() {
-        setItem(weedwood, "thebetweenlands:weedwood_planks", 0);
-        setItem(slimy_bone, "thebetweenlands:items_misc", 14);
-        setItem(valonite, "thebetweenlands:items_misc", 19);
-        setItem(octine, "thebetweenlands:octine_ingot", 0);
-        setItem(syrmorite, "thebetweenlands:items_misc", 11);
+        addDirectItem(weedwood, "thebetweenlands:weedwood_planks", 0, Material.VALUE_Ingot);
+        addDirectItem(weedwood, "thebetweenlands:log_weedwood", OreDictionary.WILDCARD_VALUE, 4 * Material.VALUE_Ingot);
+        addDirectItem(weedwood, "thebetweenlands:weedwood", 0, 4 * Material.VALUE_Ingot);
+        addDirectItem(weedwood, "thebetweenlands:items_misc", 20, 72);
+        weedwood.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:weedwood_planks")));
+
+        addDirectItem(slimy_bone, "thebetweenlands:items_misc", 14, Material.VALUE_Ingot);
+        slimy_bone.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 14));
+
+        addDirectItem(valonite, "thebetweenlands:items_misc", 19, Material.VALUE_Ingot);
+        addDirectItem(valonite, "thebetweenlands:items_misc", 43, Material.VALUE_Nugget);
+        addDirectItem(valonite, "thebetweenlands:valonite_block", 0, Material.VALUE_Block);
+        valonite.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 19));
+
+        addDirectItem(octine, "thebetweenlands:octine_ingot", 0, Material.VALUE_Ingot);
+        addDirectItem(octine, "thebetweenlands:items_misc", 42, Material.VALUE_Nugget);
+        addDirectItem(octine, "thebetweenlands:octine_block", 0, Material.VALUE_Block);
+        octine.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:octine_ingot")));
+
+        addDirectItem(syrmorite, "thebetweenlands:items_misc", 11, Material.VALUE_Ingot);
+        addDirectItem(syrmorite, "thebetweenlands:items_misc", 41, Material.VALUE_Nugget);
+        addDirectItem(syrmorite, "thebetweenlands:syrmorite_block", 0, Material.VALUE_Block);
+        syrmorite.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 11));
+
+        addOreDictOnly(weedwood, "plankWeedwood", Material.VALUE_Ingot);
+        addOreDictOnly(weedwood, "logWeedwood", 4 * Material.VALUE_Ingot);
+        addOreDictOnly(weedwood, "stickWeedwood", 72);
+
+        addOreDictOnly(slimy_bone, "boneSlimy", Material.VALUE_Ingot);
+
+        addOreDictOnly(valonite, "gemValonite", Material.VALUE_Ingot);
+        addOreDictOnly(valonite, "nuggetValonite", Material.VALUE_Nugget);
+        addOreDictOnly(valonite, "blockValonite", Material.VALUE_Block);
+
+        addOreDictOnly(octine, "ingotOctine", Material.VALUE_Ingot);
+        addOreDictOnly(octine, "nuggetOctine", Material.VALUE_Nugget);
+        addOreDictOnly(octine, "blockOctine", Material.VALUE_Block);
+
+        addOreDictOnly(syrmorite, "ingotSyrmorite", Material.VALUE_Ingot);
+        addOreDictOnly(syrmorite, "nuggetSyrmorite", Material.VALUE_Nugget);
+        addOreDictOnly(syrmorite, "blockSyrmorite", Material.VALUE_Block);
     }
 
-    private static void setItem(Material mat, String itemId, int meta) {
+    private static void addDirectItem(Material mat, String itemId, int meta, int value) {
         Item item = Item.getByNameOrId(itemId);
         if (item != null) {
-            ItemStack stack = new ItemStack(item, 1, meta);
-            mat.addItem(stack, 1, Material.VALUE_Ingot);
-            mat.setRepresentativeItem(stack);
+            mat.addItem(new ItemStack(item, 1, meta), 1, value);
         }
+    }
+
+    private static void addOreDictOnly(Material mat, String oreName, int value) {
+        mat.addItem(oreName, 1, value);
     }
 
     private static void registerMeltingRecipes() {
@@ -141,5 +179,29 @@ public class MaterialRegister {
         Item syrmoriteIngot = Item.getByNameOrId("thebetweenlands:items_misc");
         if (syrmoriteIngot != null)
             TinkerRegistry.registerMelting(new ItemStack(syrmoriteIngot, 1, 11), fluidSyrmorite, Material.VALUE_Ingot);
+
+        Item octineNugget = Item.getByNameOrId("thebetweenlands:items_misc");
+        if (octineNugget != null)
+            TinkerRegistry.registerMelting(new ItemStack(octineNugget, 1, 42), fluidOctine, Material.VALUE_Nugget);
+
+        Item syrmoriteNugget = Item.getByNameOrId("thebetweenlands:items_misc");
+        if (syrmoriteNugget != null)
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteNugget, 1, 41), fluidSyrmorite, Material.VALUE_Nugget);
+
+        Item octineBlock = Item.getByNameOrId("thebetweenlands:octine_block");
+        if (octineBlock != null)
+            TinkerRegistry.registerMelting(new ItemStack(octineBlock), fluidOctine, Material.VALUE_Block);
+
+        Item syrmoriteBlock = Item.getByNameOrId("thebetweenlands:syrmorite_block");
+        if (syrmoriteBlock != null)
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteBlock), fluidSyrmorite, Material.VALUE_Block);
+
+        Item octineOre = Item.getByNameOrId("thebetweenlands:octine_ore");
+        if (octineOre != null)
+            TinkerRegistry.registerMelting(new ItemStack(octineOre), fluidOctine, 288);
+
+        Item syrmoriteOre = Item.getByNameOrId("thebetweenlands:syrmorite_ore");
+        if (syrmoriteOre != null)
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteOre), fluidSyrmorite, 288);
     }
 }
