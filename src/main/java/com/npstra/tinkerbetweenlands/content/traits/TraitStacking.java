@@ -36,6 +36,9 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public int onToolDamage(ItemStack tool, int damage, int newDamage, EntityLivingBase entity) {
+        if (entity == null) {
+            return newDamage;
+        }
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
         if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
