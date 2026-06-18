@@ -8,7 +8,6 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ModifierTagHolder;
-import slimeknights.tconstruct.library.utils.TagUtil;
 import java.util.List;
 
 public class TraitStacking extends AbstractTrait {
@@ -26,6 +25,12 @@ public class TraitStacking extends AbstractTrait {
         if (amount > REPAIR_THRESHOLD) {
             ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
             Data data = modtag.getTagData(Data.class);
+            if (data == null) {
+                data = new Data();
+                data.stack = 0;
+                data.write(modtag.tag);
+                modtag.save();
+            }
             if (data.stack < MAX_STACK) {
                 data.stack++;
                 modtag.save();
@@ -41,6 +46,13 @@ public class TraitStacking extends AbstractTrait {
         }
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
+        if (data == null) {
+            data = new Data();
+            data.stack = 0;
+            data.write(modtag.tag);
+            modtag.save();
+            return newDamage;
+        }
         if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
@@ -51,8 +63,9 @@ public class TraitStacking extends AbstractTrait {
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
+        int stackCount = (data == null) ? 0 : data.stack;
         String loc = String.format(LOC_Extra, getModifierIdentifier());
-        return ImmutableList.of(Util.translateFormatted(loc, data.stack));
+        return ImmutableList.of(Util.translateFormatted(loc, stackCount));
     }
 
     private static class Data extends ModifierNBT {
