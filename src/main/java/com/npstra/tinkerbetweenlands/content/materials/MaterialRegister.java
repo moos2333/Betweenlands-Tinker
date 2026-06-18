@@ -2,6 +2,7 @@ package com.npstra.tinkerbetweenlands.content.materials;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -24,8 +25,8 @@ public class MaterialRegister {
     private static boolean statsRegistered = false;
 
     public static void preInit() {
-        fluidOctine = new Fluid("octine", null, null).setTemperature(900);
-        fluidSyrmorite = new Fluid("syrmorite", null, null).setTemperature(800);
+        fluidOctine = new Fluid("octine", new ResourceLocation("minecraft:blocks/lava_still"), new ResourceLocation("minecraft:blocks/lava_flow")).setTemperature(900);
+        fluidSyrmorite = new Fluid("syrmorite", new ResourceLocation("minecraft:blocks/lava_still"), new ResourceLocation("minecraft:blocks/lava_flow")).setTemperature(800);
         FluidRegistry.registerFluid(fluidOctine);
         FluidRegistry.registerFluid(fluidSyrmorite);
 
