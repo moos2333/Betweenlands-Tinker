@@ -25,7 +25,7 @@ public class MaterialRegister {
         weedwood = createMaterial("weedwood", 0x706738, false, 40, 2.0f, 2.0f, 0);
         slimy_bone = createMaterial("slimy_bone", 0x9e9e6a, false, 100, 4.0f, 2.0f, 1);
         valonite = createMaterial("valonite", 0xb69cb6, false, 1300, 8.0f, 6.0f, 4);
-        octine = createMaterial("octine", 0xF5A615, true, 700, 6.0f, 4.0f, 2);
+        octine = createMaterial("octine", 0xffc81f, true, 700, 6.0f, 4.0f, 2);
         syrmorite = createMaterial("syrmorite", 0x5660A5, true, 900, 8.0f, 3.0f, 2);
 
         octine.setFluid(FluidRegister.fluidOctine);
