@@ -106,7 +106,6 @@ public class MaterialRegister {
         TinkerRegistry.integrate(valonite);
         TinkerRegistry.integrate(octine);
         TinkerRegistry.integrate(syrmorite);
-        registerMeltingRecipes();
     }
 
     private static void setMaterialItems() {
@@ -162,39 +161,5 @@ public class MaterialRegister {
 
     private static void addOreDictOnly(Material mat, String oreName, int value) {
         mat.addItem(oreName, 1, value);
-    }
-
-    private static void registerMeltingRecipes() {
-        Item octineIngot = Item.getByNameOrId("thebetweenlands:octine_ingot");
-        if (octineIngot != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineIngot), FluidRegister.fluidOctine, Material.VALUE_Ingot);
-
-        Item syrmoriteIngot = Item.getByNameOrId("thebetweenlands:items_misc");
-        if (syrmoriteIngot != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteIngot, 1, 11), FluidRegister.fluidSyrmorite, Material.VALUE_Ingot);
-
-        Item octineNugget = Item.getByNameOrId("thebetweenlands:items_misc");
-        if (octineNugget != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineNugget, 1, 42), FluidRegister.fluidOctine, Material.VALUE_Nugget);
-
-        Item syrmoriteNugget = Item.getByNameOrId("thebetweenlands:items_misc");
-        if (syrmoriteNugget != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteNugget, 1, 41), FluidRegister.fluidSyrmorite, Material.VALUE_Nugget);
-
-        Item octineBlock = Item.getByNameOrId("thebetweenlands:octine_block");
-        if (octineBlock != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineBlock), FluidRegister.fluidOctine, Material.VALUE_Block);
-
-        Item syrmoriteBlock = Item.getByNameOrId("thebetweenlands:syrmorite_block");
-        if (syrmoriteBlock != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteBlock), FluidRegister.fluidSyrmorite, Material.VALUE_Block);
-
-        Item octineOre = Item.getByNameOrId("thebetweenlands:octine_ore");
-        if (octineOre != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineOre), FluidRegister.fluidOctine, 288);
-
-        Item syrmoriteOre = Item.getByNameOrId("thebetweenlands:syrmorite_ore");
-        if (syrmoriteOre != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteOre), FluidRegister.fluidSyrmorite, 288);
     }
 }

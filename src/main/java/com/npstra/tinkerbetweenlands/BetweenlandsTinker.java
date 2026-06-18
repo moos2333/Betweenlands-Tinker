@@ -1,6 +1,7 @@
 package com.npstra.tinkerbetweenlands;
 
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
+import com.npstra.tinkerbetweenlands.content.recipe.SmelteryRecipeRegister;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -46,6 +47,7 @@ public class BetweenlandsTinker {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         MaterialRegister.init();
+        SmelteryRecipeRegister.init(event);
         AnimatorRecipe.addRecipe(new ToolConversionRecipe());
         AnimatorRecipe.addRecipe(new PartConversionRecipe());
         MinecraftForge.EVENT_BUS.register(new BetweenlandsEventHandler());
