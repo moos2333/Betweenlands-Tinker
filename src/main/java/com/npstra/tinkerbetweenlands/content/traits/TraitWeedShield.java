@@ -7,9 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.Util;
-import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
-import slimeknights.tconstruct.library.utils.ModifierTagHolder;
+import slimeknights.tconstruct.library.utils.TagUtil;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
 import java.util.List;
 
@@ -18,6 +17,8 @@ public class TraitWeedShield extends AbstractTrait {
     private static final int MAX_SHIELD = 100;
     private static final int NORMAL_INTERVAL = 20;
     private static final int BONUS_INTERVAL = 10;
+    private static final String TAG_SHIELD = "weed_shield";
+    private static final String TAG_LAST_TICK = "weed_last_tick";
 
     private TraitWeedShield() {
         super("weedshield", 0x00AA00);
@@ -29,71 +30,57 @@ public class TraitWeedShield extends AbstractTrait {
         if (!(entity instanceof EntityLivingBase)) return;
         if (itemSlot < 0 || (itemSlot > 8 && itemSlot != 40)) return;
 
-        ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
-        Data data = modtag.getTagData(Data.class);
+        NBTTagCompound root = TagUtil.getTagSafe(tool);
+        int shield = root.getInteger(TAG_SHIELD);
+        long lastTick = root.getLong(TAG_LAST_TICK);
+        long currentTick = world.getTotalWorldTime();
 
-        if (data.shield >= MAX_SHIELD) {
-            data.lastTick = world.getTotalWorldTime();
-            modtag.save();
+        if (shield >= MAX_SHIELD) {
+            if (lastTick != currentTick) {
+                root.setLong(TAG_LAST_TICK, currentTick);
+                tool.setTagCompound(root);
+            }
             return;
         }
 
-        long currentTick = world.getTotalWorldTime();
-        if (data.lastTick == 0 || data.lastTick > currentTick) {
-            data.lastTick = currentTick;
-            modtag.save();
+        if (lastTick == 0 || lastTick > currentTick) {
+            root.setLong(TAG_LAST_TICK, currentTick);
+            tool.setTagCompound(root);
             return;
         }
 
         int interval = (world.provider.getDimension() == ModConfig.dimensionId) ? BONUS_INTERVAL : NORMAL_INTERVAL;
-        long diff = currentTick - data.lastTick;
+        long diff = currentTick - lastTick;
 
         if (diff >= interval * 20L) {
             int add = (int) (diff / (interval * 20L));
-            data.shield = Math.min(MAX_SHIELD, data.shield + add);
-            data.lastTick = currentTick - (diff % (interval * 20L));
-            modtag.save();
+            shield = Math.min(MAX_SHIELD, shield + add);
+            long newLastTick = currentTick - (diff % (interval * 20L));
+            root.setInteger(TAG_SHIELD, shield);
+            root.setLong(TAG_LAST_TICK, newLastTick);
+            tool.setTagCompound(root);
         }
     }
 
     @Override
     public int onToolDamage(ItemStack tool, int damage, int newDamage, EntityLivingBase entity) {
-        ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
-        Data data = modtag.getTagData(Data.class);
-
-        if (data.shield > 0) {
-            int consumed = Math.min(data.shield, newDamage);
-            data.shield -= consumed;
+        NBTTagCompound root = TagUtil.getTagSafe(tool);
+        int shield = root.getInteger(TAG_SHIELD);
+        if (shield > 0) {
+            int consumed = Math.min(shield, newDamage);
+            shield -= consumed;
             newDamage -= consumed;
-            modtag.save();
+            root.setInteger(TAG_SHIELD, shield);
+            tool.setTagCompound(root);
         }
         return newDamage;
     }
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
-        Data data = modtag.getTagData(Data.class);
+        NBTTagCompound root = TagUtil.getTagSafe(tool);
+        int shield = root.getInteger(TAG_SHIELD);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
-        return ImmutableList.of(Util.translateFormatted(loc, data.shield, MAX_SHIELD));
-    }
-
-    public static class Data extends ModifierNBT {
-        public int shield;
-        public long lastTick;
-
-        @Override
-        public void read(NBTTagCompound tag) {
-            super.read(tag);
-            shield = tag.getInteger("shield");
-            lastTick = tag.getLong("lastTick");
-        }
-
-        @Override
-        public void write(NBTTagCompound tag) {
-            super.write(tag);
-            tag.setInteger("shield", shield);
-            tag.setLong("lastTick", lastTick);
-        }
+        return ImmutableList.of(Util.translateFormatted(loc, shield, MAX_SHIELD));
     }
 }
