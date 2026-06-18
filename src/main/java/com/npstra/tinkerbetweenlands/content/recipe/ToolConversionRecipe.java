@@ -8,9 +8,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.tconstruct.library.tools.ToolCore;
+import slimeknights.tconstruct.tools.tools.Excavator;
+import slimeknights.tconstruct.tools.tools.Hammer;
 import thebetweenlands.api.item.ICorrodible;
 import thebetweenlands.api.recipes.IAnimatorRecipe;
-import slimeknights.tconstruct.library.tools.ToolCore;
 import com.npstra.tinkerbetweenlands.api.IBetweenlandsTool;
 import com.npstra.tinkerbetweenlands.content.tools.ModTools;
 
@@ -21,6 +23,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
         Item item = stack.getItem();
         if (!(item instanceof ToolCore)) return false;
         if (item instanceof IBetweenlandsTool) return false;
+        if (item instanceof Hammer || item instanceof Excavator) return false;
         return item instanceof slimeknights.tconstruct.tools.tools.Pickaxe ||
                 item instanceof slimeknights.tconstruct.tools.tools.Shovel ||
                 item instanceof slimeknights.tconstruct.tools.tools.Hatchet ||
@@ -29,7 +32,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
 
     @Override
     public int getRequiredFuel(ItemStack stack) {
-        return 10;
+        return 16;
     }
 
     @Override
@@ -58,6 +61,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
 
     private ItemStack getOutputTool(ItemStack input) {
         Item item = input.getItem();
+        if (item instanceof Hammer || item instanceof Excavator) return ItemStack.EMPTY;
         if (item instanceof slimeknights.tconstruct.tools.tools.Pickaxe)
             return new ItemStack(ModTools.BETWEEN_PICKAXE);
         if (item instanceof slimeknights.tconstruct.tools.tools.Shovel)
@@ -76,7 +80,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
 
     @Override
     public ItemStack onAnimated(World world, BlockPos pos, ItemStack stack) {
-        return getResult(stack);
+        return ItemStack.EMPTY;
     }
 
     @Override
