@@ -8,11 +8,13 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.ModifierTagHolder;
+import slimeknights.tconstruct.library.utils.TagUtil;
 import java.util.List;
 
 public class TraitStacking extends AbstractTrait {
     public static final TraitStacking INSTANCE = new TraitStacking();
     private static final int MAX_STACK = 100;
+    private static final int REPAIR_THRESHOLD = 500;
 
     private TraitStacking() {
         super("stacking", 0x00AA00);
@@ -20,11 +22,8 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public int onToolHeal(ItemStack tool, int amount, int newAmount, EntityLivingBase entity) {
-        if (newAmount <= 1) {
-            return 0;
-        }
         int halved = newAmount / 2;
-        if (newAmount > 1000) {
+        if (amount > REPAIR_THRESHOLD) {
             ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
             Data data = modtag.getTagData(Data.class);
             if (data.stack < MAX_STACK) {
@@ -53,7 +52,7 @@ public class TraitStacking extends AbstractTrait {
         return ImmutableList.of(Util.translateFormatted(loc, data.stack));
     }
 
-    public static class Data extends ModifierNBT {
+    private static class Data extends ModifierNBT {
         public int stack;
 
         @Override
