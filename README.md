@@ -1,21 +1,95 @@
-## TemplateDevEnv
-_For Kotlin see [TemplateDevEnvKt](https://github.com/CleanroomMC/TemplateDevEnvKt)_
+# Betweenlands’ Tinker
 
-Template workspace for modding Minecraft 1.12.2. Licensed under MIT, it is made for public use.
+**A Tinkers’ Construct addon that brings Betweenlands materials, tools, and mechanics to your forge.**
 
-This template runs on **Java 25**, **Gradle 9.2.1** + **[RetroFuturaGradle](https://github.com/GTNewHorizons/RetroFuturaGradle) 2.0.2** + **Forge 14.23.5.2847**.
+---
 
-With **coremod and mixin support** that is easy to configure.
+## Overview
+Betweenlands’ Tinker integrates the dark swamps of The Betweenlands into Tinkers’ Construct. It adds 5 new materials, 4 craftable tools, 5 unique traits, and full smeltery support—all while preserving the dimension’s core mechanics: weakness and corrosion.
 
-### Instructions:
+**Minecraft 1.12.2 · Forge 14.23.5.2847+**
 
-1. Click `use this template` at the top.
-2. Clone the repository that you have created with this template to your local machine.
-3. Make sure IDEA is using Java 25 for Gradle before you sync the project. Verify this by going to IDEA's `Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JVM`.
-4. Open the project folder in IDEA. When prompted, click "Load Gradle Project" as it detects the `build.gradle`, if you weren't prompted, right-click the project's `build.gradle` in IDEA, select `Link Gradle Project`, after completion, hit `Refresh All` in the gradle tab on the right.
-5. Run gradle tasks such as `runClient` and `runServer` in the IDEA gradle tab, or use the auto-imported run configurations like `1. Run Client`.
+---
 
-### Notes:
-- Dependencies script in [gradle/scripts/dependencies.gradle](gradle/scripts/dependencies.gradle), explanations are commented in the file.
-- Publishing script in [gradle/scripts/publishing.gradle](gradle/scripts/publishing.gradle).
-- When writing Mixins on IntelliJ, it is advisable to use latest [MinecraftDev Fork for RetroFuturaGradle](https://github.com/eigenraven/MinecraftDev/releases).
+## Dependencies
+- Mantle (1.12-1.3.3+)
+- Tinkers’ Construct (1.12.2-2.13.0+)
+- The Betweenlands (3.9.6+)
+
+---
+
+## New Materials
+
+- **Weedwood** – Mining Level 0, non-castable, 40 dur, 2.0 spd, 2.0 atk. Traits: Between, Weed Shield.
+- **Slimy Bone** – Mining Level 1, non-castable, 100 dur, 4.0 spd, 2.0 atk. Traits: Between, Splintering (Head), Splinters (All).
+- **Octine** – Mining Level 2, castable, 700 dur, 6.0 spd, 4.0 atk. Traits: Between, Ignition.
+- **Syrmorite** – Mining Level 2, castable, 900 dur, 8.0 spd, 3.0 atk. Traits: Between, Stacking.
+- **Valonite** – Mining Level 3, non-castable, 1300 dur, 8.0 spd, 6.0 atk. Traits: Between, Valor.
+
+Octine and Syrmorite are fully castable: ore → 288 mB, ingot → 144 mB, nugget → 16 mB, block → 1296 mB. Use casting table (with casts) or basin (no cast for blocks).
+
+---
+
+## New Tools
+
+Four Betweenlands tools are created by converting existing Tinkers’ tools in the Animator (recipe: Tool + Life Crystal + Sulfur):
+
+- Betweenlands Pickaxe (from Pickaxe)
+- Betweenlands Shovel (from Shovel)
+- Betweenlands Hatchet (from Hatchet)
+- Betweenlands Broadsword (from Broadsword)
+
+All stats, modifiers, and durability are preserved. Tools are immune to the Betweenlands weakness but suffer corrosion.
+
+Part conversion is also available: Tool Rod → Betweenlands Handle, Binding → Betweenlands Binding, Blade/Head → Betweenlands Tool Head.
+
+---
+
+## New Traits
+
+- **Between** – Non-Interloper tools bypass weakness but lose 25% damage/speed; Interloper tools unaffected.
+- **Weed Shield** – Generates a shield (max 100) that absorbs durability loss. Regens every 20s (10s in Betweenlands).
+- **Valor** – Gain valor from mining (1) or dealing damage (1 per 5 damage). Every 100 valor gives +1% damage, +1% speed, -1% durability consumption (max 3000).
+- **Ignition** – Every third hit ignites target for 5s, or deals +25% damage if already burning.
+- **Stacking** – Repairs are 50% less effective; repairs over 1000 durability grant 1 stacking point (max 100), each -1% durability consumption.
+
+---
+
+## Core Mechanics
+
+- **Weakness Immunity**: All Betweenlands tools ignore the Betweenlands weakness effect. Non-Interloper tools can gain this via the Between trait at a 25% penalty.
+- **Corrosion**: Betweenlands tools accumulate corrosion (0–255) over time, reducing damage and speed (max 70% penalty). Tooltips show corrosion stage.
+- **Animator Conversion**: Convert tools or parts (see above). Excludes Hammer and Excavator.
+
+---
+
+## Smeltery Integration
+
+Full smelting and casting support for Octine and Syrmorite:
+
+- Octine/Syrmorite Ore → 288 mB Molten Metal
+- Ingot/Nugget/Block → melts to 144/16/1296 mB
+- Casting Table (with cast) → Ingot or Nugget
+- Casting Basin (no cast) → Block
+
+---
+
+## Localization & Resources
+Full localization for English and Chinese Simplified. All modifier textures are registered.
+
+---
+
+## License
+MIT
+
+---
+
+## Credits
+- Tinkers’ Construct – Tool system & API
+- The Betweenlands – Dimension & mechanics
+- SlimeKnights & Angry Pixel teams
+
+---
+
+**Note:**  
+This documentation is written in Markdown. Portions of this code were generated with the assistance of an AI language model.
