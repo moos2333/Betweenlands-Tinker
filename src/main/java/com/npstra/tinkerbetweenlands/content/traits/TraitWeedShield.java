@@ -74,9 +74,9 @@ public class TraitWeedShield extends AbstractTrait {
         return ImmutableList.of(Util.translateFormatted(loc, data.shield, MAX_SHIELD));
     }
 
-    private static class Data extends ModifierNBT {
-        int shield;
-        long lastTick;
+    public static class Data extends ModifierNBT {
+        public int shield;
+        public long lastTick;
 
         @Override
         public void read(NBTTagCompound tag) {

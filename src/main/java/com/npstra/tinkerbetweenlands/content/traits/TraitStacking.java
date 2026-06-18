@@ -53,8 +53,8 @@ public class TraitStacking extends AbstractTrait {
         return ImmutableList.of(Util.translateFormatted(loc, data.stack));
     }
 
-    private static class Data extends ModifierNBT {
-        int stack;
+    public static class Data extends ModifierNBT {
+        public int stack;
 
         @Override
         public void read(NBTTagCompound tag) {

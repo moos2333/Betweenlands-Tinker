@@ -20,7 +20,7 @@ public class TraitValor extends AbstractTrait {
         super("valor", 0x00AA00);
     }
 
-    public static void addValor(ItemStack tool, int amount) {
+    private static void addValor(ItemStack tool, int amount) {
         if (tool.isEmpty() || amount <= 0) return;
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, INSTANCE.getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
@@ -32,6 +32,23 @@ public class TraitValor extends AbstractTrait {
         ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
         Data data = modtag.getTagData(Data.class);
         return data.valor / BONUS_INTERVAL;
+    }
+
+    @Override
+    public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
+        if (wasHit && !player.getEntityWorld().isRemote) {
+            int gain = Math.max(1, Math.min(10, (int)(damageDealt / 5.0f)));
+            addValor(tool, gain);
+        }
+        super.afterHit(tool, player, target, damageDealt, wasCritical, wasHit);
+    }
+
+    @Override
+    public void afterBlockBreak(ItemStack tool, net.minecraft.world.World world, net.minecraft.block.state.IBlockState state, net.minecraft.util.math.BlockPos pos, EntityLivingBase player, boolean wasEffective) {
+        if (!world.isRemote) {
+            addValor(tool, 1);
+        }
+        super.afterBlockBreak(tool, world, state, pos, player, wasEffective);
     }
 
     @Override
@@ -67,8 +84,8 @@ public class TraitValor extends AbstractTrait {
         return ImmutableList.of(Util.translateFormatted(loc, level));
     }
 
-    private static class Data extends ModifierNBT {
-        int valor;
+    public static class Data extends ModifierNBT {
+        public int valor;
 
         @Override
         public void read(NBTTagCompound tag) {

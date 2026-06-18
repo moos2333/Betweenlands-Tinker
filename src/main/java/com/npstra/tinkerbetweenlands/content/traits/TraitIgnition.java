@@ -41,8 +41,8 @@ public class TraitIgnition extends AbstractTrait {
         return super.damage(tool, player, target, damage, newDamage, isCritical);
     }
 
-    private static class Data extends ModifierNBT {
-        int count;
+    public static class Data extends ModifierNBT {
+        public int count;
 
         @Override
         public void read(NBTTagCompound tag) {
