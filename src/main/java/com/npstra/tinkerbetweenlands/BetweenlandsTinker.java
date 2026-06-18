@@ -1,5 +1,6 @@
 package com.npstra.tinkerbetweenlands;
 
+import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -27,6 +28,7 @@ public class BetweenlandsTinker {
         ModConfig.init(event);
         ModParts.register();
         ModTools.register();
+        FluidRegister.preInit();
         MaterialRegister.preInit();
         OverworldItemHandler.TOOL_BLACKLIST.put(
                 new ResourceLocation("tinkerbetweenlands", "tinkers_tools"),

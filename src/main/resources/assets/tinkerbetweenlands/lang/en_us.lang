@@ -34,5 +34,5 @@ modifier.stacking.desc=§oDense and stubborn...§r\nThe tool is extremely hard t
 modifier.stacking.extra=Stacking: +%s%%.
 
 # Betweenlands Tinker - Fluids
-fluid.octine=Molten Octine
-fluid.syrmorite=Molten Syrmorite
+fluid.octine.name=Molten Octine
+fluid.syrmorite.name=Molten Syrmorite

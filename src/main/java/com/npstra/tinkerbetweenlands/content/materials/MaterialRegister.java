@@ -2,9 +2,6 @@ package com.npstra.tinkerbetweenlands.content.materials;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.ArrowShaftMaterialStats;
@@ -13,6 +10,7 @@ import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
+import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.traits.TraitBetween;
 import com.npstra.tinkerbetweenlands.content.traits.TraitWeedShield;
 import com.npstra.tinkerbetweenlands.content.traits.TraitValor;
@@ -21,23 +19,17 @@ import com.npstra.tinkerbetweenlands.content.traits.TraitStacking;
 
 public class MaterialRegister {
     public static Material weedwood, slimy_bone, valonite, octine, syrmorite;
-    public static Fluid fluidOctine, fluidSyrmorite;
     private static boolean statsRegistered = false;
 
     public static void preInit() {
-        fluidOctine = new Fluid("octine", new ResourceLocation("minecraft:blocks/lava_still"), new ResourceLocation("minecraft:blocks/lava_flow")).setTemperature(900);
-        fluidSyrmorite = new Fluid("syrmorite", new ResourceLocation("minecraft:blocks/lava_still"), new ResourceLocation("minecraft:blocks/lava_flow")).setTemperature(800);
-        FluidRegistry.registerFluid(fluidOctine);
-        FluidRegistry.registerFluid(fluidSyrmorite);
-
         weedwood = createMaterial("weedwood", 0x706738, false, 40, 2.0f, 2.0f, 0);
         slimy_bone = createMaterial("slimy_bone", 0x9e9e6a, false, 100, 4.0f, 2.0f, 1);
         valonite = createMaterial("valonite", 0xb69cb6, false, 1300, 8.0f, 6.0f, 4);
         octine = createMaterial("octine", 0xF5A615, true, 700, 6.0f, 4.0f, 2);
         syrmorite = createMaterial("syrmorite", 0x5660A5, true, 900, 8.0f, 3.0f, 2);
 
-        octine.setFluid(fluidOctine);
-        syrmorite.setFluid(fluidSyrmorite);
+        octine.setFluid(FluidRegister.fluidOctine);
+        syrmorite.setFluid(FluidRegister.fluidSyrmorite);
 
         addStats();
     }
@@ -175,34 +167,34 @@ public class MaterialRegister {
     private static void registerMeltingRecipes() {
         Item octineIngot = Item.getByNameOrId("thebetweenlands:octine_ingot");
         if (octineIngot != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineIngot), fluidOctine, Material.VALUE_Ingot);
+            TinkerRegistry.registerMelting(new ItemStack(octineIngot), FluidRegister.fluidOctine, Material.VALUE_Ingot);
 
         Item syrmoriteIngot = Item.getByNameOrId("thebetweenlands:items_misc");
         if (syrmoriteIngot != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteIngot, 1, 11), fluidSyrmorite, Material.VALUE_Ingot);
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteIngot, 1, 11), FluidRegister.fluidSyrmorite, Material.VALUE_Ingot);
 
         Item octineNugget = Item.getByNameOrId("thebetweenlands:items_misc");
         if (octineNugget != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineNugget, 1, 42), fluidOctine, Material.VALUE_Nugget);
+            TinkerRegistry.registerMelting(new ItemStack(octineNugget, 1, 42), FluidRegister.fluidOctine, Material.VALUE_Nugget);
 
         Item syrmoriteNugget = Item.getByNameOrId("thebetweenlands:items_misc");
         if (syrmoriteNugget != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteNugget, 1, 41), fluidSyrmorite, Material.VALUE_Nugget);
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteNugget, 1, 41), FluidRegister.fluidSyrmorite, Material.VALUE_Nugget);
 
         Item octineBlock = Item.getByNameOrId("thebetweenlands:octine_block");
         if (octineBlock != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineBlock), fluidOctine, Material.VALUE_Block);
+            TinkerRegistry.registerMelting(new ItemStack(octineBlock), FluidRegister.fluidOctine, Material.VALUE_Block);
 
         Item syrmoriteBlock = Item.getByNameOrId("thebetweenlands:syrmorite_block");
         if (syrmoriteBlock != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteBlock), fluidSyrmorite, Material.VALUE_Block);
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteBlock), FluidRegister.fluidSyrmorite, Material.VALUE_Block);
 
         Item octineOre = Item.getByNameOrId("thebetweenlands:octine_ore");
         if (octineOre != null)
-            TinkerRegistry.registerMelting(new ItemStack(octineOre), fluidOctine, 288);
+            TinkerRegistry.registerMelting(new ItemStack(octineOre), FluidRegister.fluidOctine, 288);
 
         Item syrmoriteOre = Item.getByNameOrId("thebetweenlands:syrmorite_ore");
         if (syrmoriteOre != null)
-            TinkerRegistry.registerMelting(new ItemStack(syrmoriteOre), fluidSyrmorite, 288);
+            TinkerRegistry.registerMelting(new ItemStack(syrmoriteOre), FluidRegister.fluidSyrmorite, 288);
     }
 }
