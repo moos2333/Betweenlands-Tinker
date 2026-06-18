@@ -8,8 +8,8 @@ import net.minecraft.nbt.NBTTagList;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
-import slimeknights.tconstruct.library.utils.ModifierTagHolder;
 import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 import java.util.List;
 
@@ -22,38 +22,51 @@ public class TraitStacking extends AbstractTrait {
         super("stacking", 0x00AA00);
     }
 
-    private ModifierTagHolder getHolder(ItemStack tool, boolean createIfMissing) {
-        ModifierTagHolder modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
-        Data data = modtag.getTagData(Data.class);
-        if (data == null && createIfMissing) {
-            if (modtag.tag == null) {
-                NBTTagCompound newTag = new NBTTagCompound();
-                newTag.setString("identifier", getModifierIdentifier());
-                NBTTagList tagList = TagUtil.getModifiersTagList(tool);
-                tagList.appendTag(newTag);
-                TagUtil.setModifiersTagList(tool, tagList);
-                modtag = ModifierTagHolder.getModifier(tool, getModifierIdentifier());
-            }
-            data = modtag.getTagData(Data.class);
-            if (data == null) {
-                data = new Data();
-                data.stack = 0;
-                data.write(modtag.tag);
-                modtag.save();
-            }
+    private Data getData(ItemStack tool, boolean createIfMissing) {
+        NBTTagCompound root = TagUtil.getTagSafe(tool);
+        NBTTagList tagList = TagUtil.getModifiersTagList(root);
+        String id = getModifierIdentifier();
+        int index = TinkerUtil.getIndexInCompoundList(tagList, id);
+        NBTTagCompound tag;
+        if (index == -1) {
+            if (!createIfMissing) return null;
+            tag = new NBTTagCompound();
+            tag.setString("identifier", id);
+            tagList.appendTag(tag);
+            TagUtil.setModifiersTagList(tool, tagList);
+        } else {
+            tag = tagList.getCompoundTagAt(index);
         }
-        return modtag;
+        Data data = new Data();
+        data.read(tag);
+        return data;
+    }
+
+    private void saveData(ItemStack tool, Data data) {
+        NBTTagCompound root = TagUtil.getTagSafe(tool);
+        NBTTagList tagList = TagUtil.getModifiersTagList(root);
+        String id = getModifierIdentifier();
+        int index = TinkerUtil.getIndexInCompoundList(tagList, id);
+        NBTTagCompound tag;
+        if (index == -1) {
+            tag = new NBTTagCompound();
+            tag.setString("identifier", id);
+            tagList.appendTag(tag);
+        } else {
+            tag = tagList.getCompoundTagAt(index);
+        }
+        data.write(tag);
+        TagUtil.setModifiersTagList(tool, tagList);
     }
 
     @Override
     public int onToolHeal(ItemStack tool, int amount, int newAmount, EntityLivingBase entity) {
         int halved = newAmount / 2;
         if (amount > REPAIR_THRESHOLD) {
-            ModifierTagHolder holder = getHolder(tool, true);
-            Data data = holder.getTagData(Data.class);
-            if (data != null && data.stack < MAX_STACK) {
+            Data data = getData(tool, true);
+            if (data.stack < MAX_STACK) {
                 data.stack++;
-                holder.save();
+                saveData(tool, data);
             }
         }
         return halved;
@@ -64,9 +77,8 @@ public class TraitStacking extends AbstractTrait {
         if (entity == null) {
             return newDamage;
         }
-        ModifierTagHolder holder = getHolder(tool, true);
-        Data data = holder.getTagData(Data.class);
-        if (data != null && data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
+        Data data = getData(tool, true);
+        if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
         return newDamage;
