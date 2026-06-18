@@ -10,6 +10,7 @@ import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.tools.TinkerTraits;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.traits.TraitBetween;
 import com.npstra.tinkerbetweenlands.content.traits.TraitWeedShield;
@@ -39,9 +40,13 @@ public class MaterialRegister {
         mat.setCraftable(!castable);
         mat.setCastable(castable);
         mat.addTrait(TraitBetween.INSTANCE, "head");
+
         if (id.equals("weedwood")) {
             mat.addTrait(TraitWeedShield.INSTANCE, "head");
             mat.addTrait(TraitWeedShield.INSTANCE, null);
+        } else if (id.equals("slimy_bone")) {
+            mat.addTrait(TinkerTraits.splintering, "head");
+            mat.addTrait(TinkerTraits.fractured, null);
         } else if (id.equals("valonite")) {
             mat.addTrait(TraitValor.INSTANCE, "head");
             mat.addTrait(TraitValor.INSTANCE, null);
@@ -52,6 +57,7 @@ public class MaterialRegister {
             mat.addTrait(TraitStacking.INSTANCE, "head");
             mat.addTrait(TraitStacking.INSTANCE, null);
         }
+
         TinkerRegistry.addMaterial(mat);
         mat.setVisible();
         return mat;
@@ -61,7 +67,7 @@ public class MaterialRegister {
         if (statsRegistered) return;
         statsRegistered = true;
 
-        if (weedwood != null)
+        if (weedwood != null) {
             TinkerRegistry.addMaterialStats(weedwood,
                     new HeadMaterialStats(40, 2.0f, 2.0f, 0),
                     new ExtraMaterialStats(25),
@@ -69,34 +75,39 @@ public class MaterialRegister {
                     new BowMaterialStats(1.0f, 1.0f, 0.0f),
                     new ArrowShaftMaterialStats(1.0f, 0)
             );
-        if (slimy_bone != null)
+        }
+        if (slimy_bone != null) {
             TinkerRegistry.addMaterialStats(slimy_bone,
                     new HeadMaterialStats(100, 4.0f, 2.0f, 1),
                     new ExtraMaterialStats(50),
                     new HandleMaterialStats(1.1f, 0),
                     new BowMaterialStats(1.0f, 1.0f, 0.0f)
             );
-        if (valonite != null)
+        }
+        if (valonite != null) {
             TinkerRegistry.addMaterialStats(valonite,
                     new HeadMaterialStats(1300, 8.0f, 6.0f, 4),
                     new ExtraMaterialStats(300),
                     new HandleMaterialStats(1.1f, 400),
                     new BowMaterialStats(0.8f, 1.2f, 4.0f)
             );
-        if (octine != null)
+        }
+        if (octine != null) {
             TinkerRegistry.addMaterialStats(octine,
                     new HeadMaterialStats(700, 6.0f, 4.0f, 2),
                     new ExtraMaterialStats(100),
                     new HandleMaterialStats(1.0f, 100),
                     new BowMaterialStats(0.9f, 1.1f, 3.0f)
             );
-        if (syrmorite != null)
+        }
+        if (syrmorite != null) {
             TinkerRegistry.addMaterialStats(syrmorite,
                     new HeadMaterialStats(900, 8.0f, 3.0f, 2),
                     new ExtraMaterialStats(150),
                     new HandleMaterialStats(1.0f, 150),
                     new BowMaterialStats(0.9f, 1.1f, 2.0f)
             );
+        }
     }
 
     public static void init() {
@@ -138,15 +149,12 @@ public class MaterialRegister {
         addOreDictOnly(weedwood, "stickWeedwood", 72);
 
         addOreDictOnly(slimy_bone, "boneSlimy", Material.VALUE_Ingot);
-
         addOreDictOnly(valonite, "gemValonite", Material.VALUE_Ingot);
         addOreDictOnly(valonite, "nuggetValonite", Material.VALUE_Nugget);
         addOreDictOnly(valonite, "blockValonite", Material.VALUE_Block);
-
         addOreDictOnly(octine, "ingotOctine", Material.VALUE_Ingot);
         addOreDictOnly(octine, "nuggetOctine", Material.VALUE_Nugget);
         addOreDictOnly(octine, "blockOctine", Material.VALUE_Block);
-
         addOreDictOnly(syrmorite, "ingotSyrmorite", Material.VALUE_Ingot);
         addOreDictOnly(syrmorite, "nuggetSyrmorite", Material.VALUE_Nugget);
         addOreDictOnly(syrmorite, "blockSyrmorite", Material.VALUE_Block);
