@@ -78,7 +78,7 @@ public class TraitIgnition extends AbstractTrait {
             if (!target.isBurning()) {
                 target.setFire(5);
             } else {
-                newDamage *= 1.25f;
+                newDamage *= 1.5f;
             }
             data.count = 0;
             saveData(tool, data);
