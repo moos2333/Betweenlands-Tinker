@@ -40,13 +40,25 @@ public class BetweenlandsTinker {
         if (Loader.isModLoaded("conarm")) {
             ArmorMaterial.registerArmorStats();
         }
-        OverworldItemHandler.TOOL_BLACKLIST.put(
-                new ResourceLocation("tinkerbetweenlands", "tinkers_tools"),
+        if (ModConfig.enableToolWeakening) {
+            OverworldItemHandler.TOOL_BLACKLIST.put(
+                    new ResourceLocation("tinkerbetweenlands", "tinkers_tools"),
+                    stack -> {
+                        if (stack.getItem() instanceof ToolCore) {
+                            if (stack.getItem() instanceof IBetweenlandsTool) return false;
+                            if (TinkerUtil.hasTrait(TagUtil.getTagSafe(stack), "between")) return false;
+                            return true;
+                        }
+                        return false;
+                    }
+            );
+        }
+        OverworldItemHandler.TOOL_WHITELIST.put(
+                new ResourceLocation(Tags.MOD_ID, "betweenlands_tools"),
                 stack -> {
                     if (stack.getItem() instanceof ToolCore) {
-                        if (stack.getItem() instanceof IBetweenlandsTool) return false;
-                        if (TinkerUtil.hasTrait(TagUtil.getTagSafe(stack), "between")) return false;
-                        return true;
+                        if (stack.getItem() instanceof IBetweenlandsTool) return true;
+                        if (TinkerUtil.hasTrait(TagUtil.getTagSafe(stack), "between")) return true;
                     }
                     return false;
                 }
