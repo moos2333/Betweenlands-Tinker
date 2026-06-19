@@ -1,5 +1,8 @@
 {
   "textures": {
-    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_web"
+    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_web",
+    "between_hatchet": "tinkerbetweenlands:items/tools/betweenaxe/mod_web",
+    "between_shovel": "tinkerbetweenlands:items/tools/betweenaxe/mod_web",
+    "between_pickaxe": "tinkerbetweenlands:items/tools/betweenaxe/mod_web"
   }
 }

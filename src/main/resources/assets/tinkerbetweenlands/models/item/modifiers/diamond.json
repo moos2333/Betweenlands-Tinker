@@ -1,5 +1,8 @@
 {
   "textures": {
-    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_diamond"
+    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_diamond",
+    "between_hatchet": "tinkerbetweenlands:items/tools/betweenaxe/mod_diamond",
+    "between_shovel": "tinkerbetweenlands:items/tools/betweenaxe/mod_diamond",
+    "between_pickaxe": "tinkerbetweenlands:items/tools/betweenaxe/mod_diamond"
   }
 }

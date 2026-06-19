@@ -1,5 +1,8 @@
 {
   "textures": {
-    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_soulbound"
+    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_soulbound",
+    "between_hatchet": "tinkerbetweenlands:items/tools/betweenaxe/mod_soulbound",
+    "between_shovel": "tinkerbetweenlands:items/tools/betweenaxe/mod_soulbound",
+    "between_pickaxe": "tinkerbetweenlands:items/tools/betweenaxe/mod_soulbound"
   }
 }

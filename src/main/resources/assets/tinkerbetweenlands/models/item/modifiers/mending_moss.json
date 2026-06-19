@@ -1,5 +1,8 @@
 {
   "textures": {
-    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_mending_moss"
+    "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_mending_moss",
+    "between_hatchet": "tinkerbetweenlands:items/tools/betweenaxe/mod_mending_moss",
+    "between_shovel": "tinkerbetweenlands:items/tools/betweenaxe/mod_mending_moss",
+    "between_pickaxe": "tinkerbetweenlands:items/tools/betweenaxe/mod_mending_moss"
   }
 }
