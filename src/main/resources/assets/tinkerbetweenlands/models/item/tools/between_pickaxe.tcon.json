@@ -4,9 +4,5 @@
     "layer1": "tinkerbetweenlands:items/tools/betweenpickaxe/head",
     "layer2": "tinkerbetweenlands:items/tools/betweenaxe/extra",
     "broken1": "tinkerbetweenlands:items/tools/betweenpickaxe/broken_head"
-  },
-  "offset": {
-    "x": 0,
-    "y": -1
   }
 }

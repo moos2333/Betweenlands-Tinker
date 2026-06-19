@@ -39,7 +39,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
 
     @Override
     public int getRequiredLife(ItemStack stack) {
-        return 25;
+        return 32;
     }
 
     @SideOnly(Side.CLIENT)
