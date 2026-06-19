@@ -5,19 +5,12 @@ import c4.conarm.lib.materials.ArmorMaterialType;
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
 import c4.conarm.lib.materials.TrimMaterialStats;
-import com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitValorArmor;
 import net.minecraftforge.fml.common.Loader;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import com.npstra.tinkerbetweenlands.content.materials.MaterialRegister;
-import com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitStackingArmor;
-import com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitWeedShieldArmor;
 
 public class ArmorMaterial {
-
-    private static final TraitWeedShieldArmor TRAIT_WEED_SHIELD = new TraitWeedShieldArmor();
-    private static final TraitStackingArmor TRAIT_STACKING = new TraitStackingArmor();
-    private static final TraitValorArmor TRAIT_VALOR = new TraitValorArmor();
 
     public static void registerArmorStats() {
         if (!Loader.isModLoaded("conarm")) return;
@@ -71,19 +64,23 @@ public class ArmorMaterial {
 
     public static void registerArmorTraits() {
         if (!Loader.isModLoaded("conarm")) return;
+        com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitWeedShieldArmor traitWeedShield = new com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitWeedShieldArmor();
+        com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitStackingArmor traitStacking = new com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitStackingArmor();
+        com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitValorArmor traitValor = new com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitValorArmor();
+
         Material weedwood = MaterialRegister.weedwood;
         Material syrmorite = MaterialRegister.syrmorite;
         Material slimyBone = MaterialRegister.slimy_bone;
         Material valonite = MaterialRegister.valonite;
 
         if (weedwood != null) {
-            addArmorTrait(weedwood, TRAIT_WEED_SHIELD);
+            addArmorTrait(weedwood, traitWeedShield);
         }
         if (syrmorite != null) {
-            addArmorTrait(syrmorite, TRAIT_STACKING);
+            addArmorTrait(syrmorite, traitStacking);
         }
         if (valonite != null) {
-            addArmorTrait(valonite, TRAIT_VALOR);
+            addArmorTrait(valonite, traitValor);
         }
         if (slimyBone != null) {
             slimyBone.addTrait(ArmorTraits.calcic, ArmorMaterialType.CORE);
