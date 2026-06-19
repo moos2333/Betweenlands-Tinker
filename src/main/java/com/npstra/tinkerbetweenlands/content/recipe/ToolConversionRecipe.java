@@ -4,30 +4,32 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.tools.ToolCore;
-import slimeknights.tconstruct.tools.tools.Excavator;
-import slimeknights.tconstruct.tools.tools.Hammer;
+import slimeknights.tconstruct.tools.melee.item.BroadSword;
 import thebetweenlands.api.item.ICorrodible;
 import thebetweenlands.api.recipes.IAnimatorRecipe;
 import com.npstra.tinkerbetweenlands.api.IBetweenlandsTool;
 import com.npstra.tinkerbetweenlands.content.tools.ModTools;
 
 public class ToolConversionRecipe implements IAnimatorRecipe {
+
+    private static final Item PICKAXE = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "pickaxe"));
+    private static final Item SHOVEL = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "shovel"));
+    private static final Item HATCHET = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "hatchet"));
+
     @Override
     public boolean matchesInput(ItemStack stack) {
         if (stack.isEmpty()) return false;
         Item item = stack.getItem();
         if (!(item instanceof ToolCore)) return false;
         if (item instanceof IBetweenlandsTool) return false;
-        if (item instanceof Hammer || item instanceof Excavator) return false;
-        return item instanceof slimeknights.tconstruct.tools.tools.Pickaxe ||
-                item instanceof slimeknights.tconstruct.tools.tools.Shovel ||
-                item instanceof slimeknights.tconstruct.tools.tools.Hatchet ||
-                item instanceof slimeknights.tconstruct.tools.melee.item.BroadSword;
+        return item == PICKAXE || item == SHOVEL || item == HATCHET || item instanceof BroadSword;
     }
 
     @Override
@@ -61,15 +63,10 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
 
     private ItemStack getOutputTool(ItemStack input) {
         Item item = input.getItem();
-        if (item instanceof Hammer || item instanceof Excavator) return ItemStack.EMPTY;
-        if (item instanceof slimeknights.tconstruct.tools.tools.Pickaxe)
-            return new ItemStack(ModTools.BETWEEN_PICKAXE);
-        if (item instanceof slimeknights.tconstruct.tools.tools.Shovel)
-            return new ItemStack(ModTools.BETWEEN_SHOVEL);
-        if (item instanceof slimeknights.tconstruct.tools.tools.Hatchet)
-            return new ItemStack(ModTools.BETWEEN_HATCHET);
-        if (item instanceof slimeknights.tconstruct.tools.melee.item.BroadSword)
-            return new ItemStack(ModTools.BETWEEN_BROADSWORD);
+        if (item == PICKAXE) return new ItemStack(ModTools.BETWEEN_PICKAXE);
+        if (item == SHOVEL) return new ItemStack(ModTools.BETWEEN_SHOVEL);
+        if (item == HATCHET) return new ItemStack(ModTools.BETWEEN_HATCHET);
+        if (item instanceof BroadSword) return new ItemStack(ModTools.BETWEEN_BROADSWORD);
         return ItemStack.EMPTY;
     }
 

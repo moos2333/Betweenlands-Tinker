@@ -89,7 +89,7 @@ public class MaterialRegister {
                     new HeadMaterialStats(1300, 8.0f, 6.0f, 4),
                     new ExtraMaterialStats(300),
                     new HandleMaterialStats(1.1f, 400),
-                    new BowMaterialStats(0.8f, 1.2f, 4.0f)
+                    new BowMaterialStats(0.8f, 1.2f, 5.0f)
             );
         }
         if (octine != null) {
