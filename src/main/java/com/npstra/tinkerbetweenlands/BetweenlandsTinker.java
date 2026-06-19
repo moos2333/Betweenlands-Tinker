@@ -79,7 +79,6 @@ public class BetweenlandsTinker {
         ForgeRegistries.RECIPES.register(new GemAttachmentRecipe().setRegistryName(Tags.MOD_ID, "gem_attachment"));
         if (Loader.isModLoaded("conarm")) {
             ArmorMaterial.registerArmorTraits();
-            ArmorMaterial.reintegrateMaterials();
         }
     }
 

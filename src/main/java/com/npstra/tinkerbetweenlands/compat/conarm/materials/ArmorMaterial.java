@@ -100,17 +100,4 @@ public class ArmorMaterial {
             octine.addTrait(ArmorTraits.superhot, ArmorMaterialType.TRIM);
         }
     }
-
-    public static void reintegrateMaterials() {
-        if (!Loader.isModLoaded("conarm")) return;
-        reintegrate(MaterialRegister.weedwood);
-        reintegrate(MaterialRegister.slimy_bone);
-        reintegrate(MaterialRegister.octine);
-        reintegrate(MaterialRegister.syrmorite);
-        reintegrate(MaterialRegister.valonite);
-    }
-
-    private static void reintegrate(Material material) {
-        if (material != null) TinkerRegistry.integrate(material);
-    }
 }
