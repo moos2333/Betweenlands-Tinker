@@ -70,8 +70,9 @@ public class ArmorMaterial {
 
         Material weedwood = MaterialRegister.weedwood;
         Material syrmorite = MaterialRegister.syrmorite;
-        Material slimyBone = MaterialRegister.slimy_bone;
         Material valonite = MaterialRegister.valonite;
+        Material slimyBone = MaterialRegister.slimy_bone;
+        Material octine = MaterialRegister.octine;
 
         if (weedwood != null) {
             weedwood.addTrait(traitWeedShield, ArmorMaterialType.CORE);
@@ -92,6 +93,11 @@ public class ArmorMaterial {
             slimyBone.addTrait(ArmorTraits.calcic, ArmorMaterialType.CORE);
             slimyBone.addTrait(ArmorTraits.skeletal, ArmorMaterialType.PLATES);
             slimyBone.addTrait(ArmorTraits.skeletal, ArmorMaterialType.TRIM);
+        }
+        if (octine != null) {
+            octine.addTrait(ArmorTraits.autoforge, ArmorMaterialType.CORE);
+            octine.addTrait(ArmorTraits.superhot, ArmorMaterialType.PLATES);
+            octine.addTrait(ArmorTraits.superhot, ArmorMaterialType.TRIM);
         }
     }
 
