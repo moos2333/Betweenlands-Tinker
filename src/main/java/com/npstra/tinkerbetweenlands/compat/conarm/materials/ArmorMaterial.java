@@ -74,13 +74,19 @@ public class ArmorMaterial {
         Material valonite = MaterialRegister.valonite;
 
         if (weedwood != null) {
-            addArmorTrait(weedwood, traitWeedShield);
+            weedwood.addTrait(traitWeedShield, ArmorMaterialType.CORE);
+            weedwood.addTrait(traitWeedShield, ArmorMaterialType.PLATES);
+            weedwood.addTrait(traitWeedShield, ArmorMaterialType.TRIM);
         }
         if (syrmorite != null) {
-            addArmorTrait(syrmorite, traitStacking);
+            syrmorite.addTrait(traitStacking, ArmorMaterialType.CORE);
+            syrmorite.addTrait(traitStacking, ArmorMaterialType.PLATES);
+            syrmorite.addTrait(traitStacking, ArmorMaterialType.TRIM);
         }
         if (valonite != null) {
-            addArmorTrait(valonite, traitValor);
+            valonite.addTrait(traitValor, ArmorMaterialType.CORE);
+            valonite.addTrait(traitValor, ArmorMaterialType.PLATES);
+            valonite.addTrait(traitValor, ArmorMaterialType.TRIM);
         }
         if (slimyBone != null) {
             slimyBone.addTrait(ArmorTraits.calcic, ArmorMaterialType.CORE);
@@ -100,11 +106,5 @@ public class ArmorMaterial {
 
     private static void reintegrate(Material material) {
         if (material != null) TinkerRegistry.integrate(material);
-    }
-
-    private static void addArmorTrait(Material material, c4.conarm.lib.traits.AbstractArmorTrait trait) {
-        material.addTrait(trait, ArmorMaterialType.CORE);
-        material.addTrait(trait, ArmorMaterialType.PLATES);
-        material.addTrait(trait, ArmorMaterialType.TRIM);
     }
 }
