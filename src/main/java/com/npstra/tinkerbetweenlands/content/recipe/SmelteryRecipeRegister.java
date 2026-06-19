@@ -89,7 +89,7 @@ public class SmelteryRecipeRegister {
             ItemStack sulfurItem = new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 18);
             ItemStack sulfurBlock = new ItemStack(Item.getByNameOrId("thebetweenlands:sulfur_block"));
             if (!sulfurItem.isEmpty()) {
-                TinkerRegistry.registerTableCasting(sulfurItem, new ItemStack(TinkerSmeltery.castGem.getItem()), fluidSulfur, 50);
+                TinkerRegistry.registerTableCasting(sulfurItem, TinkerSmeltery.castGem, fluidSulfur, 50);
             }
             if (!sulfurBlock.isEmpty()) {
                 TinkerRegistry.registerBasinCasting(sulfurBlock, ItemStack.EMPTY, fluidSulfur, 450);
