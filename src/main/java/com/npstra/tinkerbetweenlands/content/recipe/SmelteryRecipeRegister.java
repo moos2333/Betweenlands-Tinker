@@ -3,6 +3,7 @@ package com.npstra.tinkerbetweenlands.content.recipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
@@ -14,6 +15,7 @@ public class SmelteryRecipeRegister {
     public static void init(FMLInitializationEvent event) {
         registerMeltingRecipes();
         registerCastingRecipes();
+        registerFuel();
     }
 
     private static void registerMeltingRecipes() {
@@ -48,6 +50,14 @@ public class SmelteryRecipeRegister {
         Item syrmoriteOre = Item.getByNameOrId("thebetweenlands:syrmorite_ore");
         if (syrmoriteOre != null)
             TinkerRegistry.registerMelting(new ItemStack(syrmoriteOre), FluidRegister.fluidSyrmorite, 288);
+
+        Item sulfurItem = Item.getByNameOrId("thebetweenlands:items_misc");
+        if (sulfurItem != null)
+            TinkerRegistry.registerMelting(new ItemStack(sulfurItem, 1, 18), FluidRegister.fluidMoltenSulfur, 50);
+
+        Item sulfurBlock = Item.getByNameOrId("thebetweenlands:sulfur_block");
+        if (sulfurBlock != null)
+            TinkerRegistry.registerMelting(new ItemStack(sulfurBlock), FluidRegister.fluidMoltenSulfur, 450);
     }
 
     private static void registerCastingRecipes() {
@@ -73,5 +83,23 @@ public class SmelteryRecipeRegister {
         TinkerRegistry.registerTableCasting(syrmoriteNugget, new ItemStack(TinkerSmeltery.castNugget.getItem()), fluidSyrmorite, Material.VALUE_Nugget);
         TinkerRegistry.registerTableCasting(syrmoriteIngot, new ItemStack(TinkerSmeltery.castIngot.getItem()), fluidSyrmorite, Material.VALUE_Ingot);
         TinkerRegistry.registerBasinCasting(syrmoriteBlock, ItemStack.EMPTY, fluidSyrmorite, Material.VALUE_Block);
+
+        Fluid fluidSulfur = FluidRegister.fluidMoltenSulfur;
+        if (fluidSulfur != null) {
+            ItemStack sulfurItem = new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 18);
+            ItemStack sulfurBlock = new ItemStack(Item.getByNameOrId("thebetweenlands:sulfur_block"));
+            if (!sulfurItem.isEmpty()) {
+                TinkerRegistry.registerTableCasting(sulfurItem, new ItemStack(TinkerSmeltery.castGem.getItem()), fluidSulfur, 50);
+            }
+            if (!sulfurBlock.isEmpty()) {
+                TinkerRegistry.registerBasinCasting(sulfurBlock, ItemStack.EMPTY, fluidSulfur, 450);
+            }
+        }
+    }
+
+    private static void registerFuel() {
+        if (FluidRegister.fluidMoltenSulfur != null) {
+            TinkerRegistry.registerSmelteryFuel(new FluidStack(FluidRegister.fluidMoltenSulfur, 50), 100);
+        }
     }
 }
