@@ -1,49 +1,46 @@
 # Betweenlands’ Tinker
 
-**A Tinkers’ Construct addon that brings Betweenlands materials, tools, and mechanics to your forge.**
+**A Tinkers’ Construct addon bringing the dark swamps of The Betweenlands to your smeltery and tool forge.**
 
 ---
 
 ## Overview
-Betweenlands’ Tinker integrates the dark swamps of The Betweenlands into Tinkers’ Construct. It adds 5 new materials, 4 craftable tools, 5 unique traits, and full smeltery support—all while preserving the dimension’s core mechanics: weakness and corrosion.
-
-**Minecraft 1.12.2 · Forge 14.23.5.2847+**
+Betweenlands’ Tinker integrates **5 new materials**, **4 craftable tools**, **5 unique traits**, and full smeltery support while preserving the dimension's core mechanics—**weakness immunity** and **corrosion**.  
+All tools are obtained via **Animator conversion** from vanilla Tinkers’ tools, retaining stats, modifiers, and durability.
 
 ---
 
-## Dependencies
-- Mantle (1.12-1.3.3+)
-- Tinkers’ Construct (1.12.2-2.13.0+)
-- The Betweenlands (3.9.6+)
+## Important Note
+
+If you encounter issues with **Weedwood** or **Slimy Bone** materials not working correctly, please consider using **[Tinkers’ Antique](https://www.curseforge.com/minecraft/mc-mods/tinkers-antique)** – an actively maintained fork of Tinkers’ Construct 2 that resolves many compatibility and stability issues.
 
 ---
 
 ## New Materials
 
-| Material | Mining Level | Castable | Durability | Speed | Attack | Traits |
-|----------|--------------|----------|------------|-------|--------|--------|
-| **Weedwood** | 0 | ❌ | 40 | 2.0 | 2.0 | Between, Weed Shield |
-| **Slimy Bone** | 1 | ❌ | 100 | 4.0 | 2.0 | Between, Splintering (Head), Splinters (All) |
-| **Octine** | 2 | ✅ | 700 | 6.0 | 4.0 | Between, Ignition |
-| **Syrmorite** | 2 | ✅ | 900 | 8.0 | 3.0 | Between, Stacking |
-| **Valonite** | 3 | ❌ | 1300 | 8.0 | 6.0 | Between, Valor |
-
-Octine and Syrmorite are fully castable: ore → 288 mB, ingot → 144 mB, nugget → 16 mB, block → 1296 mB. Use casting table (with casts) or basin (no cast for blocks).
+| Material | Tool Stats (Durability / Speed / Attack) | Castable | Traits |
+|----------|-------------------------------------------|----------|--------|
+| **Weedwood**    | 40 / 2.0 / 2.0      | ❌ | Between, Weed Shield |
+| **Slimy Bone**  | 100 / 4.0 / 2.0     | ❌ | Between, Splintering/Splinters |
+| **Octine**      | 700 / 6.0 / 4.0     | ✅ | Between, Ignition |
+| **Syrmorite**   | 900 / 8.0 / 3.0     | ✅ | Between, Stacking |
+| **Valonite**    | 1300 / 8.0 / 6.0    | ❌ | Between, Valor |
 
 ---
 
 ## New Tools
 
-Four Betweenlands tools are created by converting existing Tinkers’ tools in the Animator (recipe: Tool + Life Crystal + Sulfur):
+Convert **any** existing Tinkers’ tool in the Animator (input: tool + Life Crystal + Sulfur):
 
-- Betweenlands Pickaxe (from Pickaxe)
-- Betweenlands Shovel (from Shovel)
-- Betweenlands Hatchet (from Hatchet)
-- Betweenlands Broadsword (from Broadsword)
+- **Pickaxe** → Betweenlands Pickaxe
+- **Shovel** → Betweenlands Shovel
+- **Hatchet** → Betweenlands Hatchet
+- **Broadsword** → Betweenlands Broadsword
 
-All stats, modifiers, and durability are preserved. Tools are immune to the Betweenlands weakness but suffer corrosion.
+All stats, modifiers, and durability transfer exactly. Tools are **immune to the Betweenlands weakness** and support the dimension's **corrosion** system.
 
-Part conversion is also available: Tool Rod → Betweenlands Handle, Binding → Betweenlands Binding, Blade/Head → Betweenlands Tool Head.
+**Parts can also be converted**: Tool Rod → Betweenlands Handle, Binding → Betweenlands Binding, Blade/Head → Betweenlands Tool Head.  
+*Parts are only for replacing components in Betweenlands tools—they cannot be used to craft tools directly.*
 
 ---
 
@@ -51,35 +48,35 @@ Part conversion is also available: Tool Rod → Betweenlands Handle, Binding →
 
 | Trait | Effect |
 |-------|--------|
-| **Between** | Non-Interloper tools bypass weakness but lose 25% damage/speed; Interloper tools unaffected. |
-| **Weed Shield** | Generates a shield (max 100) that absorbs durability loss. Regens every 20s (10s in Betweenlands). |
-| **Valor** | Gain valor from mining (1) or dealing damage (1 per 5 damage). Every 100 valor gives +1% damage, +1% speed, -1% durability consumption (max 3000). |
-| **Ignition** | Every third hit ignites target for 5s, or deals +25% damage if already burning. |
-| **Stacking** | Repairs are 50% less effective; repairs over 1000 durability grant 1 stacking point (max 100), each -1% durability consumption. |
+| **Between** | Bypasses weakness; non-Between tools suffer -25% damage/speed. |
+| **Weed Shield** | Absorbs durability loss (max 100); regenerates every 20s (10s in Betweenlands). |
+| **Valor** | Gain valor from mining (1) or damage (1 per 5 damage). Every 100 valor = +1% damage, +1% speed, -1% durability consumption (max 3000). |
+| **Ignition** | Every third hit ignites target (5s) or deals +25% damage if already burning. |
+| **Stacking** | Repairs are 80% less effective (only 20% of repair amount applied). Every 1000 durability consumed grants +1 stacking point (max 100). Each point reduces future durability consumption by 1% (cumulative, up to 100% chance to avoid durability loss). |
 
 ---
 
 ## Core Mechanics
 
-- **Weakness Immunity**: All Betweenlands tools ignore the Betweenlands weakness effect. Non-Interloper tools can gain this via the Between trait at a 25% penalty.
-- **Corrosion**: Betweenlands tools accumulate corrosion (0–255) over time, reducing damage and speed (max 70% penalty). Tooltips show corrosion stage.
-- **Animator Conversion**: Convert tools or parts (see above). Excludes Hammer and Excavator.
+- **Weakness Immunity**: All Betweenlands tools ignore the dimension's weakness. Non-Interloper tools can gain immunity via the *Between* trait at a 25% penalty.
+- **Corrosion**: Tools accumulate corrosion (0–255) over use, reducing damage and speed (max 70% penalty). Tooltips show the current stage.
+- **Animator Conversion**: Convert tools or parts as described above (excludes Hammer and Excavator).
 
 ---
 
-## Smeltery Integration
 
-Full smelting and casting support for Octine and Syrmorite:
-
-- Octine/Syrmorite Ore → 288 mB Molten Metal
-- Ingot/Nugget/Block → melts to 144/16/1296 mB
-- Casting Table (with cast) → Ingot or Nugget
-- Casting Basin (no cast) → Block
+## Dependencies
+- Mantle (1.12-1.3.3+)
+- Tinkers’ Construct (1.12.2-2.13.0+)
+- The Betweenlands (3.9.6+)
+> **Minecraft 1.12.2 · Forge 14.23.5.2847+**
 
 ---
 
-## Gallery
-![2026-06-18_22.22.14.png](run/screenshots/2026-06-18_22.22.14.png)
+## Compatibilities
+
+- **Construct’s Armory** – Adds Betweenlands armor materials and traits.
+- **JEI** – Adds Animator conversion recipe viewer support.
 
 ---
 
@@ -90,13 +87,10 @@ MIT
 
 ## Credits
 
-- **Tinkers’ Construct** – Created by SlimeKnights
-- **The Betweenlands** – Created by Angry Pixel
-- **Mantle** – Created by SlimeKnights
-
-Special thanks to the modding community for their support and contributions.
+- **Tinkers’ Construct** – SlimeKnights
+- **The Betweenlands** – Angry Pixel
+- **Mantle** – SlimeKnights
 
 ---
 
-**Note:**  
-Portions of this code were generated with the assistance of an AI language model.
+*Note: Portions of this code were generated with the assistance of AI Tools.*

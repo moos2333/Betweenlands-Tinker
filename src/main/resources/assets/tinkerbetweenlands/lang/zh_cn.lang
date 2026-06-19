@@ -36,6 +36,7 @@ modifier.stacking.extra=层叠：+%s%%
 # Betweenlands Tinker - Fluids
 fluid.octine.name=熔融炽炎
 fluid.syrmorite.name=熔融赛摩
+fluid.molten_sulfur.name=液态硫磺
 
 #Betweenlands Tinker - Armor Traits
 modifier.weedshield_armor.name=杂草盾

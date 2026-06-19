@@ -36,6 +36,7 @@ modifier.stacking.extra=Stacking: +%s%%.
 # Betweenlands Tinker - Fluids
 fluid.octine.name=Molten Octine
 fluid.syrmorite.name=Molten Syrmorite
+fluid.molten_sulfur.name=Molten Sulfur
 
 # Betweenlands Tinker - Armor Traits
 modifier.weedshield_armor.name=Weed Shield

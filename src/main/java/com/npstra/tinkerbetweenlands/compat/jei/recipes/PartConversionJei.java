@@ -8,12 +8,17 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.tools.TinkerTools;
 import thebetweenlands.common.recipe.misc.AnimatorRecipe;
+import com.npstra.tinkerbetweenlands.content.materials.MaterialRegister;
 import com.npstra.tinkerbetweenlands.content.parts.BetweenlandsPart;
 import com.npstra.tinkerbetweenlands.content.parts.ModParts;
 
 public class PartConversionJei extends AnimatorRecipe {
     public PartConversionJei() {
-        super(withLore(new ItemStack(TinkerTools.toolRod)), 2, 5, new ItemStack(ModParts.BETWEEN_HANDLE));
+        super(withLore(TinkerTools.toolRod.getItemstackWithMaterial(getMaterial())), 2, 5, ModParts.BETWEEN_HANDLE.getItemstackWithMaterial(getMaterial()));
+    }
+
+    private static Material getMaterial() {
+        return MaterialRegister.syrmorite != null ? MaterialRegister.syrmorite : Material.UNKNOWN;
     }
 
     private static ItemStack withLore(ItemStack stack) {
