@@ -12,7 +12,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
@@ -26,7 +25,6 @@ import com.npstra.tinkerbetweenlands.content.recipe.ToolConversionRecipe;
 import com.npstra.tinkerbetweenlands.content.tools.ModTools;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
 import thebetweenlands.common.recipe.misc.AnimatorRecipe;
-import thebetweenlands.common.registries.RecipeRegistry;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION, dependencies = "required-after:mantle@[1.12-1.3.3.55,);required-after:tconstruct@[1.12.2-2.13.0,);required-after:thebetweenlands@[1.12.2-3.9.0,)")
 public class BetweenlandsTinker {
@@ -71,6 +69,12 @@ public class BetweenlandsTinker {
         SmelteryRecipeRegister.init(event);
         AnimatorRecipe.addRecipe(new ToolConversionRecipe());
         AnimatorRecipe.addRecipe(new PartConversionRecipe());
+
+        if (Loader.isModLoaded("jei")) {
+            AnimatorRecipe.addRecipe(new com.npstra.tinkerbetweenlands.compat.jei.recipes.ToolConversionJei());
+            AnimatorRecipe.addRecipe(new com.npstra.tinkerbetweenlands.compat.jei.recipes.PartConversionJei());
+        }
+
         MinecraftForge.EVENT_BUS.register(new BetweenlandsEventHandler());
         ForgeRegistries.RECIPES.register(new GemAttachmentRecipe().setRegistryName(Tags.MOD_ID, "gem_attachment"));
         if (Loader.isModLoaded("conarm")) {
