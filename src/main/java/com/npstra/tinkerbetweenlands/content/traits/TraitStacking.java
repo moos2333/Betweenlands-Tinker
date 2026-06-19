@@ -71,7 +71,7 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public int onToolHeal(ItemStack tool, int amount, int newAmount, EntityLivingBase entity) {
-        return newAmount / 4;
+        return newAmount / 5;
     }
 
     @Override
