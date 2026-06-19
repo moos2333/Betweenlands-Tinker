@@ -1,0 +1,8 @@
+{
+  "textures": {
+    "layer0": "tinkerbetweenlands:items/tools/betweenaxe/handle",
+    "layer1": "tinkerbetweenlands:items/tools/betweenshovel/head",
+    "layer2": "tinkerbetweenlands:items/tools/betweenaxe/extra",
+    "broken1": "tinkerbetweenlands:items/tools/betweenshovel/broken_head"
+  }
+}
