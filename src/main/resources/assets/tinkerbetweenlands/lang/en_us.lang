@@ -43,3 +43,4 @@ modifier.weedshield_armor.desc=§oParasitic!§r\nGenerates a shield that absorbs
 
 modifier.stacking_armor.name=Stacking
 modifier.stacking_armor.desc=§oDense and stubborn...§r\nThe armor is harder to repair, but extensive use will permanently reduce its wear.
+modifier.stacking_armor.extra=Stacking: +%s%%.

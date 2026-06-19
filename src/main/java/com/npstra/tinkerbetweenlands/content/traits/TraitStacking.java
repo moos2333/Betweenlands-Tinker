@@ -22,6 +22,16 @@ public class TraitStacking extends AbstractTrait {
         super("stacking", 0x00AA00);
     }
 
+    @Override
+    public void updateNBT(NBTTagCompound modifierTag) {
+        Data data = new Data();
+        data.read(modifierTag);
+        data.identifier = this.getModifierIdentifier();
+        data.color = this.color;
+        if (data.level == 0) data.level = 1;
+        data.write(modifierTag);
+    }
+
     private Data getData(ItemStack tool, boolean createIfMissing) {
         NBTTagCompound root = TagUtil.getTagSafe(tool);
         NBTTagList tagList = TagUtil.getModifiersTagList(root);
@@ -73,17 +83,15 @@ public class TraitStacking extends AbstractTrait {
         if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
-        if (damage > 0) {
-            data.accumulated += damage;
-            if (data.accumulated >= ACCUMULATE_THRESHOLD) {
-                if (data.stack < MAX_STACK) {
-                    data.stack++;
-                }
+        if (newDamage > 0) {
+            data.accumulated += newDamage;
+            while (data.accumulated >= ACCUMULATE_THRESHOLD && data.stack < MAX_STACK) {
+                data.stack++;
                 data.accumulated -= ACCUMULATE_THRESHOLD;
             }
             saveData(tool, data);
         }
-        return damage;
+        return newDamage;
     }
 
     @Override
