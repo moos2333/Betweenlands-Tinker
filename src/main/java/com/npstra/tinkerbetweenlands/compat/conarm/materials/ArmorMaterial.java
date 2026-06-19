@@ -1,5 +1,6 @@
 package com.npstra.tinkerbetweenlands.compat.conarm.materials;
 
+import c4.conarm.common.armor.traits.ArmorTraits;
 import c4.conarm.lib.materials.ArmorMaterialType;
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
@@ -76,12 +77,18 @@ public class ArmorMaterial {
     private static void registerArmorTraits() {
         Material weedwood = MaterialRegister.weedwood;
         Material syrmorite = MaterialRegister.syrmorite;
+        Material slimyBone = MaterialRegister.slimy_bone;
 
         if (weedwood != null) {
             addArmorTrait(weedwood, TRAIT_WEED_SHIELD);
         }
         if (syrmorite != null) {
             addArmorTrait(syrmorite, TRAIT_STACKING);
+        }
+        if (slimyBone != null) {
+            slimyBone.addTrait(ArmorTraits.calcic, ArmorMaterialType.CORE);
+            slimyBone.addTrait(ArmorTraits.skeletal, ArmorMaterialType.PLATES);
+            slimyBone.addTrait(ArmorTraits.skeletal, ArmorMaterialType.TRIM);
         }
     }
 
