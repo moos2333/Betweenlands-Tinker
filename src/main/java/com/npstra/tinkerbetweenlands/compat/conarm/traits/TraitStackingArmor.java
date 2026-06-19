@@ -71,7 +71,7 @@ public class TraitStackingArmor extends AbstractArmorTrait {
 
     @Override
     public int onArmorHeal(ItemStack armor, DamageSource source, int amount, int newAmount, EntityPlayer player, int slot) {
-        return newAmount / 2;
+        return newAmount / 4;
     }
 
     @Override
