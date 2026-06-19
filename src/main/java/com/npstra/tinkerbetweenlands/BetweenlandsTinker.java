@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
@@ -32,6 +33,9 @@ public class BetweenlandsTinker {
         ModTools.register();
         FluidRegister.preInit();
         MaterialRegister.preInit();
+        if (Loader.isModLoaded("conarm")) {
+            ArmorMaterial.registerArmorStats();
+        }
         OverworldItemHandler.TOOL_BLACKLIST.put(
                 new ResourceLocation("tinkerbetweenlands", "tinkers_tools"),
                 stack -> {
@@ -52,7 +56,10 @@ public class BetweenlandsTinker {
         AnimatorRecipe.addRecipe(new ToolConversionRecipe());
         AnimatorRecipe.addRecipe(new PartConversionRecipe());
         MinecraftForge.EVENT_BUS.register(new BetweenlandsEventHandler());
-        ArmorMaterial.init(event);
+        if (Loader.isModLoaded("conarm")) {
+            ArmorMaterial.registerArmorTraits();
+            ArmorMaterial.reintegrateMaterials();
+        }
     }
 
     @Mod.EventHandler

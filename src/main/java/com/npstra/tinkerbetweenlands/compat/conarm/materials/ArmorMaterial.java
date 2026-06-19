@@ -5,8 +5,8 @@ import c4.conarm.lib.materials.ArmorMaterialType;
 import c4.conarm.lib.materials.CoreMaterialStats;
 import c4.conarm.lib.materials.PlatesMaterialStats;
 import c4.conarm.lib.materials.TrimMaterialStats;
+import com.npstra.tinkerbetweenlands.compat.conarm.traits.TraitValorArmor;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import com.npstra.tinkerbetweenlands.content.materials.MaterialRegister;
@@ -17,16 +17,15 @@ public class ArmorMaterial {
 
     private static final TraitWeedShieldArmor TRAIT_WEED_SHIELD = new TraitWeedShieldArmor();
     private static final TraitStackingArmor TRAIT_STACKING = new TraitStackingArmor();
+    private static final TraitValorArmor TRAIT_VALOR = new TraitValorArmor();
 
-    public static void init(FMLInitializationEvent event) {
-        if (!Loader.isModLoaded("conarm")) {
-            return;
+    public static void registerArmorStats() {
+        if (!Loader.isModLoaded("conarm")) return;
+        if (Material.UNKNOWN.getStats(ArmorMaterialType.CORE) == null) {
+            Material.UNKNOWN.addStats(new CoreMaterialStats(0.0f, 0.0f));
+            Material.UNKNOWN.addStats(new PlatesMaterialStats(1.0f, 0.0f, 0.0f));
+            Material.UNKNOWN.addStats(new TrimMaterialStats(0.0f));
         }
-        registerArmorStats();
-        registerArmorTraits();
-    }
-
-    private static void registerArmorStats() {
         Material weedwood = MaterialRegister.weedwood;
         Material slimyBone = MaterialRegister.slimy_bone;
         Material octine = MaterialRegister.octine;
@@ -40,7 +39,6 @@ public class ArmorMaterial {
                     new TrimMaterialStats(1.0f)
             );
         }
-
         if (slimyBone != null) {
             TinkerRegistry.addMaterialStats(slimyBone,
                     new CoreMaterialStats(13.0f, 4.5f),
@@ -48,7 +46,6 @@ public class ArmorMaterial {
                     new TrimMaterialStats(6.0f)
             );
         }
-
         if (octine != null) {
             TinkerRegistry.addMaterialStats(octine,
                     new CoreMaterialStats(12.5f, 15.5f),
@@ -56,7 +53,6 @@ public class ArmorMaterial {
                     new TrimMaterialStats(4.0f)
             );
         }
-
         if (syrmorite != null) {
             TinkerRegistry.addMaterialStats(syrmorite,
                     new CoreMaterialStats(16.0f, 17.5f),
@@ -64,7 +60,6 @@ public class ArmorMaterial {
                     new TrimMaterialStats(11.0f)
             );
         }
-
         if (valonite != null) {
             TinkerRegistry.addMaterialStats(valonite,
                     new CoreMaterialStats(19.0f, 19.5f),
@@ -74,10 +69,12 @@ public class ArmorMaterial {
         }
     }
 
-    private static void registerArmorTraits() {
+    public static void registerArmorTraits() {
+        if (!Loader.isModLoaded("conarm")) return;
         Material weedwood = MaterialRegister.weedwood;
         Material syrmorite = MaterialRegister.syrmorite;
         Material slimyBone = MaterialRegister.slimy_bone;
+        Material valonite = MaterialRegister.valonite;
 
         if (weedwood != null) {
             addArmorTrait(weedwood, TRAIT_WEED_SHIELD);
@@ -85,11 +82,27 @@ public class ArmorMaterial {
         if (syrmorite != null) {
             addArmorTrait(syrmorite, TRAIT_STACKING);
         }
+        if (valonite != null) {
+            addArmorTrait(valonite, TRAIT_VALOR);
+        }
         if (slimyBone != null) {
             slimyBone.addTrait(ArmorTraits.calcic, ArmorMaterialType.CORE);
             slimyBone.addTrait(ArmorTraits.skeletal, ArmorMaterialType.PLATES);
             slimyBone.addTrait(ArmorTraits.skeletal, ArmorMaterialType.TRIM);
         }
+    }
+
+    public static void reintegrateMaterials() {
+        if (!Loader.isModLoaded("conarm")) return;
+        reintegrate(MaterialRegister.weedwood);
+        reintegrate(MaterialRegister.slimy_bone);
+        reintegrate(MaterialRegister.octine);
+        reintegrate(MaterialRegister.syrmorite);
+        reintegrate(MaterialRegister.valonite);
+    }
+
+    private static void reintegrate(Material material) {
+        if (material != null) TinkerRegistry.integrate(material);
     }
 
     private static void addArmorTrait(Material material, c4.conarm.lib.traits.AbstractArmorTrait trait) {
