@@ -68,6 +68,10 @@ public class SmelteryRecipeRegister {
             return;
         }
 
+        if (FluidRegister.fluidSyrmorite != null) {
+            TinkerSmeltery.castCreationFluids.add(new FluidStack(FluidRegister.fluidSyrmorite, 144));
+        }
+
         ItemStack octineNugget = new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 42);
         ItemStack octineIngot = new ItemStack(Item.getByNameOrId("thebetweenlands:octine_ingot"));
         ItemStack octineBlock = new ItemStack(Item.getByNameOrId("thebetweenlands:octine_block"));
