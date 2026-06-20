@@ -1,12 +1,15 @@
 # Betweenlands’ Tinker
 
-**A Tinkers’ Construct addon bringing the dark swamps of The Betweenlands to your smeltery and tool forge.**
+**A Tinkers’ Construct addon bridging the dark swamps of The Betweenlands with your smeltery and tool forge.**
 
 ---
 
 ## Overview
+
 Betweenlands’ Tinker integrates **5 new materials**, **4 craftable tools**, **5 unique traits**, and full smeltery support while preserving the dimension's core mechanics—**weakness immunity** and **corrosion**.  
 All tools are obtained via **Animator conversion** from vanilla Tinkers’ tools, retaining stats, modifiers, and durability.
+
+Molten Syrmorite can be used to craft casts. Syrmorite Fluid Tanks passively collect Molten Sulfur from rainfall when placed beneath a Sulfur block, providing an alternative fuel source for the Smeltery.
 
 ---
 
@@ -21,7 +24,7 @@ If you encounter issues with **Weedwood** or **Slimy Bone** materials not workin
 | Material | Tool Stats (Durability / Speed / Attack) | Castable | Traits |
 |----------|-------------------------------------------|----------|--------|
 | **Weedwood**    | 40 / 2.0 / 2.0      | ❌ | Between, Weed Shield |
-| **Slimy Bone**  | 100 / 4.0 / 2.0     | ❌ | Between, Splintering/Splinters |
+| **Slimy Bone**  | 200 / 4.0 / 2.0     | ❌ | Between, Splintering/Splinters |
 | **Octine**      | 700 / 6.0 / 4.0     | ✅ | Between, Ignition |
 | **Syrmorite**   | 900 / 8.0 / 3.0     | ✅ | Between, Stacking |
 | **Valonite**    | 1300 / 8.0 / 6.0    | ❌ | Between, Valor |
@@ -30,7 +33,7 @@ If you encounter issues with **Weedwood** or **Slimy Bone** materials not workin
 
 ## New Tools
 
-Convert **any** existing Tinkers’ tool in the Animator (input: tool + Life Crystal + Sulfur):
+Convert existing Tinkers’ tools in the Animator (input: tool + Life Crystal + Sulfur):
 
 - **Pickaxe** → Betweenlands Pickaxe
 - **Shovel** → Betweenlands Shovel
@@ -40,7 +43,14 @@ Convert **any** existing Tinkers’ tool in the Animator (input: tool + Life Cry
 All stats, modifiers, and durability transfer exactly. Tools are **immune to the Betweenlands weakness** and support the dimension's **corrosion** system.
 
 **Parts can also be converted**: Tool Rod → Betweenlands Handle, Binding → Betweenlands Binding, Blade/Head → Betweenlands Tool Head.  
-*Parts are only for replacing components in Betweenlands tools—they cannot be used to craft tools directly.*
+*Parts are only for replacing components in existing Betweenlands tools—they cannot be used to craft tools directly.*
+
+---
+
+## Smeltery & Casting
+
+- **Syrmorite Casts**: Molten Syrmorite can be poured over tool parts to create permanent casts.
+- **Molten Sulfur Collection**: Place a Sulfur block atop a Syrmorite Fluid Tank and wait for rain. Molten Sulfur accumulates in the tank and can be used as smeltery fuel.
 
 ---
 
@@ -64,11 +74,12 @@ All stats, modifiers, and durability transfer exactly. Tools are **immune to the
 
 ---
 
-
 ## Dependencies
+
 - Mantle (1.12-1.3.3+)
 - Tinkers’ Construct (1.12.2-2.13.0+)
 - The Betweenlands (3.9.6+)
+
 > **Minecraft 1.12.2 · Forge 14.23.5.2847+**
 
 ---
@@ -81,6 +92,7 @@ All stats, modifiers, and durability transfer exactly. Tools are **immune to the
 ---
 
 ## License
+
 MIT
 
 ---
