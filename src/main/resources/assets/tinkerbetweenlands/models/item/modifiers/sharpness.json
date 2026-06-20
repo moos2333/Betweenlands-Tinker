@@ -2,7 +2,7 @@
   "textures": {
     "between_broadsword": "tinkerbetweenlands:items/tools/betweensword/mod_sharpness",
     "between_hatchet": "tinkerbetweenlands:items/tools/betweenaxe/mod_sharpness",
-    "between_shovel": "tinkerbetweenlands:items/tools/betweenaxe/mod_sharpness",
-    "between_pickaxe": "tinkerbetweenlands:items/tools/betweenaxe/mod_sharpness"
+    "between_shovel": "tinkerbetweenlands:items/tools/betweenshovel/mod_sharpness",
+    "between_pickaxe": "tinkerbetweenlands:items/tools/betweenpickaxe/mod_sharpness"
   }
 }
