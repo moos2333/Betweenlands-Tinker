@@ -49,3 +49,7 @@ modifier.stacking_armor.extra=层叠：+%s%%
 modifier.valor_armor.name=勇气
 modifier.valor_armor.desc=§o挺身而立！§r\n盔甲将随使用永久提升性能，提供额外防护。
 modifier.valor_armor.extra=勇气：+%s%%
+
+# Betweenlands Tinker Book
+item.tinkerbetweenlands.betweenlands_tinker_book.name=交错工匠百科
+item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=一本关于交错次元与匠魂的指南

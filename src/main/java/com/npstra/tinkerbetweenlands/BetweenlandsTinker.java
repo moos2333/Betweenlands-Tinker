@@ -1,5 +1,7 @@
 package com.npstra.tinkerbetweenlands;
 
+import com.npstra.tinkerbetweenlands.common.item.ItemBetweenlandsTinkerBook;
+import com.npstra.tinkerbetweenlands.common.item.ModItems;
 import com.npstra.tinkerbetweenlands.compat.conarm.materials.ArmorMaterial;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.recipe.GemAttachmentRecipe;
@@ -12,6 +14,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import slimeknights.mantle.client.book.BookLoader;
+import slimeknights.mantle.client.book.repository.FileRepository;
+import slimeknights.tconstruct.library.book.content.ContentTool;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
@@ -61,6 +66,10 @@ public class BetweenlandsTinker {
                     return false;
                 }
         );
+        MinecraftForge.EVENT_BUS.register(ModItems.class);
+        ItemBetweenlandsTinkerBook.BOOK_DATA = BookLoader.registerBook(
+                "tinkerbetweenlands:betweenlands_tinker_book",
+                new FileRepository("tinkerbetweenlands:book"));
     }
 
     @Mod.EventHandler

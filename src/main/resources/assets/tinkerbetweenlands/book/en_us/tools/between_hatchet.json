@@ -1,0 +1,14 @@
+{
+  "tool": "between_hatchet",
+  "text": [
+    { "text": "The Betweenlands Hatchet is a well-balanced tool, excelling at chopping wood and combat, obtained by converting a Hatchet in the Animator, consuming Life Crystal charges and Sulfur." },
+    { "text": "\n" },
+    { "text": "Its base stats are identical to the Hatchet." }
+  ],
+  "properties": [
+    "Same stats as Hatchet",
+    "Immune to Betweenlands weakness",
+    "Supports corrosion",
+    "Supports gem attachments"
+  ]
+}

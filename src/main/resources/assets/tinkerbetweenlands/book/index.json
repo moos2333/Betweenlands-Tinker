@@ -1,0 +1,13 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/intro.json",
+    "icon": { "item": { "id": "tinkerbetweenlands:between_extra" } }
+  },
+  {
+    "name": "tools",
+    "data": "sections/tools.json",
+    "module": "TinkerTools",
+    "icon": { "item": { "id": "tinkerbetweenlands:between_broadsword" } }
+  }
+]

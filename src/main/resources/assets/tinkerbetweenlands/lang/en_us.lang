@@ -49,3 +49,7 @@ modifier.stacking_armor.extra=Stacking: +%s%%.
 modifier.valor_armor.name=Valor
 modifier.valor_armor.desc=§oStand tall!§r\nArmor permanently improves with use, granting bonus protection.
 modifier.valor_armor.extra=Valor: +%s%%.
+
+# Betweenlands Tinker Book
+item.tinkerbetweenlands.betweenlands_tinker_book.name=Betweenlands Tinker Encyclopedia
+item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=A guide to all things Betweenlands and Tinkers'
