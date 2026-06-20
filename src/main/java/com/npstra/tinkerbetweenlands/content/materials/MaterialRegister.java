@@ -25,7 +25,7 @@ public class MaterialRegister {
     public static void preInit() {
         weedwood = createMaterial("weedwood", 0x706738, false, 40, 2.0f, 2.0f, 0);
         slimy_bone = createMaterial("slimy_bone", 0x9e9e6a, false, 200, 4.0f, 2.0f, 1);
-        valonite = createMaterial("valonite", 0xb69cb6, false, 1300, 8.0f, 6.0f, 4);
+        valonite = createMaterial("valonite", 0xb69cb6, false, 1300, 8.0f, 6.0f, 3);
         octine = createMaterial("octine", 0xffc81f, true, 700, 6.0f, 4.0f, 2);
         syrmorite = createMaterial("syrmorite", 0x5660A5, true, 900, 8.0f, 3.0f, 2);
 
@@ -86,7 +86,7 @@ public class MaterialRegister {
         }
         if (valonite != null) {
             TinkerRegistry.addMaterialStats(valonite,
-                    new HeadMaterialStats(1300, 8.0f, 6.0f, 4),
+                    new HeadMaterialStats(1300, 8.0f, 6.0f, 3),
                     new ExtraMaterialStats(300),
                     new HandleMaterialStats(1.1f, 400),
                     new BowMaterialStats(0.8f, 1.2f, 5.0f)

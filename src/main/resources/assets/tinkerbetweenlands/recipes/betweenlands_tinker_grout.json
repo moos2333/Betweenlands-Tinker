@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "thebetweenlands:silt" },
+    { "item": "thebetweenlands:mud" },
+    { "item": "thebetweenlands:items_misc", "data": 27 }
+  ],
+  "result": {
+    "item": "tconstruct:soil",
+    "count": 2,
+    "data": 0
+  }
+}
