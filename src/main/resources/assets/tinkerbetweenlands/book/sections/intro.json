@@ -3,5 +3,10 @@
     "name": "welcome",
     "type": "text",
     "data": "intro/welcome.json"
+  },
+  {
+    "name": "welcome2",
+    "type": "text",
+    "data": "intro/welcome2.json"
   }
 ]
