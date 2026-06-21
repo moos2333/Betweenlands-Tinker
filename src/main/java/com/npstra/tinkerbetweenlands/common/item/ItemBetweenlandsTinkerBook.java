@@ -1,5 +1,6 @@
 package com.npstra.tinkerbetweenlands.common.item;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -29,6 +30,9 @@ public class ItemBetweenlandsTinkerBook extends Item {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         if (world.isRemote && BOOK_DATA != null) {
+            if (BOOK_DATA.fontRenderer == null) {
+                BOOK_DATA.fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            }
             BOOK_DATA.openGui(stack);
             return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }

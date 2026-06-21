@@ -1,7 +1,7 @@
 [
   {
     "type": "modifier",
-    "data": "modifiers/critter_crusher.json"
+    "data": "modifiers/critter_cruncher.json"
   },
   {
     "type": "modifier",
