@@ -74,11 +74,11 @@ public class TraitIgnition extends AbstractTrait {
     @Override
     public float damage(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damage, float newDamage, boolean isCritical) {
         Data data = getData(tool, false);
-        if (data != null && data.count >= 3) {
+        if (data != null && data.count >= 2) {
             if (!target.isBurning()) {
                 target.setFire(5);
             } else {
-                newDamage *= 1.5f;
+                newDamage *= 1.4f;
             }
             data.count = 0;
             saveData(tool, data);
