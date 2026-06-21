@@ -33,12 +33,12 @@ public class PartConversionRecipe implements IAnimatorRecipe {
 
     @Override
     public int getRequiredFuel(ItemStack stack) {
-        return 2;
+        return 8;
     }
 
     @Override
     public int getRequiredLife(ItemStack stack) {
-        return 5;
+        return 16;
     }
 
     @SideOnly(Side.CLIENT)
