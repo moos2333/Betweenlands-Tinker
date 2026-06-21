@@ -26,7 +26,9 @@ public class PartConversionRecipe implements IAnimatorRecipe {
                 item == TinkerTools.swordBlade ||
                 item == TinkerTools.axeHead ||
                 item == TinkerTools.shovelHead ||
-                item == TinkerTools.pickHead;
+                item == TinkerTools.pickHead ||
+                item == TinkerTools.bowLimb ||
+                item == TinkerTools.bowString;
     }
 
     @Override
@@ -56,6 +58,10 @@ public class PartConversionRecipe implements IAnimatorRecipe {
             outputPart = ModParts.BETWEEN_HANDLE;
         } else if (item == TinkerTools.binding) {
             outputPart = ModParts.BETWEEN_EXTRA;
+        } else if (item == TinkerTools.bowLimb) {
+            outputPart = ModParts.BETWEENLANDS_LIMB;
+        } else if (item == TinkerTools.bowString) {
+            outputPart = ModParts.BETWEENLANDS_BOWSTRING;
         } else {
             outputPart = ModParts.BETWEEN_HEAD;
         }
