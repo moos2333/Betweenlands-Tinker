@@ -1,8 +1,8 @@
 [
   {
-    "name": "between_shortbow",
+    "name": "between_broadsword",
     "type": "tool",
-    "data": "tools/between_shortbow.json"
+    "data": "tools/between_broadsword.json"
   },
   {
     "name": "between_pickaxe",
@@ -10,18 +10,18 @@
     "data": "tools/between_pickaxe.json"
   },
   {
-    "name": "between_shovel",
-    "type": "tool",
-    "data": "tools/between_shovel.json"
-  },
-  {
     "name": "between_hatchet",
     "type": "tool",
     "data": "tools/between_hatchet.json"
   },
   {
-    "name": "between_broadsword",
+    "name": "between_shovel",
     "type": "tool",
-    "data": "tools/between_broadsword.json"
+    "data": "tools/between_shovel.json"
+  },
+  {
+    "name": "between_shortbow",
+    "type": "tool",
+    "data": "tools/between_shortbow.json"
   }
 ]
