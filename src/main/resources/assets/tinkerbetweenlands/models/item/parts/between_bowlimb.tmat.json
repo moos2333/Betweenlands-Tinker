@@ -1,4 +1,5 @@
 {
+  "parent": "builtin/generated",
   "textures": {
     "layer0": "tinkerbetweenlands:items/tools/betweenbow/limb2"
   },

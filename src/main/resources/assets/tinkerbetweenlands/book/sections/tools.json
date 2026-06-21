@@ -1,5 +1,10 @@
 [
   {
+    "name": "between_shortbow",
+    "type": "tool",
+    "data": "tools/between_shortbow.json"
+  },
+  {
     "name": "between_pickaxe",
     "type": "tool",
     "data": "tools/between_pickaxe.json"

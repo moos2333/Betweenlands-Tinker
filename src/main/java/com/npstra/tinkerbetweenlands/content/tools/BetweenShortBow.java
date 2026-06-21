@@ -8,6 +8,7 @@ import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -197,5 +198,14 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
         }
 
         this.playShootSound(power, worldIn, player);
+    }
+
+    @Override
+    public void playShootSound(float power, World world, EntityPlayer entityPlayer) {
+        float pitch = 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + power * 0.15F;
+        pitch *= 0.6F;
+        world.playSound(null, entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ,
+                net.minecraft.init.SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL,
+                1.0F, pitch);
     }
 }
