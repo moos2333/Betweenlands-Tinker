@@ -81,7 +81,7 @@ public class MaterialRegister {
                     new HeadMaterialStats(200, 4.0f, 2.0f, 1),
                     new ExtraMaterialStats(50),
                     new HandleMaterialStats(1.1f, 0),
-                    new BowMaterialStats(1.0f, 1.0f, 0.0f)
+                    new BowMaterialStats(0.9f, 1.1f, 0.0f)
             );
         }
         if (valonite != null) {
@@ -97,7 +97,7 @@ public class MaterialRegister {
                     new HeadMaterialStats(700, 6.0f, 4.0f, 2),
                     new ExtraMaterialStats(100),
                     new HandleMaterialStats(1.0f, 100),
-                    new BowMaterialStats(0.9f, 1.1f, 3.0f)
+                    new BowMaterialStats(0.5f, 1.5f, 7.0f)
             );
         }
         if (syrmorite != null) {
@@ -105,7 +105,7 @@ public class MaterialRegister {
                     new HeadMaterialStats(900, 8.0f, 3.0f, 2),
                     new ExtraMaterialStats(150),
                     new HandleMaterialStats(1.0f, 150),
-                    new BowMaterialStats(0.9f, 1.1f, 2.0f)
+                    new BowMaterialStats(0.9f, 1.1f, 3.0f)
             );
         }
     }
