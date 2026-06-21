@@ -1,7 +1,7 @@
 {
   "tool": "between_pickaxe",
   "text": [
-    { "text": "The Betweenlands Pickaxe is a sturdy mining tool forged from Betweenlands materials, obtained by converting a Pickaxe in the Animator, consuming Life Crystal charges and Sulfur." },
+    { "text": "The Betweenlands Pickaxe is a mining tool, converted from a Pickaxe in the Animator using Life Crystal charges and Sulfur." },
     { "text": "\n" },
     { "text": "\n" },
     { "text": "Its base stats are identical to the Pickaxe." }
