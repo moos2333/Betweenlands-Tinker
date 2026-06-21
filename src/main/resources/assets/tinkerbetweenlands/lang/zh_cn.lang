@@ -2,10 +2,15 @@
 item.tinkerbetweenlands.between_head.name=交错顶端
 item.tinkerbetweenlands.between_handle.name=交错手柄
 item.tinkerbetweenlands.between_extra.name=交错附件
+item.tinkerbetweenlands.between_limb.name=交错弓臂
+item.tinkerbetweenlands.between_bowstring.name=交错弓弦
 item.tinkerbetweenlands.between_pickaxe.name=交错镐
 item.tinkerbetweenlands.between_shovel.name=交错锹
 item.tinkerbetweenlands.between_hatchet.name=交错斧
 item.tinkerbetweenlands.between_broadsword.name=交错剑
+item.tinkerbetweenlands.between_shortbow.name=交错弓
+item.tinkerbetweenlands.betweenlands_tinker_book.name=交错工匠百科
+item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=一本关于交错次元与匠魂的指南
 
 # Betweenlands Tinker - Materials
 material.weedwood.name=杂草木
@@ -49,7 +54,3 @@ modifier.stacking_armor.extra=层叠：+%s%%
 modifier.valor_armor.name=勇气
 modifier.valor_armor.desc=§o挺身而立！§r\n盔甲将随使用永久提升性能，提供额外防护。
 modifier.valor_armor.extra=勇气：+%s%%
-
-# Betweenlands Tinker Book
-item.tinkerbetweenlands.betweenlands_tinker_book.name=交错工匠百科
-item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=一本关于交错次元与匠魂的指南

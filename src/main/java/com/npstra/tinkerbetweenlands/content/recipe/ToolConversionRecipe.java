@@ -22,6 +22,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
     private static final Item PICKAXE = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "pickaxe"));
     private static final Item SHOVEL = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "shovel"));
     private static final Item HATCHET = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "hatchet"));
+    private static final Item SHORTBOW = ForgeRegistries.ITEMS.getValue(new ResourceLocation("tconstruct", "shortbow"));
 
     @Override
     public boolean matchesInput(ItemStack stack) {
@@ -29,7 +30,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
         Item item = stack.getItem();
         if (!(item instanceof ToolCore)) return false;
         if (item instanceof IBetweenlandsTool) return false;
-        return item == PICKAXE || item == SHOVEL || item == HATCHET || item instanceof BroadSword;
+        return item == PICKAXE || item == SHOVEL || item == HATCHET || item instanceof BroadSword || item == SHORTBOW;
     }
 
     @Override
@@ -67,6 +68,7 @@ public class ToolConversionRecipe implements IAnimatorRecipe {
         if (item == SHOVEL) return new ItemStack(ModTools.BETWEEN_SHOVEL);
         if (item == HATCHET) return new ItemStack(ModTools.BETWEEN_HATCHET);
         if (item instanceof BroadSword) return new ItemStack(ModTools.BETWEEN_BROADSWORD);
+        if (item == SHORTBOW) return new ItemStack(ModTools.BETWEEN_SHORTBOW);
         return ItemStack.EMPTY;
     }
 

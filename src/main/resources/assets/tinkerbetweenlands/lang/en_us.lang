@@ -2,10 +2,15 @@
 item.tinkerbetweenlands.between_head.name=Betweenlands Tool Head
 item.tinkerbetweenlands.between_handle.name=Betweenlands Tool Handle
 item.tinkerbetweenlands.between_extra.name=Betweenlands Tool Binding
+item.tinkerbetweenlands.between_limb.name=Betweenlands Limb
+item.tinkerbetweenlands.between_bowstring.name=Betweenlands Bowstring
 item.tinkerbetweenlands.between_pickaxe.name=Betweenlands Pickaxe
 item.tinkerbetweenlands.between_shovel.name=Betweenlands Shovel
 item.tinkerbetweenlands.between_hatchet.name=Betweenlands Hatchet
 item.tinkerbetweenlands.between_broadsword.name=Betweenlands Broadsword
+item.tinkerbetweenlands.between_shortbow.name=Betweenlands Shortbow
+item.tinkerbetweenlands.betweenlands_tinker_book.name=Betweenlands Tinker Encyclopedia
+item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=A guide to all things Betweenlands and Tinkers'
 
 # Betweenlands Tinker - Materials
 material.weedwood.name=Weedwood
@@ -49,7 +54,3 @@ modifier.stacking_armor.extra=Stacking: +%s%%.
 modifier.valor_armor.name=Valor
 modifier.valor_armor.desc=§oStand tall!§r\nArmor permanently improves with use, granting bonus protection.
 modifier.valor_armor.extra=Valor: +%s%%.
-
-# Betweenlands Tinker Book
-item.tinkerbetweenlands.betweenlands_tinker_book.name=Betweenlands Tinker Encyclopedia
-item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=A guide to all things Betweenlands and Tinkers'

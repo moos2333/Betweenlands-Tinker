@@ -19,16 +19,19 @@ public class ModTools {
     public static final BetweenShovel BETWEEN_SHOVEL = new BetweenShovel();
     public static final BetweenHatchet BETWEEN_HATCHET = new BetweenHatchet();
     public static final BetweenBroadSword BETWEEN_BROADSWORD = new BetweenBroadSword();
+    public static final BetweenShortBow BETWEEN_SHORTBOW = new BetweenShortBow();
 
     public static void register() {
         ForgeRegistries.ITEMS.register(BETWEEN_PICKAXE.setRegistryName("between_pickaxe"));
         ForgeRegistries.ITEMS.register(BETWEEN_SHOVEL.setRegistryName("between_shovel"));
         ForgeRegistries.ITEMS.register(BETWEEN_HATCHET.setRegistryName("between_hatchet"));
         ForgeRegistries.ITEMS.register(BETWEEN_BROADSWORD.setRegistryName("between_broadsword"));
+        ForgeRegistries.ITEMS.register(BETWEEN_SHORTBOW.setRegistryName("between_shortbow"));
         TinkerRegistry.registerTool(BETWEEN_PICKAXE);
         TinkerRegistry.registerTool(BETWEEN_SHOVEL);
         TinkerRegistry.registerTool(BETWEEN_HATCHET);
         TinkerRegistry.registerTool(BETWEEN_BROADSWORD);
+        TinkerRegistry.registerTool(BETWEEN_SHORTBOW);
     }
 
     @SideOnly(Side.CLIENT)
@@ -38,6 +41,7 @@ public class ModTools {
         if (BETWEEN_SHOVEL != null) ModelRegisterUtil.registerToolModel(BETWEEN_SHOVEL);
         if (BETWEEN_HATCHET != null) ModelRegisterUtil.registerToolModel(BETWEEN_HATCHET);
         if (BETWEEN_BROADSWORD != null) ModelRegisterUtil.registerToolModel(BETWEEN_BROADSWORD);
+        if (BETWEEN_SHORTBOW != null) ModelRegisterUtil.registerToolModel(BETWEEN_SHORTBOW);
         registerModifierModels();
     }
 
