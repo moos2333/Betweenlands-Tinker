@@ -1,15 +1,16 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.crosshair.Crosshairs;
 import slimeknights.tconstruct.library.client.crosshair.ICrosshair;
 import slimeknights.tconstruct.library.client.crosshair.ICustomCrosshairUser;
@@ -24,6 +25,7 @@ import slimeknights.tconstruct.library.tinkering.PartMaterialType;
 import slimeknights.tconstruct.library.tools.ProjectileLauncherNBT;
 import slimeknights.tconstruct.library.tools.ranged.BowCore;
 import slimeknights.tconstruct.library.utils.ToolHelper;
+import slimeknights.tconstruct.tools.TinkerMaterials;
 import thebetweenlands.api.item.CorrosionHelper;
 import thebetweenlands.api.item.ICorrodible;
 import thebetweenlands.common.capability.circlegem.CircleGemHelper;
@@ -47,6 +49,32 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
         this.setTranslationKey("tinkerbetweenlands.between_shortbow");
         CorrosionHelper.addCorrosionPropertyOverrides(this);
         CircleGemHelper.addGemPropertyOverrides(this);
+        this.addPropertyOverride(new ResourceLocation("pull"), this.pullProgressPropertyGetter);
+        this.addPropertyOverride(new ResourceLocation("pulling"), this.isPullingPropertyGetter);
+    }
+
+    @Override
+    public int[] getRepairParts() {
+        return new int[]{0, 1};
+    }
+
+    @Override
+    public void addDefaultSubItems(List<ItemStack> subItems, Material... fixedMaterials) {
+        Material bowstringMaterial = TinkerMaterials.string;
+        if (fixedMaterials.length > 2 && fixedMaterials[2] != null) {
+            bowstringMaterial = fixedMaterials[2];
+        }
+        for (Material limbMaterial : TinkerRegistry.getAllMaterials()) {
+            if (!limbMaterial.hasStats("bow")) continue;
+            List<Material> mats = new ArrayList<>(3);
+            mats.add(limbMaterial);
+            mats.add(limbMaterial);
+            mats.add(bowstringMaterial);
+            ItemStack tool = this.buildItem(mats);
+            if (this.hasValidMaterials(tool)) {
+                subItems.add(tool);
+            }
+        }
     }
 
     @Override

@@ -1,0 +1,9 @@
+{
+  "textures": {
+    "layer0": "tinkerbetweenlands:items/tools/betweenbow/limb2"
+  },
+  "offset": {
+    "x": 4,
+    "y": -2
+  }
+}
