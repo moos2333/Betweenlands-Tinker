@@ -3,14 +3,16 @@
   "text": [
     { "text": "Welcome to the Betweenlands Tinker Encyclopedia!" },
     { "text": "\n" },
-    { "text": "This guide will introduce you to all the new tools and materials added by this mod." },
     { "text": "\n" },
-    { "text": "Through the Animator, you can convert ordinary Tinkers' tools into four powerful Betweenlands tools: the Betweenlands Pickaxe, Shovel, Hatchet, and Broadsword. They inherit all stats from their predecessors and are immune to the Betweenlands weakness." },
+    { "text": "This guide covers all the new tools and materials added by this mod." },
     { "text": "\n" },
-    { "text": "In addition to full tools, you can also convert Tinkers' parts (Tool Rods, Bindings, and Tool Heads) in the Animator to obtain their Betweenlands equivalents." },
     { "text": "\n" },
-    { "text": "These parts are only for replacing components in existing Betweenlands tools—they cannot be used to craft tools directly." }
-    { "text": "\n"},
-    { "text": "Enjoy your journey in the swamps!" }
+    { "text": "Using the Animator, you can convert Tinkers' tools into four powerful Betweenlands variants: the Pickaxe, Shovel, Hatchet, and Broadsword. They retain all original stats and are immune to the Betweenlands weakness." },
+    { "text": "\n" },
+    { "text": "\n" },
+    { "text": "You can also convert Tinkers' parts (Tool Rods, Bindings, and Heads) into their Betweenlands equivalents. These parts are only for replacing components in existing Betweenlands tools—they cannot craft tools directly." },
+    { "text": "\n" },
+    { "text": "\n" },
+    { "text": "Enjoy your journey through the swamps!" }
   ]
 }
