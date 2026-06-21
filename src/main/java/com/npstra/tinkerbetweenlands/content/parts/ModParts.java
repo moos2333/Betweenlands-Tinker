@@ -14,8 +14,8 @@ public class ModParts {
     public static final BetweenlandsPart BETWEEN_HEAD = new BetweenlandsPart(0, "head");
     public static final BetweenlandsPart BETWEEN_HANDLE = new BetweenlandsPart(0, "handle");
     public static final BetweenlandsPart BETWEEN_EXTRA = new BetweenlandsPart(0, "extra");
-    public static final BetweenlandsPart BETWEENLANDS_LIMB = new BetweenlandsPart(432, "bow");
-    public static final BetweenlandsPart BETWEENLANDS_BOWSTRING = new BetweenlandsPart(144, "bowstring");
+    public static final BetweenlandsPart BETWEENLANDS_LIMB = new BetweenlandsPart(0, "bow");
+    public static final BetweenlandsPart BETWEENLANDS_BOWSTRING = new BetweenlandsPart(0, "bowstring");
 
     public static void register() {
         ForgeRegistries.ITEMS.register(BETWEEN_HEAD.setRegistryName("between_head").setTranslationKey("tinkerbetweenlands.between_head"));
