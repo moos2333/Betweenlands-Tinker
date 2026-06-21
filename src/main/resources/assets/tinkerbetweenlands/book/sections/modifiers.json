@@ -1,0 +1,18 @@
+[
+  {
+    "type": "modifier",
+    "data": "modifiers/critter_crusher.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifiers/hag_hacker.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifiers/sludge_slicer.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifiers/wight_slayer.json"
+  }
+]

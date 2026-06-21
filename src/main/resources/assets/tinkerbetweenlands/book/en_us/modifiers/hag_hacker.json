@@ -1,0 +1,16 @@
+{
+  "modifier": "hag_hacker",
+  "text": [
+    {
+      "text": "The Hag Hacker puts an end to those swamp hags once and for all!"
+    }
+  ],
+  "effects": [
+    "Deal bonus damage to swamp hags",
+    "Apply with a Hag Hacker",
+    "Multiple levels"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

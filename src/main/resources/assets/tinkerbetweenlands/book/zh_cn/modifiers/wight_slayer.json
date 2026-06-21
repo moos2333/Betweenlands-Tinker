@@ -1,0 +1,16 @@
+{
+  "modifier": "wight_slayer",
+  "text": [
+    {
+      "text": "阴魂克星在手，让那些阴魂不散的家伙彻底消失！"
+    }
+  ],
+  "effects": [
+    "对阴魂造成额外伤害",
+    "使用阴魂之克星强化",
+    "多个等级"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

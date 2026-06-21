@@ -5,6 +5,7 @@ import com.npstra.tinkerbetweenlands.common.item.ModItems;
 import com.npstra.tinkerbetweenlands.compat.conarm.materials.ArmorMaterial;
 import com.npstra.tinkerbetweenlands.content.event.SulfurLeachEventHandler;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
+import com.npstra.tinkerbetweenlands.content.modifiers.ModifierRegister;
 import com.npstra.tinkerbetweenlands.content.recipe.GemAttachmentRecipe;
 import com.npstra.tinkerbetweenlands.content.recipe.SmelteryRecipeRegister;
 import net.minecraftforge.fml.common.Mod;
@@ -76,6 +77,7 @@ public class BetweenlandsTinker {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         MaterialRegister.init();
+        ModifierRegister.init();
         SmelteryRecipeRegister.init(event);
         AnimatorRecipe.addRecipe(new ToolConversionRecipe());
         AnimatorRecipe.addRecipe(new PartConversionRecipe());

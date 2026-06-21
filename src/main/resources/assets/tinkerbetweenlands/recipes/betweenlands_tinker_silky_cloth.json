@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern" :[
+    "SSS",
+    "SOS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "thebetweenlands:items_misc",
+      "data": 63
+    },
+    "O": {
+      "item": "thebetweenlands:octine_ingot"
+    }
+  },
+  "result": {
+    "item": "tconstruct:materials",
+    "data": 15,
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "modifier": "wight_slayer",
+  "text": [
+    {
+      "text": "Banish those spectral menaces for good with the Wight Slayer!"
+    }
+  ],
+  "effects": [
+    "Deal bonus damage to wights",
+    "Apply with a Wight's Bane",
+    "Multiple levels"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

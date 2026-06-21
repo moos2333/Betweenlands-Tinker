@@ -38,6 +38,23 @@ modifier.stacking.name=层叠
 modifier.stacking.desc=§o致密而顽固...§r\n工具更难被修复，但大量使用工具将永久降低其损耗。
 modifier.stacking.extra=层叠：+%s%%
 
+# Betweenlands Tinker - Modifiers
+modifier.wight_slayer.name=阴魂杀手
+modifier.wight_slayer.desc=§o呜！§r\n对阴魂造成额外伤害。
+modifier.wight_slayer.extra=对阴魂：+%s
+
+modifier.hag_hacker.name=巫尸猎手
+modifier.hag_hacker.desc=§o猎杀巫尸！§r\n对沼泽巫尸造成额外伤害。
+modifier.hag_hacker.extra=对巫尸：+%s
+
+modifier.sludge_slicer.name=污泥克星
+modifier.sludge_slicer.desc=§o粘液终结！§r\n对污泥怪造成额外伤害。
+modifier.sludge_slicer.extra=对污泥怪：+%s
+
+modifier.critter_cruncher.name=爬虫克星
+modifier.critter_cruncher.desc=§o啪叽！§r\n对沼泽小型生物造成额外伤害。
+modifier.critter_cruncher.extra=对爬虫：+%s
+
 # Betweenlands Tinker - Fluids
 fluid.octine.name=熔融炽炎
 fluid.syrmorite.name=熔融赛摩

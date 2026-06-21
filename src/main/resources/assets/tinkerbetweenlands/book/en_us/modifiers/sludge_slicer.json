@@ -1,0 +1,16 @@
+{
+  "modifier": "sludge_slicer",
+  "text": [
+    {
+      "text": "Slice through slimy foes with the Sludge Slicer!"
+    }
+  ],
+  "effects": [
+    "Deal bonus damage to sludge monsters",
+    "Apply with a Sludge Slicer",
+    "Multiple levels"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

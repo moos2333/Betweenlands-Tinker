@@ -1,0 +1,16 @@
+{
+  "modifier": "critter_cruncher",
+  "text": [
+    {
+      "text": "用爬虫打击者的力量碾碎那些恼人的小虫子！"
+    }
+  ],
+  "effects": [
+    "对沼泽小型生物造成额外伤害",
+    "使用爬虫打击者强化",
+    "多个等级"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

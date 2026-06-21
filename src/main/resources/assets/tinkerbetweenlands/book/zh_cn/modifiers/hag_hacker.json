@@ -1,0 +1,16 @@
+{
+  "modifier": "hag_hacker",
+  "text": [
+    {
+      "text": "巫尸猎手专治沼泽巫尸，让它们无处遁形！"
+    }
+  ],
+  "effects": [
+    "对沼泽巫尸造成额外伤害",
+    "使用巫尸狩猎者强化",
+    "多个等级"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

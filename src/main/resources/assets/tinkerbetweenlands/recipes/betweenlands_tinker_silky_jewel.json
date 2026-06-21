@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern" :[
+    " S ",
+    "SGS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "tconstruct:materials",
+      "data": 15
+    },
+    "G": {
+      "item": "thebetweenlands:green_middle_gem"
+    }
+  },
+  "result": {
+    "item": "tconstruct:materials",
+    "data": 16,
+    "count": 1
+  }
+}

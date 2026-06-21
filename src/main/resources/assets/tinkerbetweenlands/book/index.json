@@ -9,5 +9,11 @@
     "data": "sections/tools.json",
     "module": "TinkerTools",
     "icon": { "item": { "id": "tinkerbetweenlands:between_broadsword" } }
+  },
+  {
+    "name": "modifiers",
+    "data": "sections/modifiers.json",
+    "module": "TinkerTools",
+    "icon": { "item": { "id": "thebetweenlands:hag_hacker"}}
   }
 ]

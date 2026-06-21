@@ -38,6 +38,23 @@ modifier.stacking.name=Stacking
 modifier.stacking.desc=§oDense and stubborn...§r\nThe tool is harder to repair, but extensive use will permanently reduce its wear.
 modifier.stacking.extra=Stacking: +%s%%.
 
+# Betweenlands Tinker - Modifiers
+modifier.wight_slayer.name=Wight Slayer
+modifier.wight_slayer.desc=§oBoo!§r\nDeal extra damage to those spectral terrors.
+modifier.wight_slayer.extra=Vs Wights: +%s
+
+modifier.hag_hacker.name=Hag Hacker
+modifier.hag_hacker.desc=§oWitch hunt!§r\nDeal bonus damage to swamp hags.
+modifier.hag_hacker.extra=Vs Swamp Hags: +%s
+
+modifier.sludge_slicer.name=Sludge Slicer
+modifier.sludge_slicer.desc=§oSticky end!§r\nDeal bonus damage to sludge monsters.
+modifier.sludge_slicer.extra=Vs Sludge: +%s
+
+modifier.critter_cruncher.name=Critter Cruncher
+modifier.critter_cruncher.desc=§oSquish!§r\nDeal extra damage to small swamp critters.
+modifier.critter_cruncher.extra=Vs Critters: +%s
+
 # Betweenlands Tinker - Fluids
 fluid.octine.name=Molten Octine
 fluid.syrmorite.name=Molten Syrmorite

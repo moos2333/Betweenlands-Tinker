@@ -1,0 +1,16 @@
+{
+  "modifier": "sludge_slicer",
+  "text": [
+    {
+      "text": "污泥收割者能轻松切碎那些黏糊糊的怪物！"
+    }
+  ],
+  "effects": [
+    "对污泥怪造成额外伤害",
+    "使用污泥收割者强化",
+    "多个等级"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

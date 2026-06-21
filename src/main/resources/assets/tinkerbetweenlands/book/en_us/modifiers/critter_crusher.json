@@ -1,0 +1,16 @@
+{
+  "modifier": "critter_cruncher",
+  "text": [
+    {
+      "text": "Crush those pesky critters with the power of the Critter Cruncher!"
+    }
+  ],
+  "effects": [
+    "Deal bonus damage to swamp critters",
+    "Apply with a Critter Cruncher",
+    "Multiple levels"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}
