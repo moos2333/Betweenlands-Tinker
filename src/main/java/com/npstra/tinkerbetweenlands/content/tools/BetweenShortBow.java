@@ -1,5 +1,6 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -11,6 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.crosshair.Crosshairs;
 import slimeknights.tconstruct.library.client.crosshair.ICrosshair;
@@ -207,5 +210,12 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
         world.playSound(null, entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ,
                 net.minecraft.init.SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.NEUTRAL,
                 1.0F, pitch);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+        super.addInformation(stack, world, tooltip, flag);
+        CorrosionHelper.addCorrosionTooltips(stack, tooltip, flag.isAdvanced());
     }
 }
