@@ -3,6 +3,7 @@ package com.npstra.tinkerbetweenlands;
 import com.npstra.tinkerbetweenlands.common.item.ItemBetweenlandsTinkerBook;
 import com.npstra.tinkerbetweenlands.common.item.ModItems;
 import com.npstra.tinkerbetweenlands.compat.conarm.materials.ArmorMaterial;
+import com.npstra.tinkerbetweenlands.content.event.EventRegistry;
 import com.npstra.tinkerbetweenlands.content.event.SulfurLeachEventHandler;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.modifiers.ModifierRegister;
@@ -87,8 +88,7 @@ public class BetweenlandsTinker {
             AnimatorRecipe.addRecipe(new com.npstra.tinkerbetweenlands.compat.jei.recipes.PartConversionJei());
         }
 
-        MinecraftForge.EVENT_BUS.register(new BetweenlandsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new SulfurLeachEventHandler());
+        EventRegistry.registerEvents();
         ForgeRegistries.RECIPES.register(new GemAttachmentRecipe().setRegistryName(Tags.MOD_ID, "gem_attachment"));
         if (Loader.isModLoaded("conarm")) {
             ArmorMaterial.registerArmorTraits();
