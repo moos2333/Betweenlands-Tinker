@@ -13,7 +13,7 @@ public class FluidRegister {
         fluidOctine = new FluidMolten("octine", 0xF5A615);
         fluidSyrmorite = new FluidMolten("syrmorite", 0x5660A5);
         fluidMoltenSulfur = new FluidMolten("molten_sulfur", 0xE8C92D);
-        fluidMoltenSulfur.setTemperature(1135);
+        fluidMoltenSulfur.setTemperature(1050);
         fluidOctine.setTemperature(1300);
         FluidRegistry.registerFluid(fluidOctine);
         FluidRegistry.registerFluid(fluidSyrmorite);
