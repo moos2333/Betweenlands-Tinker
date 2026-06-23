@@ -105,5 +105,8 @@ public class SmelteryRecipeRegister {
         if (FluidRegister.fluidMoltenSulfur != null) {
             TinkerRegistry.registerSmelteryFuel(new FluidStack(FluidRegister.fluidMoltenSulfur, 50), 100);
         }
+        if (FluidRegister.fluidOctine != null) {
+            TinkerRegistry.registerSmelteryFuel(new FluidStack(FluidRegister.fluidOctine, 50), 100);
+        }
     }
 }
