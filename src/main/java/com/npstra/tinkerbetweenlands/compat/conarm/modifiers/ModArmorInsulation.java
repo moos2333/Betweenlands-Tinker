@@ -3,13 +3,18 @@ package com.npstra.tinkerbetweenlands.compat.conarm.modifiers;
 import com.google.common.collect.ImmutableList;
 import c4.conarm.lib.modifiers.ArmorModifierTrait;
 import c4.conarm.lib.utils.RecipeMatchHolder;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import slimeknights.mantle.util.RecipeMatch;
+import thebetweenlands.common.entity.EntityBLLightningBolt;
+import thebetweenlands.common.entity.EntityShock;
+import thebetweenlands.common.entity.projectiles.EntityBLArrow;
 import thebetweenlands.common.item.misc.ItemMisc;
+import thebetweenlands.common.item.tools.bow.EnumArrowType;
 
 import java.util.*;
 
@@ -18,7 +23,7 @@ public class ModArmorInsulation extends ArmorModifierTrait {
     private static final ItemStack RUBBER_BALL = ItemMisc.EnumItemMisc.RUBBER_BALL.create(1);
 
     public ModArmorInsulation() {
-        super("insulation", 0xCCCCCC, 1, 1);
+        super("insulation", 0xC4A882, 1, 1);
         RecipeMatchHolder.addRecipeMatch(this, new ItemCombination(1,
                 RUBBER_BALL, RUBBER_BALL, RUBBER_BALL, RUBBER_BALL, RUBBER_BALL
         ));
@@ -26,10 +31,39 @@ public class ModArmorInsulation extends ArmorModifierTrait {
 
     @Override
     public float onHurt(ItemStack armor, EntityPlayer player, DamageSource source, float damage, float newDamage, LivingHurtEvent evt) {
-        if (source == DamageSource.LIGHTNING_BOLT) {
+        if (isLightningDamage(source)) {
             newDamage -= damage * 0.25f;
         }
         return newDamage;
+    }
+
+    private boolean isLightningDamage(DamageSource source) {
+        if (source == DamageSource.LIGHTNING_BOLT) {
+            return true;
+        }
+
+        Entity trueSource = source.getTrueSource();
+        Entity immediateSource = source.getImmediateSource();
+
+        if (trueSource instanceof EntityBLLightningBolt || immediateSource instanceof EntityBLLightningBolt) {
+            return true;
+        }
+        if (trueSource instanceof EntityShock || immediateSource instanceof EntityShock) {
+            return true;
+        }
+        if (trueSource instanceof EntityBLArrow) {
+            EntityBLArrow arrow = (EntityBLArrow) trueSource;
+            if (arrow.getArrowType() == EnumArrowType.SHOCK) {
+                return true;
+            }
+        }
+        if (immediateSource instanceof EntityBLArrow) {
+            EntityBLArrow arrow = (EntityBLArrow) immediateSource;
+            if (arrow.getArrowType() == EnumArrowType.SHOCK) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static class ItemCombination extends RecipeMatch {
