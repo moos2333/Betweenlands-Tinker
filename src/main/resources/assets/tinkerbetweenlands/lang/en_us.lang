@@ -71,3 +71,7 @@ modifier.stacking_armor.extra=Stacking: +%s%%.
 modifier.valor_armor.name=Valor
 modifier.valor_armor.desc=§oStand tall!§r\nArmor permanently improves with use, granting bonus protection.
 modifier.valor_armor.extra=Valor: +%s%%.
+
+# Betweenlands Tinker - Armor Modifiers
+modifier.insulation_armor.name=Insulation
+modifier.insulation_armor.desc=§oRubber's embrace!§r\nEffectively resists lightning damage.

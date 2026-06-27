@@ -1,6 +1,5 @@
 package com.npstra.tinkerbetweenlands.content.materials;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -11,6 +10,8 @@ import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.tools.TinkerTraits;
+import thebetweenlands.common.registries.BlockRegistry;
+import thebetweenlands.common.registries.ItemRegistry;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.traits.TraitBetween;
 import com.npstra.tinkerbetweenlands.content.traits.TraitWeedShield;
@@ -120,54 +121,39 @@ public class MaterialRegister {
     }
 
     private static void setMaterialItems() {
-        addDirectItem(weedwood, "thebetweenlands:weedwood_planks", 0, Material.VALUE_Ingot);
-        addDirectItem(weedwood, "thebetweenlands:log_weedwood", OreDictionary.WILDCARD_VALUE, 4 * Material.VALUE_Ingot);
-        addDirectItem(weedwood, "thebetweenlands:weedwood", 0, 4 * Material.VALUE_Ingot);
-        addDirectItem(weedwood, "thebetweenlands:items_misc", 20, 72);
-        weedwood.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:weedwood_planks")));
+        weedwood.addItem(new ItemStack(BlockRegistry.WEEDWOOD_PLANKS), 1, Material.VALUE_Ingot);
+        weedwood.addItem(new ItemStack(BlockRegistry.LOG_WEEDWOOD, 1, OreDictionary.WILDCARD_VALUE), 1, 4 * Material.VALUE_Ingot);
+        weedwood.addItem(new ItemStack(BlockRegistry.WEEDWOOD), 1, 4 * Material.VALUE_Ingot);
+        weedwood.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 20), 1, 72);
+        weedwood.setRepresentativeItem(new ItemStack(BlockRegistry.WEEDWOOD_PLANKS));
 
-        addDirectItem(slimy_bone, "thebetweenlands:items_misc", 14, Material.VALUE_Ingot);
-        slimy_bone.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 14));
+        slimy_bone.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 14), 1, Material.VALUE_Ingot);
+        slimy_bone.addItem(new ItemStack(BlockRegistry.SLIMY_BONE_BLOCK), 1, Material.VALUE_Block);
+        slimy_bone.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 14));
 
-        addDirectItem(valonite, "thebetweenlands:items_misc", 19, Material.VALUE_Ingot);
-        addDirectItem(valonite, "thebetweenlands:items_misc", 43, Material.VALUE_Nugget);
-        addDirectItem(valonite, "thebetweenlands:valonite_block", 0, Material.VALUE_Block);
-        valonite.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 19));
+        valonite.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 19), 1, Material.VALUE_Ingot);
+        valonite.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 43), 1, Material.VALUE_Nugget);
+        valonite.addItem(new ItemStack(BlockRegistry.VALONITE_BLOCK), 1, Material.VALUE_Block);
+        valonite.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 19));
 
-        addDirectItem(octine, "thebetweenlands:octine_ingot", 0, Material.VALUE_Ingot);
-        addDirectItem(octine, "thebetweenlands:items_misc", 42, Material.VALUE_Nugget);
-        addDirectItem(octine, "thebetweenlands:octine_block", 0, Material.VALUE_Block);
-        octine.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:octine_ingot")));
+        octine.addItem(new ItemStack(ItemRegistry.OCTINE_INGOT), 1, Material.VALUE_Ingot);
+        octine.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 42), 1, Material.VALUE_Nugget);
+        octine.addItem(new ItemStack(BlockRegistry.OCTINE_BLOCK), 1, Material.VALUE_Block);
+        octine.setRepresentativeItem(new ItemStack(ItemRegistry.OCTINE_INGOT));
 
-        addDirectItem(syrmorite, "thebetweenlands:items_misc", 11, Material.VALUE_Ingot);
-        addDirectItem(syrmorite, "thebetweenlands:items_misc", 41, Material.VALUE_Nugget);
-        addDirectItem(syrmorite, "thebetweenlands:syrmorite_block", 0, Material.VALUE_Block);
-        syrmorite.setRepresentativeItem(new ItemStack(Item.getByNameOrId("thebetweenlands:items_misc"), 1, 11));
+        syrmorite.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 11), 1, Material.VALUE_Ingot);
+        syrmorite.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 41), 1, Material.VALUE_Nugget);
+        syrmorite.addItem(new ItemStack(BlockRegistry.SYRMORITE_BLOCK), 1, Material.VALUE_Block);
+        syrmorite.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 11));
 
-        addOreDictOnly(weedwood, "plankWeedwood", Material.VALUE_Ingot);
-        addOreDictOnly(weedwood, "logWeedwood", 4 * Material.VALUE_Ingot);
-        addOreDictOnly(weedwood, "stickWeedwood", 72);
-
-        addOreDictOnly(slimy_bone, "boneSlimy", Material.VALUE_Ingot);
-        addOreDictOnly(valonite, "gemValonite", Material.VALUE_Ingot);
-        addOreDictOnly(valonite, "nuggetValonite", Material.VALUE_Nugget);
-        addOreDictOnly(valonite, "blockValonite", Material.VALUE_Block);
-        addOreDictOnly(octine, "ingotOctine", Material.VALUE_Ingot);
-        addOreDictOnly(octine, "nuggetOctine", Material.VALUE_Nugget);
-        addOreDictOnly(octine, "blockOctine", Material.VALUE_Block);
-        addOreDictOnly(syrmorite, "ingotSyrmorite", Material.VALUE_Ingot);
-        addOreDictOnly(syrmorite, "nuggetSyrmorite", Material.VALUE_Nugget);
-        addOreDictOnly(syrmorite, "blockSyrmorite", Material.VALUE_Block);
-    }
-
-    private static void addDirectItem(Material mat, String itemId, int meta, int value) {
-        Item item = Item.getByNameOrId(itemId);
-        if (item != null) {
-            mat.addItem(new ItemStack(item, 1, meta), 1, value);
-        }
-    }
-
-    private static void addOreDictOnly(Material mat, String oreName, int value) {
-        mat.addItem(oreName, 1, value);
+        valonite.addItem("gemValonite", 1, Material.VALUE_Ingot);
+        valonite.addItem("nuggetValonite", 1, Material.VALUE_Nugget);
+        valonite.addItem("blockValonite", 1, Material.VALUE_Block);
+        octine.addItem("ingotOctine", 1, Material.VALUE_Ingot);
+        octine.addItem("nuggetOctine", 1, Material.VALUE_Nugget);
+        octine.addItem("blockOctine", 1, Material.VALUE_Block);
+        syrmorite.addItem("ingotSyrmorite", 1, Material.VALUE_Ingot);
+        syrmorite.addItem("nuggetSyrmorite", 1, Material.VALUE_Nugget);
+        syrmorite.addItem("blockSyrmorite", 1, Material.VALUE_Block);
     }
 }

@@ -71,3 +71,7 @@ modifier.stacking_armor.extra=层叠：+%s%%
 modifier.valor_armor.name=勇气
 modifier.valor_armor.desc=§o挺身而立！§r\n盔甲将随使用永久提升性能，提供额外防护。
 modifier.valor_armor.extra=勇气：+%s%%
+
+# Betweenlands Tinker - Armor Modifiers
+modifier.insulation_armor.name=绝缘
+modifier.insulation_armor.desc=§o以柔克刚！§r\n有效抵御雷电伤害。
