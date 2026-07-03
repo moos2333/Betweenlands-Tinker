@@ -55,6 +55,9 @@ modifier.critter_cruncher.name=Critter Cruncher
 modifier.critter_cruncher.desc=§oSquish!§r\nDeal extra damage to small swamp critters.
 modifier.critter_cruncher.extra=Vs Critters: +%s
 
+modifier.silk_thread.name=Silk Thread
+modifier.silk_thread.desc=§oThreads entwined, mending anew!§r\nRepair with Silk in a crafting grid when durability is below 75%.
+
 # Betweenlands Tinker - Fluids
 fluid.octine.name=Molten Octine
 fluid.syrmorite.name=Molten Syrmorite

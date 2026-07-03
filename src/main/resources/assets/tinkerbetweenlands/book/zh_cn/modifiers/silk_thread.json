@@ -1,0 +1,17 @@
+{
+  "modifier": "silk_thread",
+  "text": [
+    {
+      "text": "没有足够的材料修复你的工具？虫丝强化允许你在耐久低于75%时在合成栏中将工具与虫丝合成进行修复！"
+    }
+  ],
+  "effects": [
+    "修复耐久低于75%的工具",
+    "效果类似磨制工具",
+    "至多修复至75%耐久",
+    "只能强化一次"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

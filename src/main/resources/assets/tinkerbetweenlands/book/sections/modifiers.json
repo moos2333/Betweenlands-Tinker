@@ -14,5 +14,9 @@
   {
     "type": "modifier",
     "data": "modifiers/wight_slayer.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifiers/silk_thread.json"
   }
 ]

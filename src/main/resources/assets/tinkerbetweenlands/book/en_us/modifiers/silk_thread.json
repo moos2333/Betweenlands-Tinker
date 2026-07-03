@@ -1,0 +1,17 @@
+{
+  "modifier": "silk_thread",
+  "text": [
+    {
+      "text": "Running low on repair materials? The Silk Thread modifier allows you to repair your tool in a crafting grid with Silk Thread when durability is below 75%!"
+    }
+  ],
+  "effects": [
+    "Repairs tools below 75% durability",
+    "Functions similarly to Sharpening Kits",
+    "Restores up to 75% durability",
+    "Single level"
+  ],
+  "demoTool": [
+    "tinkerbetweenlands:between_broadsword"
+  ]
+}

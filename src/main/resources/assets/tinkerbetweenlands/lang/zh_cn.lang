@@ -55,6 +55,9 @@ modifier.critter_cruncher.name=爬虫克星
 modifier.critter_cruncher.desc=§o啪叽！§r\n对沼泽小型生物造成额外伤害。
 modifier.critter_cruncher.extra=对爬虫：+%s
 
+modifier.silk_thread.name=虫丝
+modifier.silk_thread.desc=§o丝线缠结，修复如新！§r\n耐久低于75%时，可在合成栏中用虫丝修复。
+
 # Betweenlands Tinker - Fluids
 fluid.octine.name=熔融炽炎
 fluid.syrmorite.name=熔融赛摩

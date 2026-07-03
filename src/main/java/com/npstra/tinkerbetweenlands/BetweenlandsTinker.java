@@ -5,11 +5,9 @@ import com.npstra.tinkerbetweenlands.common.item.ModItems;
 import com.npstra.tinkerbetweenlands.compat.conarm.materials.ArmorMaterial;
 import com.npstra.tinkerbetweenlands.compat.conarm.modifiers.ArmorModifierRegister;
 import com.npstra.tinkerbetweenlands.content.event.EventRegistry;
-import com.npstra.tinkerbetweenlands.content.event.SulfurLeachEventHandler;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.modifiers.ModifierRegister;
-import com.npstra.tinkerbetweenlands.content.recipe.GemAttachmentRecipe;
-import com.npstra.tinkerbetweenlands.content.recipe.SmelteryRecipeRegister;
+import com.npstra.tinkerbetweenlands.content.recipe.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,17 +18,13 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.repository.FileRepository;
-import slimeknights.tconstruct.library.book.content.ContentTool;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import thebetweenlands.common.handler.OverworldItemHandler;
 import com.npstra.tinkerbetweenlands.api.IBetweenlandsTool;
-import com.npstra.tinkerbetweenlands.content.event.BetweenlandsEventHandler;
 import com.npstra.tinkerbetweenlands.content.materials.MaterialRegister;
 import com.npstra.tinkerbetweenlands.content.parts.ModParts;
-import com.npstra.tinkerbetweenlands.content.recipe.PartConversionRecipe;
-import com.npstra.tinkerbetweenlands.content.recipe.ToolConversionRecipe;
 import com.npstra.tinkerbetweenlands.content.tools.ModTools;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
 import thebetweenlands.common.recipe.misc.AnimatorRecipe;
@@ -91,6 +85,7 @@ public class BetweenlandsTinker {
 
         EventRegistry.registerEvents();
         ForgeRegistries.RECIPES.register(new GemAttachmentRecipe().setRegistryName(Tags.MOD_ID, "gem_attachment"));
+        ForgeRegistries.RECIPES.register(new SilkRepairRecipe());
         if (Loader.isModLoaded("conarm")) {
             ArmorMaterial.registerArmorTraits();
             ArmorModifierRegister.init();
