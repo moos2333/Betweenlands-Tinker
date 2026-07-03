@@ -10,6 +10,7 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
+
 import java.util.List;
 
 public class TraitWeedShield extends AbstractTrait {
@@ -35,6 +36,12 @@ public class TraitWeedShield extends AbstractTrait {
         long lastTick = root.getLong(TAG_LAST_TICK);
         long currentTick = world.getTotalWorldTime();
 
+        if (lastTick > currentTick) {
+            lastTick = currentTick;
+            root.setLong(TAG_LAST_TICK, lastTick);
+            tool.setTagCompound(root);
+        }
+
         if (shield >= MAX_SHIELD) {
             if (lastTick != currentTick) {
                 root.setLong(TAG_LAST_TICK, currentTick);
@@ -43,22 +50,25 @@ public class TraitWeedShield extends AbstractTrait {
             return;
         }
 
-        if (lastTick == 0 || lastTick > currentTick) {
+        if (lastTick == 0) {
             root.setLong(TAG_LAST_TICK, currentTick);
             tool.setTagCompound(root);
             return;
         }
 
         int interval = (world.provider.getDimension() == ModConfig.dimensionId) ? BONUS_INTERVAL : NORMAL_INTERVAL;
+        long intervalTicks = interval * 20L;
         long diff = currentTick - lastTick;
 
-        if (diff >= interval * 20L) {
-            int add = (int) (diff / (interval * 20L));
-            shield = Math.min(MAX_SHIELD, shield + add);
-            long newLastTick = currentTick - (diff % (interval * 20L));
-            root.setInteger(TAG_SHIELD, shield);
-            root.setLong(TAG_LAST_TICK, newLastTick);
-            tool.setTagCompound(root);
+        if (diff >= intervalTicks) {
+            int add = (int) (diff / intervalTicks);
+            if (add > 0) {
+                shield = Math.min(MAX_SHIELD, shield + add);
+                long newLastTick = currentTick - (diff % intervalTicks);
+                root.setInteger(TAG_SHIELD, shield);
+                root.setLong(TAG_LAST_TICK, newLastTick);
+                tool.setTagCompound(root);
+            }
         }
     }
 

@@ -29,6 +29,12 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
         long lastTick = root.getLong("lastWeedTick");
         long currentTick = world.getTotalWorldTime();
 
+        if (lastTick > currentTick) {
+            lastTick = currentTick;
+            root.setLong("lastWeedTick", lastTick);
+            armor.setTagCompound(root);
+        }
+
         if (shield >= MAX_SHIELD) {
             if (lastTick != currentTick) {
                 root.setLong("lastWeedTick", currentTick);
@@ -37,22 +43,25 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
             return;
         }
 
-        if (lastTick == 0 || lastTick > currentTick) {
+        if (lastTick == 0) {
             root.setLong("lastWeedTick", currentTick);
             armor.setTagCompound(root);
             return;
         }
 
         int interval = (world.provider.getDimension() == ModConfig.dimensionId) ? BONUS_INTERVAL : NORMAL_INTERVAL;
+        long intervalTicks = interval * 20L;
         long diff = currentTick - lastTick;
 
-        if (diff >= interval * 20L) {
-            int add = (int) (diff / (interval * 20L));
-            shield = Math.min(MAX_SHIELD, shield + add);
-            long newLastTick = currentTick - (diff % (interval * 20L));
-            root.setInteger("weeds", shield);
-            root.setLong("lastWeedTick", newLastTick);
-            armor.setTagCompound(root);
+        if (diff >= intervalTicks) {
+            int add = (int) (diff / intervalTicks);
+            if (add > 0) {
+                shield = Math.min(MAX_SHIELD, shield + add);
+                long newLastTick = currentTick - (diff % intervalTicks);
+                root.setInteger("weeds", shield);
+                root.setLong("lastWeedTick", newLastTick);
+                armor.setTagCompound(root);
+            }
         }
     }
 
