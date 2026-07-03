@@ -4,69 +4,36 @@ import c4.conarm.lib.traits.AbstractArmorTrait;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import slimeknights.tconstruct.library.Util;
-import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.utils.TagUtil;
-import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 import java.util.List;
 
 public class TraitStackingArmor extends AbstractArmorTrait {
     private static final int MAX_STACK = 100;
     private static final int ACCUMULATE_THRESHOLD = 300;
+    private static final String KEY_STACK = "stacking_armor_stack";
+    private static final String KEY_ACCUM = "stacking_armor_accum";
 
     public TraitStackingArmor() {
         super("stacking", TextFormatting.GOLD);
     }
 
-    @Override
-    public void updateNBT(NBTTagCompound modifierTag) {
-        Data data = new Data();
-        data.read(modifierTag);
-        data.identifier = this.getModifierIdentifier();
-        data.color = this.color;
-        if (data.level == 0) data.level = 1;
-        data.write(modifierTag);
+    private int getStack(ItemStack armor) {
+        return TagUtil.getTagSafe(armor).getInteger(KEY_STACK);
     }
 
-    private Data getData(ItemStack armor, boolean createIfMissing) {
-        NBTTagCompound root = TagUtil.getTagSafe(armor);
-        NBTTagList tagList = TagUtil.getModifiersTagList(root);
-        String id = getModifierIdentifier();
-        int index = TinkerUtil.getIndexInCompoundList(tagList, id);
-        NBTTagCompound tag;
-        if (index == -1) {
-            if (!createIfMissing) return null;
-            tag = new NBTTagCompound();
-            tag.setString("identifier", id);
-            tagList.appendTag(tag);
-            TagUtil.setModifiersTagList(armor, tagList);
-        } else {
-            tag = tagList.getCompoundTagAt(index);
-        }
-        Data data = new Data();
-        data.read(tag);
-        return data;
+    private int getAccum(ItemStack armor) {
+        return TagUtil.getTagSafe(armor).getInteger(KEY_ACCUM);
     }
 
-    private void saveData(ItemStack armor, Data data) {
+    private void setData(ItemStack armor, int stack, int accum) {
         NBTTagCompound root = TagUtil.getTagSafe(armor);
-        NBTTagList tagList = TagUtil.getModifiersTagList(root);
-        String id = getModifierIdentifier();
-        int index = TinkerUtil.getIndexInCompoundList(tagList, id);
-        NBTTagCompound tag;
-        if (index == -1) {
-            tag = new NBTTagCompound();
-            tag.setString("identifier", id);
-            tagList.appendTag(tag);
-        } else {
-            tag = tagList.getCompoundTagAt(index);
-        }
-        data.write(tag);
-        TagUtil.setModifiersTagList(armor, tagList);
+        root.setInteger(KEY_STACK, stack);
+        root.setInteger(KEY_ACCUM, accum);
+        armor.setTagCompound(root);
     }
 
     @Override
@@ -76,47 +43,26 @@ public class TraitStackingArmor extends AbstractArmorTrait {
 
     @Override
     public int onArmorDamage(ItemStack armor, DamageSource source, int damage, int newDamage, EntityPlayer player, int slot) {
-        Data data = getData(armor, true);
-        if (data.stack > 0 && player.world.rand.nextFloat() < data.stack * 0.01f) {
+        int stack = getStack(armor);
+        int accum = getAccum(armor);
+        if (stack > 0 && player.world.rand.nextFloat() < stack * 0.01f) {
             return 0;
         }
         if (newDamage > 0) {
-            data.accumulated += newDamage;
-            while (data.accumulated >= ACCUMULATE_THRESHOLD && data.stack < MAX_STACK) {
-                data.stack++;
-                data.accumulated -= ACCUMULATE_THRESHOLD;
+            accum += newDamage;
+            while (accum >= ACCUMULATE_THRESHOLD && stack < MAX_STACK) {
+                stack++;
+                accum -= ACCUMULATE_THRESHOLD;
             }
-            saveData(armor, data);
+            setData(armor, stack, accum);
         }
         return newDamage;
     }
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        int stackCount = 0;
-        if (modifierTag != null && modifierTag.hasKey("stack")) {
-            stackCount = modifierTag.getInteger("stack");
-        }
+        int stackCount = getStack(tool);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
         return java.util.Collections.singletonList(Util.translateFormatted(loc, stackCount));
-    }
-
-    public static class Data extends ModifierNBT {
-        public int stack;
-        public int accumulated;
-
-        @Override
-        public void read(NBTTagCompound tag) {
-            super.read(tag);
-            stack = tag.getInteger("stack");
-            accumulated = tag.getInteger("accumulated");
-        }
-
-        @Override
-        public void write(NBTTagCompound tag) {
-            super.write(tag);
-            tag.setInteger("stack", stack);
-            tag.setInteger("accumulated", accumulated);
-        }
     }
 }

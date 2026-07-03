@@ -4,12 +4,9 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import slimeknights.tconstruct.library.Util;
-import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.TagUtil;
-import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 import java.util.List;
 
@@ -17,56 +14,26 @@ public class TraitStacking extends AbstractTrait {
     public static final TraitStacking INSTANCE = new TraitStacking();
     private static final int MAX_STACK = 100;
     private static final int ACCUMULATE_THRESHOLD = 1000;
+    private static final String KEY_STACK = "stacking_stack";
+    private static final String KEY_ACCUM = "stacking_accum";
 
     private TraitStacking() {
         super("stacking", 0x00AA00);
     }
 
-    @Override
-    public void updateNBT(NBTTagCompound modifierTag) {
-        Data data = new Data();
-        data.read(modifierTag);
-        data.identifier = this.getModifierIdentifier();
-        data.color = this.color;
-        if (data.level == 0) data.level = 1;
-        data.write(modifierTag);
-    }
-
-    private Data getData(ItemStack tool, boolean createIfMissing) {
+    private Data getData(ItemStack tool) {
         NBTTagCompound root = TagUtil.getTagSafe(tool);
-        NBTTagList tagList = TagUtil.getModifiersTagList(root);
-        String id = getModifierIdentifier();
-        int index = TinkerUtil.getIndexInCompoundList(tagList, id);
-        NBTTagCompound tag;
-        if (index == -1) {
-            if (!createIfMissing) return null;
-            tag = new NBTTagCompound();
-            tag.setString("identifier", id);
-            tagList.appendTag(tag);
-            TagUtil.setModifiersTagList(tool, tagList);
-        } else {
-            tag = tagList.getCompoundTagAt(index);
-        }
         Data data = new Data();
-        data.read(tag);
+        data.stack = root.getInteger(KEY_STACK);
+        data.accumulated = root.getInteger(KEY_ACCUM);
         return data;
     }
 
     private void saveData(ItemStack tool, Data data) {
         NBTTagCompound root = TagUtil.getTagSafe(tool);
-        NBTTagList tagList = TagUtil.getModifiersTagList(root);
-        String id = getModifierIdentifier();
-        int index = TinkerUtil.getIndexInCompoundList(tagList, id);
-        NBTTagCompound tag;
-        if (index == -1) {
-            tag = new NBTTagCompound();
-            tag.setString("identifier", id);
-            tagList.appendTag(tag);
-        } else {
-            tag = tagList.getCompoundTagAt(index);
-        }
-        data.write(tag);
-        TagUtil.setModifiersTagList(tool, tagList);
+        root.setInteger(KEY_STACK, data.stack);
+        root.setInteger(KEY_ACCUM, data.accumulated);
+        tool.setTagCompound(root);
     }
 
     @Override
@@ -79,7 +46,7 @@ public class TraitStacking extends AbstractTrait {
         if (entity == null) {
             return newDamage;
         }
-        Data data = getData(tool, true);
+        Data data = getData(tool);
         if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
@@ -96,30 +63,13 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        int stackCount = 0;
-        if (modifierTag != null && modifierTag.hasKey("stack")) {
-            stackCount = modifierTag.getInteger("stack");
-        }
+        Data data = getData(tool);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
-        return ImmutableList.of(Util.translateFormatted(loc, stackCount));
+        return ImmutableList.of(Util.translateFormatted(loc, data.stack));
     }
 
-    public static class Data extends ModifierNBT {
-        public int stack;
-        public int accumulated;
-
-        @Override
-        public void read(NBTTagCompound tag) {
-            super.read(tag);
-            stack = tag.getInteger("stack");
-            accumulated = tag.getInteger("accumulated");
-        }
-
-        @Override
-        public void write(NBTTagCompound tag) {
-            super.write(tag);
-            tag.setInteger("stack", stack);
-            tag.setInteger("accumulated", accumulated);
-        }
+    private static class Data {
+        int stack;
+        int accumulated;
     }
 }
