@@ -39,15 +39,15 @@ public class SmelteryRecipeRegister {
         ItemStack octineNugget = new ItemStack(ItemRegistry.ITEMS_MISC, 1, 42);
         ItemStack octineIngot = new ItemStack(ItemRegistry.OCTINE_INGOT);
         ItemStack octineBlock = new ItemStack(BlockRegistry.OCTINE_BLOCK);
-        TinkerRegistry.registerTableCasting(octineNugget, new ItemStack(TinkerSmeltery.castNugget.getItem()), FluidRegister.fluidOctine, Material.VALUE_Nugget);
-        TinkerRegistry.registerTableCasting(octineIngot, new ItemStack(TinkerSmeltery.castIngot.getItem()), FluidRegister.fluidOctine, Material.VALUE_Ingot);
+        TinkerRegistry.registerTableCasting(octineNugget, TinkerSmeltery.castNugget, FluidRegister.fluidOctine, Material.VALUE_Nugget);
+        TinkerRegistry.registerTableCasting(octineIngot, TinkerSmeltery.castIngot, FluidRegister.fluidOctine, Material.VALUE_Ingot);
         TinkerRegistry.registerBasinCasting(octineBlock, ItemStack.EMPTY, FluidRegister.fluidOctine, Material.VALUE_Block);
 
         ItemStack syrmoriteNugget = new ItemStack(ItemRegistry.ITEMS_MISC, 1, 41);
         ItemStack syrmoriteIngot = new ItemStack(ItemRegistry.ITEMS_MISC, 1, 11);
         ItemStack syrmoriteBlock = new ItemStack(BlockRegistry.SYRMORITE_BLOCK);
-        TinkerRegistry.registerTableCasting(syrmoriteNugget, new ItemStack(TinkerSmeltery.castNugget.getItem()), FluidRegister.fluidSyrmorite, Material.VALUE_Nugget);
-        TinkerRegistry.registerTableCasting(syrmoriteIngot, new ItemStack(TinkerSmeltery.castIngot.getItem()), FluidRegister.fluidSyrmorite, Material.VALUE_Ingot);
+        TinkerRegistry.registerTableCasting(syrmoriteNugget, TinkerSmeltery.castNugget, FluidRegister.fluidSyrmorite, Material.VALUE_Nugget);
+        TinkerRegistry.registerTableCasting(syrmoriteIngot, TinkerSmeltery.castIngot, FluidRegister.fluidSyrmorite, Material.VALUE_Ingot);
         TinkerRegistry.registerBasinCasting(syrmoriteBlock, ItemStack.EMPTY, FluidRegister.fluidSyrmorite, Material.VALUE_Block);
 
         if (FluidRegister.fluidMoltenSulfur != null) {
