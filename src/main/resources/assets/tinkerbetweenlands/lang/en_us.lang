@@ -18,6 +18,8 @@ material.slimy_bone.name=Slimy Bone
 material.valonite.name=Valonite
 material.octine.name=Octine
 material.syrmorite.name=Syrmorite
+material.reed_rope.name=Reed Rope
+material.dried_swamp_reed.name=Dried Swamp Reed
 
 # Betweenlands Tinker - Material Traits
 modifier.between.name=Between

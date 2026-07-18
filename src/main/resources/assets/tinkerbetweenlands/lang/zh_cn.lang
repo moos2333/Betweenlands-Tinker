@@ -18,6 +18,8 @@ material.slimy_bone.name=粘骨
 material.valonite.name=英玫
 material.octine.name=炽炎
 material.syrmorite.name=赛摩
+material.reed_rope.name=芦苇绳
+material.dried_swamp_reed.name=干沼泽芦苇
 
 # Betweenlands Tinker - Material Traits
 modifier.between.name=交错
