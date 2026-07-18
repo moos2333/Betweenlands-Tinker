@@ -1,7 +1,5 @@
 package com.npstra.tinkerbetweenlands.content.materials;
 
-import com.npstra.tinkerbetweenlands.content.modifiers.ModSilkThread;
-import com.npstra.tinkerbetweenlands.content.modifiers.ModifierRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -17,7 +15,7 @@ import com.npstra.tinkerbetweenlands.content.traits.TraitIgnition;
 import com.npstra.tinkerbetweenlands.content.traits.TraitStacking;
 
 public class MaterialRegister {
-    public static Material weedwood, slimy_bone, valonite, octine, syrmorite, reedRope, driedSwampReed;
+    public static Material weedwood, slimy_bone, valonite, octine, syrmorite;
     private static boolean statsRegistered = false;
 
     public static void preInit() {
@@ -29,16 +27,6 @@ public class MaterialRegister {
 
         octine.setFluid(FluidRegister.fluidOctine);
         syrmorite.setFluid(FluidRegister.fluidSyrmorite);
-
-        reedRope = new Material("reed_rope", 0x0E4B0E);
-        reedRope.setCraftable(true).setCastable(false);
-        TinkerRegistry.addMaterial(reedRope);
-        reedRope.setVisible();
-
-        driedSwampReed = new Material("dried_swamp_reed", 0x6C5B1E);
-        driedSwampReed.setCraftable(true).setCastable(false);
-        TinkerRegistry.addMaterial(driedSwampReed);
-        driedSwampReed.setVisible();
 
         addStats();
     }
@@ -116,18 +104,6 @@ public class MaterialRegister {
                     new BowMaterialStats(0.9f, 1.1f, 3.0f)
             );
         }
-
-        if (reedRope != null) {
-            reedRope.addTrait(TraitBetween.INSTANCE, "bowstring");
-            TinkerRegistry.addMaterialStats(reedRope,
-                    new BowStringMaterialStats(0.75f));
-        }
-        if (driedSwampReed != null) {
-            driedSwampReed.addTrait(TraitBetween.INSTANCE, "shaft");
-            driedSwampReed.addTrait(TinkerTraits.breakable, "shaft");
-            TinkerRegistry.addMaterialStats(driedSwampReed,
-                    new ArrowShaftMaterialStats(1.5f, 10));
-        }
     }
 
     public static void init() {
@@ -174,11 +150,5 @@ public class MaterialRegister {
         syrmorite.addItem("ingotSyrmorite", 1, Material.VALUE_Ingot);
         syrmorite.addItem("nuggetSyrmorite", 1, Material.VALUE_Nugget);
         syrmorite.addItem("blockSyrmorite", 1, Material.VALUE_Block);
-
-        reedRope.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 7), 1, Material.VALUE_Nugget);
-        reedRope.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 7));
-
-        driedSwampReed.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 6), 1, Material.VALUE_Shard);
-        driedSwampReed.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 6));
     }
 }
