@@ -15,7 +15,7 @@ import com.npstra.tinkerbetweenlands.content.traits.TraitIgnition;
 import com.npstra.tinkerbetweenlands.content.traits.TraitStacking;
 
 public class MaterialRegister {
-    public static Material weedwood, slimy_bone, valonite, octine, syrmorite;
+    public static Material weedwood, slimy_bone, valonite, octine, syrmorite, reedRope, silkThread;
     private static boolean statsRegistered = false;
 
     public static void preInit() {
@@ -27,6 +27,16 @@ public class MaterialRegister {
 
         octine.setFluid(FluidRegister.fluidOctine);
         syrmorite.setFluid(FluidRegister.fluidSyrmorite);
+
+        reedRope = new Material("reed_rope", 0x0e4b0e);
+        reedRope.setCraftable(true).setCastable(false);
+        TinkerRegistry.addMaterial(reedRope);
+        reedRope.setVisible();
+
+        silkThread = new Material("silk_thread", 0xf0fce0);
+        silkThread.setCraftable(true).setCastable(false);
+        TinkerRegistry.addMaterial(silkThread);
+        silkThread.setVisible();
 
         addStats();
     }
@@ -104,6 +114,17 @@ public class MaterialRegister {
                     new BowMaterialStats(0.9f, 1.1f, 3.0f)
             );
         }
+
+        if (reedRope != null) {
+            reedRope.addTrait(TraitBetween.INSTANCE, "bowstring");
+            TinkerRegistry.addMaterialStats(reedRope,
+                    new BowStringMaterialStats(0.75f));
+        }
+        if (silkThread != null) {
+            silkThread.addTrait(TraitBetween.INSTANCE, "bowstring");
+            TinkerRegistry.addMaterialStats(silkThread,
+                    new BowStringMaterialStats(1.0f));
+        }
     }
 
     public static void init() {
@@ -150,5 +171,11 @@ public class MaterialRegister {
         syrmorite.addItem("ingotSyrmorite", 1, Material.VALUE_Ingot);
         syrmorite.addItem("nuggetSyrmorite", 1, Material.VALUE_Nugget);
         syrmorite.addItem("blockSyrmorite", 1, Material.VALUE_Block);
+
+        reedRope.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 7), 1, Material.VALUE_Nugget);
+        reedRope.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 7));
+
+        silkThread.addItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 63), 1, Material.VALUE_Shard);
+        silkThread.setRepresentativeItem(new ItemStack(ItemRegistry.ITEMS_MISC, 1, 63));
     }
 }
