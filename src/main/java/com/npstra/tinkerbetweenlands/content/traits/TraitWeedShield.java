@@ -19,7 +19,8 @@ public class TraitWeedShield extends AbstractTrait {
     private static final int NORMAL_INTERVAL = 20;
     private static final int BONUS_INTERVAL = 10;
     private static final String TAG_SHIELD = "weed_shield";
-    private static final String TAG_LAST_TICK = "weed_last_tick";
+    private static final String TAG_ACCUM = "weed_accum";
+    private static final String TAG_PREV_TICK = "weed_prev_tick";
 
     private TraitWeedShield() {
         super("weedshield", 0x00AA00);
@@ -33,43 +34,49 @@ public class TraitWeedShield extends AbstractTrait {
 
         NBTTagCompound root = TagUtil.getTagSafe(tool);
         int shield = root.getInteger(TAG_SHIELD);
-        long lastTick = root.getLong(TAG_LAST_TICK);
-        long currentTick = world.getTotalWorldTime();
-
-        if (lastTick > currentTick) {
-            lastTick = currentTick;
-            root.setLong(TAG_LAST_TICK, lastTick);
-            tool.setTagCompound(root);
-        }
-
         if (shield >= MAX_SHIELD) {
-            if (lastTick != currentTick) {
-                root.setLong(TAG_LAST_TICK, currentTick);
-                tool.setTagCompound(root);
-            }
-            return;
-        }
-
-        if (lastTick == 0) {
-            root.setLong(TAG_LAST_TICK, currentTick);
+            if (root.hasKey(TAG_ACCUM)) root.removeTag(TAG_ACCUM);
+            if (root.hasKey(TAG_PREV_TICK)) root.removeTag(TAG_PREV_TICK);
             tool.setTagCompound(root);
             return;
         }
 
-        int interval = (world.provider.getDimension() == ModConfig.dimensionId) ? BONUS_INTERVAL : NORMAL_INTERVAL;
-        long intervalTicks = interval * 20L;
-        long diff = currentTick - lastTick;
+        long currentTick = ((EntityLivingBase) entity).ticksExisted;
+        long prevTick = root.getLong(TAG_PREV_TICK);
+        long accum = root.getLong(TAG_ACCUM);
 
-        if (diff >= intervalTicks) {
-            int add = (int) (diff / intervalTicks);
-            if (add > 0) {
-                shield = Math.min(MAX_SHIELD, shield + add);
-                long newLastTick = currentTick - (diff % intervalTicks);
-                root.setInteger(TAG_SHIELD, shield);
-                root.setLong(TAG_LAST_TICK, newLastTick);
-                tool.setTagCompound(root);
-            }
+        if (prevTick == 0) {
+            root.setLong(TAG_PREV_TICK, currentTick);
+            root.setLong(TAG_ACCUM, accum);
+            tool.setTagCompound(root);
+            return;
         }
+
+        long delta = currentTick - prevTick;
+        if (delta < 0) {
+            delta = 0;
+            prevTick = currentTick;
+        }
+        long maxDelta = (getInterval(world) * 20L) * 2;
+        if (delta > maxDelta) delta = maxDelta;
+
+        accum += delta;
+        long intervalTicks = getInterval(world) * 20L;
+        while (accum >= intervalTicks) {
+            shield++;
+            accum -= intervalTicks;
+            if (shield >= MAX_SHIELD) break;
+        }
+        if (shield > MAX_SHIELD) shield = MAX_SHIELD;
+
+        root.setInteger(TAG_SHIELD, shield);
+        root.setLong(TAG_ACCUM, accum);
+        root.setLong(TAG_PREV_TICK, currentTick);
+        tool.setTagCompound(root);
+    }
+
+    private int getInterval(World world) {
+        return world.provider.getDimension() == ModConfig.dimensionId ? BONUS_INTERVAL : NORMAL_INTERVAL;
     }
 
     @Override
