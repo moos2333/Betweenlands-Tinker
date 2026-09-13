@@ -30,8 +30,8 @@ modifier.weedshield.desc=§o腐生！§r\n生成护盾抵消耐久损耗。交�
 modifier.weedshield.extra=杂草盾：%s / %s
 
 modifier.valor.name=勇气
-modifier.valor.desc=§o挺身而立！§r\n工具将随使用永久提升性能。
-modifier.valor.extra=勇气：+%s%%
+modifier.valor.desc=§o挺身而立！§r\n反击以你为目标的敌人，造成额外伤害并施加缓慢与虚弱。
+modifier.valor.extra=对敌人：+%s%%
 
 modifier.ignition.name=引燃
 modifier.ignition.desc=§o呼！§r\n每三次攻击引燃目标，或对已燃烧的目标造成额外伤害。
