@@ -30,8 +30,8 @@ modifier.weedshield.desc=§oParasitic!§r\nGenerates a shield that absorbs durab
 modifier.weedshield.extra=Weed Shield: %s / %s
 
 modifier.valor.name=Valor
-modifier.valor.desc=§oStand tall!§r\nThe tool permanently improves with use.
-modifier.valor.extra=Valor: +%s%%
+modifier.valor.desc=§oStand tall!§r\nStrike back at foes that target you, dealing extra damage and inflicting Slowness and Weakness.
+modifier.valor.extra=Vs attackers: +%s%%
 
 modifier.ignition.name=Ignition
 modifier.ignition.desc=§oFwoosh!§r\nEvery third strike ignites the target, or deals bonus damage to those already burning.
