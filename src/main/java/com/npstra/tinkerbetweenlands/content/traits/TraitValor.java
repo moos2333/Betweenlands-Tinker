@@ -16,13 +16,15 @@ public class TraitValor extends AbstractTrait {
     public static final TraitValor INSTANCE = new TraitValor();
     private static final float BONUS_DAMAGE = 0.1f;
     private static final int EFFECT_DURATION = 60;
+    private static final int EFFECT_AMPLIFIER = 0;
 
     private TraitValor() {
         super("valor", 0x00AA00);
     }
 
-    private boolean isHatedBy(EntityLivingBase target, EntityLivingBase player) {
-        return target instanceof EntityCreature
+    private static boolean isHatedBy(EntityLivingBase target, EntityLivingBase player) {
+        return player != null
+                && target instanceof EntityCreature
                 && ((EntityCreature) target).getAttackTarget() == player;
     }
 
@@ -37,8 +39,8 @@ public class TraitValor extends AbstractTrait {
     @Override
     public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit) {
         if (wasHit && !player.getEntityWorld().isRemote && isHatedBy(target, player)) {
-            target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, EFFECT_DURATION, 0));
-            target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, EFFECT_DURATION, 0));
+            target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, EFFECT_DURATION, EFFECT_AMPLIFIER));
+            target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, EFFECT_DURATION, EFFECT_AMPLIFIER));
         }
     }
 
