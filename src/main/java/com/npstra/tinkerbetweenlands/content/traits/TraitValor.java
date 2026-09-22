@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TraitValor extends AbstractTrait {
     public static final TraitValor INSTANCE = new TraitValor();
-    private static final float BONUS_DAMAGE = 0.1f;
+    private static final float BONUS_DAMAGE = 0.2f;
     private static final int EFFECT_DURATION = 60;
     private static final int EFFECT_AMPLIFIER = 0;
 
