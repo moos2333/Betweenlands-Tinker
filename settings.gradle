@@ -1,6 +1,14 @@
 pluginManagement {
     repositories {
         maven {
+            name = 'AliyunGradlePlugin'
+            url = 'https://maven.aliyun.com/repository/gradle-plugin'
+        }
+        maven {
+            name = 'TencentGradlePlugin'
+            url = 'https://mirrors.cloud.tencent.com/nexus/repository/gradle-plugins/'
+        }
+        maven {
             // RetroFuturaGradle
             name 'GTNH Maven'
             url 'https://nexus.gtnewhorizons.com/repository/public/'

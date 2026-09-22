@@ -1,6 +1,3 @@
-/**
- * It is advised that you do not edit anything in the build.gradle; unless you are sure of what you are doing
- */
 import com.gtnewhorizons.retrofuturagradle.mcp.InjectTagsTask
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.gradle.ext.Gradle
@@ -12,14 +9,13 @@ plugins {
     id 'org.jetbrains.gradle.plugin.idea-ext' version '1.4.1'
     id 'com.gtnewhorizons.retrofuturagradle' version '2.0.2'
     id 'com.matthewprenger.cursegradle' version '1.4.0' apply false
-    id 'com.modrinth.minotaur' version '2.+' apply false
+    id 'com.modrinth.minotaur' version '2.9.0' apply false
     id 'org.jetbrains.changelog' version '2.5.0'
-    id 'com.gradleup.shadow' version '9.4.+'
+    id 'com.gradleup.shadow' version '9.4.3'
 }
 
 apply from: 'gradle/scripts/helpers.gradle'
 
-// Early Assertions
 assertProperty 'mod_version'
 assertProperty 'root_package'
 assertProperty 'mod_id'
@@ -55,7 +51,6 @@ tasks.decompressDecompiledSources.enabled !propertyBool('change_minecraft_source
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(propertyBool('use_modern_java_syntax') ? 16 : 8))
-        // Azul covers the most platforms for Java 8 toolchains, crucially including MacOS arm64
         vendor.set(JvmVendorSpec.AZUL)
     }
     if (propertyBool('generate_sources_jar')) {
@@ -75,11 +70,9 @@ minecraft {
     useDependencyAccessTransformers.set(propertyBool('use_dependency_at_files'))
 
     username.set(propertyString('minecraft_username'))
-    
-    // Add any additional tweaker classes here
+
     extraTweakClasses.addAll(propertyStringList('extra_tweak_classes'))
 
-    // Add various JVM arguments here for runtime
     def args = ['-ea:' + group]
     if (propertyBool('use_mixins')) {
         args << '-Dmixin.hotSwap=true'
@@ -94,10 +87,10 @@ minecraft {
             Properties props = new Properties().tap { it.load(file('tags.properties').newInputStream()); it }
             if (!props.isEmpty()) {
                 injectedTags.set(props.collectEntries { k, v ->
-                        def interpolated = interpolate(v)
-                        if (interpolated == null || interpolated.isEmpty()) throw new GradleException("Empty tag value found for key: $k")
-                        [(k): interpolated]
-                    })
+                    def interpolated = interpolate(v)
+                    if (interpolated == null || interpolated.isEmpty()) throw new GradleException("Empty tag value found for key: $k")
+                    [(k): interpolated]
+                })
             }
         }
     }
@@ -107,12 +100,16 @@ repositories {
     maven {
         name 'CleanroomMC Maven'
         url 'https://maven.cleanroommc.com'
+        content {
+            includeGroup 'com.cleanroommc'
+            includeGroup 'zone.rong'
+        }
     }
     maven {
-        name "CurseMaven"
-        url "https://cursemaven.com"
+        name 'CurseMaven'
+        url 'https://cursemaven.com'
         content {
-            includeGroup "curse.maven"
+            includeGroup 'curse.maven'
         }
     }
 }
@@ -120,17 +117,14 @@ repositories {
 dependencies {
     if (propertyBool('use_modern_java_syntax')) {
         annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
-        // Workaround for https://github.com/bsideup/jabel/issues/174
         annotationProcessor 'net.java.dev.jna:jna-platform:5.13.0'
-        compileOnly ('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
+        compileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
             transitive = false
         }
-        // Allow jdk.unsupported classes like sun.misc.Unsafe, workaround for JDK-8206937 and fixes crashes in tests
         patchedMinecraft 'me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0'
-        // Include for tests
         testAnnotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
         testCompileOnly('com.github.bsideup.jabel:jabel-javac-plugin:1.0.0') {
-            transitive = false // We only care about the 1 annotation class
+            transitive = false
         }
     }
     if (propertyBool('use_jetbrains_annotations')) {
@@ -141,13 +135,13 @@ dependencies {
     }
     if (propertyBool('use_mixins')) {
         String mixin = modUtils.enableMixins("zone.rong:mixinbooter:${propertyString('mixin_booter_version')}", propertyString('mixin_refmap'))
-        api (mixin) {
+        api(mixin) {
             transitive = false
         }
         annotationProcessor 'org.ow2.asm:asm-debug-all:5.2'
         annotationProcessor 'com.google.guava:guava:32.1.2-jre'
         annotationProcessor 'com.google.code.gson:gson:2.8.9'
-        annotationProcessor (mixin) {
+        annotationProcessor(mixin) {
             transitive = false
         }
     }
@@ -163,7 +157,6 @@ dependencies {
 
 apply from: 'gradle/scripts/dependencies.gradle'
 
-// Adds Access Transformer files to tasks
 if (propertyBool('use_access_transformer')) {
     for (def location : propertyStringList('access_transformer_locations')) {
         def fileLocation = file("${projectDir}/src/main/resources/${location}")
@@ -177,7 +170,6 @@ if (propertyBool('use_access_transformer')) {
 }
 
 processResources {
-
     inputs.property 'mod_id', propertyString('mod_id')
     inputs.property 'mod_name', propertyString('mod_name')
     inputs.property 'mod_version', propertyString('mod_version')
@@ -209,11 +201,10 @@ processResources {
                 'mixin_package': propertyString('mixin_package')
         )
     }
-    
+
     if (propertyBool('use_access_transformer')) {
         rename '(.+_at.cfg)', 'META-INF/$1'
     }
-
 }
 
 jar {
