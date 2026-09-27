@@ -74,7 +74,7 @@ modifier.stacking_armor.desc=§o致密而顽固...§r\n盔甲更难被修复，�
 modifier.stacking_armor.extra=层叠：+%s%%
 
 modifier.valor_armor.name=勇气
-modifier.valor_armor.desc=§o挺身而立！§r\n盔甲将随使用永久提升性能，提供额外防护。
+modifier.valor_armor.desc=§o挺身而立！§r\n当被以你为目标的敌人攻击时，每件盔甲都会减轻伤害并减少磨损。
 modifier.valor_armor.extra=勇气：+%s%%
 
 # Betweenlands Tinker - Armor Modifiers

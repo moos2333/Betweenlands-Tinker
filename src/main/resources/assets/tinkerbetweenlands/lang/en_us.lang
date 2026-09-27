@@ -74,8 +74,8 @@ modifier.stacking_armor.desc=§oDense and stubborn...§r\nThe armor is harder to
 modifier.stacking_armor.extra=Stacking: +%s%%.
 
 modifier.valor_armor.name=Valor
-modifier.valor_armor.desc=§oStand tall!§r\nArmor permanently improves with use, granting bonus protection.
-modifier.valor_armor.extra=Valor: +%s%%.
+modifier.valor_armor.desc=§oStand tall!§r\nWhen struck by a foe that targets you, each piece of armor softens the blow and reduces wear.
+modifier.valor_armor.extra=Valor: +%s%%
 
 # Betweenlands Tinker - Armor Modifiers
 modifier.insulation_armor.name=Insulation
