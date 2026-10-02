@@ -16,10 +16,11 @@ import thebetweenlands.common.world.storage.BetweenlandsWorldStorage;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SulfurLeachEventHandler {
-    private static final ConcurrentHashMap<BlockPos, Long> tracked = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Integer, Set<BlockPos>> tracked = new ConcurrentHashMap<>();
     private static final int CHECK_INTERVAL = 20;
     private static final float CHANCE = 0.2F;
     private static final int AMOUNT = 400;
@@ -28,13 +29,10 @@ public class SulfurLeachEventHandler {
     public void onBlockPlace(BlockEvent.PlaceEvent event) {
         World world = event.getWorld();
         if (world.isRemote) return;
-        BlockPos pos = event.getPos();
-        if (world.getBlockState(pos).getBlock() == BlockRegistry.SULFUR_BLOCK) {
-            BlockPos below = pos.down();
-            IBlockState belowState = world.getBlockState(below);
-            if (belowState.getBlock() == BlockRegistry.SYRMORITE_BARREL) {
-                tracked.put(below, world.getTotalWorldTime());
-            }
+        if (event.getState().getBlock() != BlockRegistry.SULFUR_BLOCK) return;
+        BlockPos below = event.getPos().down();
+        if (world.getBlockState(below).getBlock() == BlockRegistry.SYRMORITE_BARREL) {
+            tracked.computeIfAbsent(world.provider.getDimension(), k -> ConcurrentHashMap.newKeySet()).add(below);
         }
     }
 
@@ -42,8 +40,9 @@ public class SulfurLeachEventHandler {
     public void onWorldTick(TickEvent.WorldTickEvent event) {
         if (event.world.isRemote) return;
         if (event.phase != TickEvent.Phase.END) return;
-        if (tracked.isEmpty()) return;
         World world = event.world;
+        Set<BlockPos> positions = tracked.get(world.provider.getDimension());
+        if (positions == null || positions.isEmpty()) return;
         long time = world.getTotalWorldTime();
         if (time % CHECK_INTERVAL != 0) return;
         boolean isRaining;
@@ -53,7 +52,7 @@ public class SulfurLeachEventHandler {
             isRaining = world.isRaining();
         }
         if (!isRaining) return;
-        Iterator<BlockPos> it = tracked.keySet().iterator();
+        Iterator<BlockPos> it = positions.iterator();
         while (it.hasNext()) {
             BlockPos pos = it.next();
             if (!world.isBlockLoaded(pos)) continue;
