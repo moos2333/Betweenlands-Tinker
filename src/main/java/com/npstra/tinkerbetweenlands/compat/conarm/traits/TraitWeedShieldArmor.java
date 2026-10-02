@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
 
 public class TraitWeedShieldArmor extends AbstractArmorTrait {
@@ -15,6 +15,9 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
     private static final int MAX_SHIELD = 100;
     private static final int NORMAL_INTERVAL = 20;
     private static final int BONUS_INTERVAL = 10;
+    private static final String TAG_SHIELD = "weed_shield";
+    private static final String TAG_ACCUM = "weed_accum";
+    private static final String TAG_PREV_TICK = "weed_prev_tick";
 
     public TraitWeedShieldArmor() {
         super("weedshield", TextFormatting.GREEN);
@@ -24,57 +27,58 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
     public void onArmorTick(ItemStack armor, World world, EntityPlayer player) {
         if (world.isRemote) return;
 
-        NBTTagCompound root = TagUtil.getTagSafe(armor);
-        int shield = root.getInteger("weeds");
-        long lastTick = root.getLong("lastWeedTick");
-        long currentTick = world.getTotalWorldTime();
-
-        if (lastTick > currentTick) {
-            lastTick = currentTick;
-            root.setLong("lastWeedTick", lastTick);
-            armor.setTagCompound(root);
-        }
-
+        NBTTagCompound tag = TinkerUtil.getModifierTag(armor, getModifierIdentifier());
+        int shield = tag.getInteger(TAG_SHIELD);
         if (shield >= MAX_SHIELD) {
-            if (lastTick != currentTick) {
-                root.setLong("lastWeedTick", currentTick);
-                armor.setTagCompound(root);
-            }
+            if (tag.hasKey(TAG_ACCUM)) tag.removeTag(TAG_ACCUM);
+            if (tag.hasKey(TAG_PREV_TICK)) tag.removeTag(TAG_PREV_TICK);
             return;
         }
 
-        if (lastTick == 0) {
-            root.setLong("lastWeedTick", currentTick);
-            armor.setTagCompound(root);
+        long currentTick = player.ticksExisted;
+        long prevTick = tag.getLong(TAG_PREV_TICK);
+        long accum = tag.getLong(TAG_ACCUM);
+
+        if (prevTick == 0) {
+            tag.setLong(TAG_PREV_TICK, currentTick);
+            tag.setLong(TAG_ACCUM, accum);
             return;
         }
 
-        int interval = (world.provider.getDimension() == ModConfig.dimensionId) ? BONUS_INTERVAL : NORMAL_INTERVAL;
-        long intervalTicks = interval * 20L;
-        long diff = currentTick - lastTick;
-
-        if (diff >= intervalTicks) {
-            int add = (int) (diff / intervalTicks);
-            if (add > 0) {
-                shield = Math.min(MAX_SHIELD, shield + add);
-                long newLastTick = currentTick - (diff % intervalTicks);
-                root.setInteger("weeds", shield);
-                root.setLong("lastWeedTick", newLastTick);
-                armor.setTagCompound(root);
-            }
+        long delta = currentTick - prevTick;
+        if (delta < 0) {
+            delta = 0;
+            prevTick = currentTick;
         }
+        long maxDelta = (getInterval(world) * 20L) * 2;
+        if (delta > maxDelta) delta = maxDelta;
+
+        accum += delta;
+        long intervalTicks = getInterval(world) * 20L;
+        while (accum >= intervalTicks) {
+            shield++;
+            accum -= intervalTicks;
+            if (shield >= MAX_SHIELD) break;
+        }
+        if (shield > MAX_SHIELD) shield = MAX_SHIELD;
+
+        tag.setInteger(TAG_SHIELD, shield);
+        tag.setLong(TAG_ACCUM, accum);
+        tag.setLong(TAG_PREV_TICK, currentTick);
+    }
+
+    private int getInterval(World world) {
+        return world.provider.getDimension() == ModConfig.dimensionId ? BONUS_INTERVAL : NORMAL_INTERVAL;
     }
 
     @Override
     public int onArmorDamage(ItemStack armor, DamageSource source, int damage, int newDamage, EntityPlayer player, int slot) {
-        NBTTagCompound root = TagUtil.getTagSafe(armor);
-        int shield = root.getInteger("weeds");
+        NBTTagCompound tag = TinkerUtil.getModifierTag(armor, getModifierIdentifier());
+        int shield = tag.getInteger(TAG_SHIELD);
         if (shield > 0) {
             int consumed = Math.min(shield, newDamage);
-            shield -= consumed;
-            newDamage -= consumed;
-            root.setInteger("weeds", shield);
-            armor.setTagCompound(root);
+            tag.setInteger(TAG_SHIELD, shield - consumed);
+            return newDamage - consumed;
         }
         return newDamage;
     }
