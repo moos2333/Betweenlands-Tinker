@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
-import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
 
 import java.util.List;
@@ -32,23 +32,21 @@ public class TraitWeedShield extends AbstractTrait {
         if (!(entity instanceof EntityLivingBase)) return;
         if (itemSlot < 0 || (itemSlot > 8 && itemSlot != 40)) return;
 
-        NBTTagCompound root = TagUtil.getTagSafe(tool);
-        int shield = root.getInteger(TAG_SHIELD);
+        NBTTagCompound tag = TinkerUtil.getModifierTag(tool, getModifierIdentifier());
+        int shield = tag.getInteger(TAG_SHIELD);
         if (shield >= MAX_SHIELD) {
-            if (root.hasKey(TAG_ACCUM)) root.removeTag(TAG_ACCUM);
-            if (root.hasKey(TAG_PREV_TICK)) root.removeTag(TAG_PREV_TICK);
-            tool.setTagCompound(root);
+            if (tag.hasKey(TAG_ACCUM)) tag.removeTag(TAG_ACCUM);
+            if (tag.hasKey(TAG_PREV_TICK)) tag.removeTag(TAG_PREV_TICK);
             return;
         }
 
         long currentTick = ((EntityLivingBase) entity).ticksExisted;
-        long prevTick = root.getLong(TAG_PREV_TICK);
-        long accum = root.getLong(TAG_ACCUM);
+        long prevTick = tag.getLong(TAG_PREV_TICK);
+        long accum = tag.getLong(TAG_ACCUM);
 
         if (prevTick == 0) {
-            root.setLong(TAG_PREV_TICK, currentTick);
-            root.setLong(TAG_ACCUM, accum);
-            tool.setTagCompound(root);
+            tag.setLong(TAG_PREV_TICK, currentTick);
+            tag.setLong(TAG_ACCUM, accum);
             return;
         }
 
@@ -69,10 +67,9 @@ public class TraitWeedShield extends AbstractTrait {
         }
         if (shield > MAX_SHIELD) shield = MAX_SHIELD;
 
-        root.setInteger(TAG_SHIELD, shield);
-        root.setLong(TAG_ACCUM, accum);
-        root.setLong(TAG_PREV_TICK, currentTick);
-        tool.setTagCompound(root);
+        tag.setInteger(TAG_SHIELD, shield);
+        tag.setLong(TAG_ACCUM, accum);
+        tag.setLong(TAG_PREV_TICK, currentTick);
     }
 
     private int getInterval(World world) {
@@ -81,22 +78,19 @@ public class TraitWeedShield extends AbstractTrait {
 
     @Override
     public int onToolDamage(ItemStack tool, int damage, int newDamage, EntityLivingBase entity) {
-        NBTTagCompound root = TagUtil.getTagSafe(tool);
-        int shield = root.getInteger(TAG_SHIELD);
+        NBTTagCompound tag = TinkerUtil.getModifierTag(tool, getModifierIdentifier());
+        int shield = tag.getInteger(TAG_SHIELD);
         if (shield > 0) {
             int consumed = Math.min(shield, newDamage);
-            shield -= consumed;
-            newDamage -= consumed;
-            root.setInteger(TAG_SHIELD, shield);
-            tool.setTagCompound(root);
+            tag.setInteger(TAG_SHIELD, shield - consumed);
+            return newDamage - consumed;
         }
         return newDamage;
     }
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        NBTTagCompound root = TagUtil.getTagSafe(tool);
-        int shield = root.getInteger(TAG_SHIELD);
+        int shield = modifierTag.getInteger(TAG_SHIELD);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
         return ImmutableList.of(Util.translateFormatted(loc, shield, MAX_SHIELD));
     }
