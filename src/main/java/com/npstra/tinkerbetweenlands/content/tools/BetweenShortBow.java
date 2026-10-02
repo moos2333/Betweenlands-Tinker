@@ -5,13 +5,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.tconstruct.library.TinkerRegistry;
@@ -30,6 +28,7 @@ import slimeknights.tconstruct.library.tools.ProjectileLauncherNBT;
 import slimeknights.tconstruct.library.tools.ranged.BowCore;
 import slimeknights.tconstruct.library.utils.ToolHelper;
 import slimeknights.tconstruct.tools.TinkerMaterials;
+import slimeknights.tconstruct.tools.ranged.TinkerRangedWeapons;
 import thebetweenlands.api.item.CorrosionHelper;
 import thebetweenlands.api.item.ICorrodible;
 import thebetweenlands.common.capability.circlegem.CircleGemHelper;
@@ -113,13 +112,7 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
 
     @Override
     protected List<Item> getAmmoItems() {
-        List<Item> ammo = new ArrayList<>();
-        for (Item item : ForgeRegistries.ITEMS) {
-            if (item instanceof ItemArrow) {
-                ammo.add(item);
-            }
-        }
-        return ammo;
+        return TinkerRangedWeapons.getDiscoveredArrows();
     }
 
     @Override
