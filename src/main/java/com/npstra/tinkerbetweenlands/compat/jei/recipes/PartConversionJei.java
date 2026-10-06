@@ -25,7 +25,7 @@ public class PartConversionJei extends AnimatorRecipe {
         NBTTagCompound display = stack.getOrCreateSubCompound("display");
         NBTTagList lore = new NBTTagList();
         lore.appendTag(new NBTTagString("§7Also works for:"));
-        lore.appendTag(new NBTTagString("§7Binding, Sword Blade, Axe Head, Shovel Head, Pick Head"));
+        lore.appendTag(new NBTTagString("§7Binding, Wide Guard, Sword Blade, Axe Head, Shovel Head, Pick Head, Bow Limb, Bow String"));
         display.setTag("Lore", lore);
         return stack;
     }

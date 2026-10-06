@@ -39,7 +39,7 @@ public class ToolConversionJei extends AnimatorRecipe {
         NBTTagCompound display = stack.getOrCreateSubCompound("display");
         NBTTagList lore = new NBTTagList();
         lore.appendTag(new NBTTagString("§7Also works for:"));
-        lore.appendTag(new NBTTagString("§7Pickaxe, Shovel, Hatchet"));
+        lore.appendTag(new NBTTagString("§7Pickaxe, Shovel, Hatchet, Shortbow"));
         display.setTag("Lore", lore);
         return stack;
     }
