@@ -23,6 +23,7 @@ public class PartConversionRecipe implements IAnimatorRecipe {
         Object item = stack.getItem();
         return item == TinkerTools.toolRod ||
                 item == TinkerTools.binding ||
+                item == TinkerTools.wideGuard ||
                 item == TinkerTools.swordBlade ||
                 item == TinkerTools.axeHead ||
                 item == TinkerTools.shovelHead ||
@@ -57,6 +58,8 @@ public class PartConversionRecipe implements IAnimatorRecipe {
         if (item == TinkerTools.toolRod) {
             outputPart = ModParts.BETWEEN_HANDLE;
         } else if (item == TinkerTools.binding) {
+            outputPart = ModParts.BETWEEN_EXTRA;
+        } else if (item == TinkerTools.wideGuard) {
             outputPart = ModParts.BETWEEN_EXTRA;
         } else if (item == TinkerTools.bowLimb) {
             outputPart = ModParts.BETWEENLANDS_LIMB;

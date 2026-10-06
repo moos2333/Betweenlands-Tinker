@@ -152,7 +152,7 @@ dependencies {
     implementation "curse.maven:mantle-74924:2713386"
     implementation "curse.maven:tinkers-construct-74072:2902483"
     implementation "curse.maven:constructs-armory-287683:3174535"
-    compileOnly "curse.maven:angry-pixel-the-betweenlands-mod-243363:4479688"
+    compileOnly files("libs/angry-pixel-the-betweenlands-mod-243363-4479688.jar")
 }
 
 apply from: 'gradle/scripts/dependencies.gradle'
