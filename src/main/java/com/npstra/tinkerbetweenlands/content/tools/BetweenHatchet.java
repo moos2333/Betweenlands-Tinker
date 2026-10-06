@@ -1,9 +1,12 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -108,6 +111,11 @@ public class BetweenHatchet extends AoeToolCore implements ICorrodible, IBetween
         ToolNBT data = buildDefaultTag(materials);
         data.attack += 0.5f;
         return data;
+    }
+
+    @Override
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        return IBetweenlandsTool.applyCorrosion(super.getAttributeModifiers(slot, stack), slot, stack, ATTACK_DAMAGE_MODIFIER);
     }
 
     @Override

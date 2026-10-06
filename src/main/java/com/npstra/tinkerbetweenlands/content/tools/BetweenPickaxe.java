@@ -1,7 +1,10 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -64,6 +67,11 @@ public class BetweenPickaxe extends AoeToolCore implements ICorrodible, IBetween
     @Override
     protected ToolNBT buildTagData(List<Material> materials) {
         return buildDefaultTag(materials);
+    }
+
+    @Override
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        return IBetweenlandsTool.applyCorrosion(super.getAttributeModifiers(slot, stack), slot, stack, ATTACK_DAMAGE_MODIFIER);
     }
 
     @Override

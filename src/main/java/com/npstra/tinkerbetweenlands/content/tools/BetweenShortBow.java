@@ -1,9 +1,12 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -130,6 +133,11 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
                 materials.get(2).getStatsOrUnknown("bowstring")
         });
         return data;
+    }
+
+    @Override
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        return IBetweenlandsTool.applyCorrosion(super.getAttributeModifiers(slot, stack), slot, stack, ATTACK_DAMAGE_MODIFIER);
     }
 
     @Override

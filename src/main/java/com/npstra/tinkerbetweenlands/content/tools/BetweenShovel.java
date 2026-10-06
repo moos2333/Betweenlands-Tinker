@@ -1,11 +1,14 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -104,6 +107,11 @@ public class BetweenShovel extends AoeToolCore implements ICorrodible, IBetweenl
     @Override
     protected ToolNBT buildTagData(List<Material> materials) {
         return buildDefaultTag(materials);
+    }
+
+    @Override
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        return IBetweenlandsTool.applyCorrosion(super.getAttributeModifiers(slot, stack), slot, stack, ATTACK_DAMAGE_MODIFIER);
     }
 
     @Override

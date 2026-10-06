@@ -1,12 +1,15 @@
 package com.npstra.tinkerbetweenlands.content.tools;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -85,6 +88,11 @@ public class BetweenBroadSword extends SwordCore implements ICorrodible, IBetwee
         data.attack += 1f;
         data.durability *= 1.1f;
         return data;
+    }
+
+    @Override
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        return IBetweenlandsTool.applyCorrosion(super.getAttributeModifiers(slot, stack), slot, stack, ATTACK_DAMAGE_MODIFIER);
     }
 
     @Override
