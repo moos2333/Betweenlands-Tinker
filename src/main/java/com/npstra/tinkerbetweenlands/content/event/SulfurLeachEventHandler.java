@@ -1,6 +1,5 @@
 package com.npstra.tinkerbetweenlands.content.event;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SulfurLeachEventHandler {
     private static final ConcurrentHashMap<Integer, Set<BlockPos>> tracked = new ConcurrentHashMap<>();
     private static final int CHECK_INTERVAL = 20;
-    private static final float CHANCE = 0.2F;
+    private static final float CHANCE = 0.25F;
     private static final int AMOUNT = 400;
 
     @SubscribeEvent
@@ -38,32 +37,25 @@ public class SulfurLeachEventHandler {
 
     @SubscribeEvent
     public void onWorldTick(TickEvent.WorldTickEvent event) {
-        if (event.world.isRemote) return;
         if (event.phase != TickEvent.Phase.END) return;
+        if (event.world.isRemote) return;
+        if (tracked.isEmpty()) return;
         World world = event.world;
+        if (!(world.provider instanceof WorldProviderBetweenlands)) return;
         Set<BlockPos> positions = tracked.get(world.provider.getDimension());
         if (positions == null || positions.isEmpty()) return;
-        long time = world.getTotalWorldTime();
-        if (time % CHECK_INTERVAL != 0) return;
-        boolean isRaining;
-        if (world.provider instanceof WorldProviderBetweenlands) {
-            isRaining = BetweenlandsWorldStorage.forWorld(world).getEnvironmentEventRegistry().heavyRain.isActive();
-        } else {
-            isRaining = world.isRaining();
-        }
-        if (!isRaining) return;
+        if (world.getTotalWorldTime() % CHECK_INTERVAL != 0) return;
+        if (!BetweenlandsWorldStorage.forWorld(world).getEnvironmentEventRegistry().heavyRain.isActive()) return;
         Iterator<BlockPos> it = positions.iterator();
         while (it.hasNext()) {
             BlockPos pos = it.next();
             if (!world.isBlockLoaded(pos)) continue;
-            IBlockState tankState = world.getBlockState(pos);
-            if (tankState.getBlock() != BlockRegistry.SYRMORITE_BARREL) {
+            if (world.getBlockState(pos).getBlock() != BlockRegistry.SYRMORITE_BARREL) {
                 it.remove();
                 continue;
             }
-            BlockPos above = pos.up();
-            IBlockState sulfurState = world.getBlockState(above);
-            if (sulfurState.getBlock() != BlockRegistry.SULFUR_BLOCK) {
+            BlockPos sulfurPos = pos.up();
+            if (world.getBlockState(sulfurPos).getBlock() != BlockRegistry.SULFUR_BLOCK) {
                 it.remove();
                 continue;
             }
@@ -80,7 +72,8 @@ public class SulfurLeachEventHandler {
             if (world.rand.nextFloat() < CHANCE) {
                 FluidStack molten = new FluidStack(FluidRegister.fluidMoltenSulfur, AMOUNT);
                 if (handler.fill(molten, true) == AMOUNT) {
-                    world.setBlockToAir(above);
+                    world.setBlockToAir(sulfurPos);
+                    it.remove();
                 }
             }
         }
