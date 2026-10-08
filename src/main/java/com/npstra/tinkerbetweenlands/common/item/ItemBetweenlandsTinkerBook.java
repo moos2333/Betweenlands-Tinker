@@ -39,7 +39,7 @@ public class ItemBetweenlandsTinkerBook extends Item {
     private static void openBook() {
         BookData book = BetweenlandsTinkerBook.get();
         if (book.fontRenderer == null) {
-            book.fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            book.fontRenderer = slimeknights.tconstruct.common.ClientProxy.fontRenderer;
         }
         book.openGui(ItemStack.EMPTY);
     }
