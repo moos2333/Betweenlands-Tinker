@@ -11,6 +11,9 @@ item.tinkerbetweenlands.between_broadsword.name=Betweenlands Broadsword
 item.tinkerbetweenlands.between_shortbow.name=Betweenlands Shortbow
 item.tinkerbetweenlands.betweenlands_tinker_book.name=Betweenlands Tinker Encyclopedia
 item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=A guide to all things Betweenlands and Tinkers'
+item.tinkerbetweenlands.distiller.name=Sulfur Distiller
+tooltip.tinkerbetweenlands.distiller.extract=Extracts Molten Sulfur from Sulfur Blocks
+tooltip.tinkerbetweenlands.distiller.repair=Can be repaired in the Animator
 
 # Betweenlands Tinker - Materials
 material.weedwood.name=Weedwood

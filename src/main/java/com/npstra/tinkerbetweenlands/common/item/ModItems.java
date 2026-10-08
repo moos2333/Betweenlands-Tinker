@@ -12,15 +12,21 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModItems {
     public static final ItemBetweenlandsTinkerBook BETWEENLANDS_TINKER_BOOK = new ItemBetweenlandsTinkerBook();
+    public static final ItemDistiller DISTILLER = new ItemDistiller();
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> registry = event.getRegistry();
         registry.register(BETWEENLANDS_TINKER_BOOK.setRegistryName("tinkerbetweenlands:betweenlands_tinker_book"));
+        registry.register(DISTILLER.setRegistryName("tinkerbetweenlands:distiller"));
     }
+
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void registerModels(ModelRegistryEvent event) {
-        ModelLoader.setCustomModelResourceLocation(BETWEENLANDS_TINKER_BOOK, 0, new ModelResourceLocation("tinkerbetweenlands:betweenlands_tinker_book", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(BETWEENLANDS_TINKER_BOOK, 0,
+                new ModelResourceLocation("tinkerbetweenlands:betweenlands_tinker_book", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(DISTILLER, 0,
+                new ModelResourceLocation("tinkerbetweenlands:distiller", "inventory"));
     }
 }

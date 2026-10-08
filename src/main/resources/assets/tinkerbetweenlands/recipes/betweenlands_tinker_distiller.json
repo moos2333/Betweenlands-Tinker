@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O B",
+    " RR",
+    "  V"
+  ],
+  "key": {
+    "O": {
+      "item": "thebetweenlands:octine_ingot"
+    },
+    "B": {
+      "item": "thebetweenlands:bl_bucket",
+      "data": 1
+    },
+    "R": {
+      "item": "thebetweenlands:items_misc",
+      "data": 7
+    },
+    "V": {
+      "item": "thebetweenlands:dentrothyst_vial",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "tinkerbetweenlands:distiller"
+  }
+}

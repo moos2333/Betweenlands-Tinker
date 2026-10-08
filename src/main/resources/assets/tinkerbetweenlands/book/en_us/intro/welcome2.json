@@ -1,12 +1,15 @@
 {
   "title": "Syrmorite Casts and Liquid Sulfur",
   "text": [
-    { "text": "Syrmorite serves as an excellent casting material. Pour molten Syrmorite over any tool part on a Casting Table to obtain a cast." },
+    { "text": "Syrmorite is an excellent casting material. Pour molten Syrmorite over a tool part placed on a Casting Table to obtain a permanent, reusable cast—just like a gold cast." },
     { "text": "\n" },
     { "text": "\n" },
-    { "text": "The Syrmorite Fluid Tank can also passively collect Molten Sulfur. Place a Sulfur block atop it and wait for rain; the water dissolves the Sulfur, storing the resulting liquid directly in the tank." },
+    { "text": "The Sulfur Distiller extracts Molten Sulfur from Sulfur Blocks. Aim at a Sulfur Block and charge; release to extract. When worn out, repair it in the Animator." },
     { "text": "\n" },
     { "text": "\n" },
-    { "text": "This Molten Sulfur serves as a potent liquid fuel for the Smeltery, offering an alternative to lava." }
+    { "text": "Molten Sulfur is a liquid fuel for the Smeltery, serving as an early alternative to lava." },
+    { "text": "\n" },
+    { "text": "\n" },
+    { "text": "With Molten Sulfur, you can obtain Molten Octine—a liquid fuel as hot as lava." }
   ]
 }

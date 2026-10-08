@@ -11,6 +11,9 @@ item.tinkerbetweenlands.between_broadsword.name=交错剑
 item.tinkerbetweenlands.between_shortbow.name=交错弓
 item.tinkerbetweenlands.betweenlands_tinker_book.name=交错工匠百科
 item.tinkerbetweenlands.betweenlands_tinker_book.tooltip=一本关于交错次元与匠魂的指南
+item.tinkerbetweenlands.distiller.name=硫磺蒸馏器
+tooltip.tinkerbetweenlands.distiller.extract=从硫磺块中提取熔融硫磺
+tooltip.tinkerbetweenlands.distiller.repair=可使用活化器修复
 
 # Betweenlands Tinker - Materials
 material.weedwood.name=杂草木

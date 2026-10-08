@@ -4,7 +4,6 @@ import com.npstra.tinkerbetweenlands.common.item.ItemBetweenlandsTinkerBook;
 import com.npstra.tinkerbetweenlands.common.item.ModItems;
 import com.npstra.tinkerbetweenlands.compat.conarm.materials.ArmorMaterial;
 import com.npstra.tinkerbetweenlands.compat.conarm.modifiers.ArmorModifierRegister;
-import com.npstra.tinkerbetweenlands.content.event.EventRegistry;
 import com.npstra.tinkerbetweenlands.content.fluid.FluidRegister;
 import com.npstra.tinkerbetweenlands.content.modifiers.ModifierRegister;
 import com.npstra.tinkerbetweenlands.content.recipe.*;
@@ -83,7 +82,6 @@ public class BetweenlandsTinker {
             AnimatorRecipe.addRecipe(new com.npstra.tinkerbetweenlands.compat.jei.recipes.PartConversionJei());
         }
 
-        EventRegistry.registerEvents();
         ForgeRegistries.RECIPES.register(new GemAttachmentRecipe().setRegistryName(Tags.MOD_ID, "gem_attachment"));
         ForgeRegistries.RECIPES.register(new SilkRepairRecipe());
         if (Loader.isModLoaded("conarm")) {
