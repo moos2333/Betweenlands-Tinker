@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "thebetweenlands:items_plant_drop",
+      "data": 30
+    }
+  },
+  "result": {
+    "item": "tconstruct:materials",
+    "data": 18,
+    "count": 1
+  }
+}

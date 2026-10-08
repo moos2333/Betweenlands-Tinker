@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "thebetweenlands:items_misc", "data": 32 },
+    { "item": "thebetweenlands:items_misc", "data": 32 },
+    { "item": "thebetweenlands:items_misc", "data": 32 },
+    { "item": "thebetweenlands:items_misc", "data": 4 }
+  ],
+  "result": {
+    "item": "minecraft:book",
+    "count": 1
+  }
+}

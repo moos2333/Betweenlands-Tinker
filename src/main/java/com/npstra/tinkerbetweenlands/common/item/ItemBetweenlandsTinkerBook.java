@@ -1,5 +1,6 @@
 package com.npstra.tinkerbetweenlands.common.item;
 
+import com.npstra.tinkerbetweenlands.client.BetweenlandsTinkerBook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,32 +20,36 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemBetweenlandsTinkerBook extends Item {
-    public static BookData BOOK_DATA;
 
     public ItemBetweenlandsTinkerBook() {
-        this.setMaxStackSize(1);
-        this.setTranslationKey("tinkerbetweenlands.betweenlands_tinker_book");
+        setMaxStackSize(1);
+        setTranslationKey("tinkerbetweenlands.betweenlands_tinker_book");
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
-        if (world.isRemote && BOOK_DATA != null) {
-            if (BOOK_DATA.fontRenderer == null) {
-                BOOK_DATA.fontRenderer = Minecraft.getMinecraft().fontRenderer;
-            }
-            BOOK_DATA.openGui(stack);
-            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+        if (world.isRemote) {
+            openBook();
         }
-        return new ActionResult<>(EnumActionResult.PASS, stack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void openBook() {
+        BookData book = BetweenlandsTinkerBook.get();
+        if (book.fontRenderer == null) {
+            book.fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        }
+        book.openGui(ItemStack.EMPTY);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (net.minecraft.util.text.translation.I18n.canTranslate(this.getTranslationKey(stack) + ".tooltip")) {
+        if (net.minecraft.util.text.translation.I18n.canTranslate(getTranslationKey(stack) + ".tooltip")) {
             tooltip.addAll(LocUtils.getTooltips(TextFormatting.GRAY.toString() +
-                    LocUtils.translateRecursive(this.getTranslationKey(stack) + ".tooltip")));
+                    LocUtils.translateRecursive(getTranslationKey(stack) + ".tooltip")));
         }
         tooltip.add(TextFormatting.GRAY + "by moos233");
     }
