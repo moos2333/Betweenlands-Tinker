@@ -131,6 +131,7 @@ public class BetweenHatchet extends AoeToolCore implements ICorrodible, IBetween
     @Override
     public void onUpdate(ItemStack stack, World world, Entity holder, int slot, boolean isHeld) {
         CorrosionHelper.updateCorrosion(stack, world, holder, slot, isHeld);
+        super.onUpdate(stack, world, holder, slot, isHeld);
     }
 
     @SideOnly(Side.CLIENT)

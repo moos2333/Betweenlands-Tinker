@@ -132,6 +132,7 @@ public class BetweenShovel extends AoeToolCore implements ICorrodible, IBetweenl
     @Override
     public void onUpdate(ItemStack stack, World world, Entity holder, int slot, boolean isHeld) {
         CorrosionHelper.updateCorrosion(stack, world, holder, slot, isHeld);
+        super.onUpdate(stack, world, holder, slot, isHeld);
     }
 
     @SideOnly(Side.CLIENT)

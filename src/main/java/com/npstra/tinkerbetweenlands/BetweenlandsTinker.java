@@ -75,6 +75,7 @@ public class BetweenlandsTinker {
         SmelteryRecipeRegister.init(event);
         AnimatorRecipe.addRecipe(new ToolConversionRecipe());
         AnimatorRecipe.addRecipe(new PartConversionRecipe());
+        AnimatorRecipe.addRecipe(new TinkerToolRepairAnimatorRecipe());
 
         if (Loader.isModLoaded("jei")) {
             AnimatorRecipe.addRecipe(new com.npstra.tinkerbetweenlands.compat.jei.recipes.ToolConversionJei());
