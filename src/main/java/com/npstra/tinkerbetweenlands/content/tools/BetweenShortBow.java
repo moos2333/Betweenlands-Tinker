@@ -157,6 +157,7 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
         return CorrosionHelper.shouldCauseReequipAnimation(old, newS, slotChanged);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public ICrosshair getCrosshair(ItemStack itemStack, EntityPlayer player) {
         return Crosshairs.SQUARE;
