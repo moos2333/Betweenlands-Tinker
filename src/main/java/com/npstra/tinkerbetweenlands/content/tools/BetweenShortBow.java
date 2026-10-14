@@ -163,6 +163,7 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
         return Crosshairs.SQUARE;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public float getCrosshairState(ItemStack itemStack, EntityPlayer player) {
         return this.getDrawbackProgress(itemStack, player);
