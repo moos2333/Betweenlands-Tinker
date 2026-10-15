@@ -152,11 +152,6 @@ public class BetweenShortBow extends BowCore implements ICorrodible, IBetweenlan
         return CorrosionHelper.shouldCauseBlockBreakReset(old, newS);
     }
 
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack old, ItemStack newS, boolean slotChanged) {
-        return CorrosionHelper.shouldCauseReequipAnimation(old, newS, slotChanged);
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public ICrosshair getCrosshair(ItemStack itemStack, EntityPlayer player) {

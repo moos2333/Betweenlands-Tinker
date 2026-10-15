@@ -80,11 +80,6 @@ public class BetweenPickaxe extends AoeToolCore implements ICorrodible, IBetween
     }
 
     @Override
-    public boolean shouldCauseReequipAnimation(ItemStack old, ItemStack newS, boolean slotChanged) {
-        return CorrosionHelper.shouldCauseReequipAnimation(old, newS, slotChanged);
-    }
-
-    @Override
     public float getDestroySpeed(ItemStack stack, IBlockState state) {
         return CorrosionHelper.getDestroySpeed(super.getDestroySpeed(stack, state), stack, state);
     }

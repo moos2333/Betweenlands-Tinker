@@ -10,6 +10,7 @@ import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import com.npstra.tinkerbetweenlands.config.ModConfig;
+import thebetweenlands.common.world.WorldProviderBetweenlands;
 
 import java.util.List;
 
@@ -55,11 +56,12 @@ public class TraitWeedShield extends AbstractTrait {
             delta = 0;
             prevTick = currentTick;
         }
-        long maxDelta = (getInterval(world) * 20L) * 2;
+        int interval = getInterval(world);
+        long intervalTicks = interval * 20L;
+        long maxDelta = intervalTicks * 2;
         if (delta > maxDelta) delta = maxDelta;
 
         accum += delta;
-        long intervalTicks = getInterval(world) * 20L;
         while (accum >= intervalTicks) {
             shield++;
             accum -= intervalTicks;
@@ -73,7 +75,7 @@ public class TraitWeedShield extends AbstractTrait {
     }
 
     private int getInterval(World world) {
-        return world.provider.getDimension() == ModConfig.dimensionId ? BONUS_INTERVAL : NORMAL_INTERVAL;
+        return world.provider instanceof WorldProviderBetweenlands ? BONUS_INTERVAL : NORMAL_INTERVAL;
     }
 
     @Override
