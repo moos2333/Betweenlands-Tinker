@@ -50,11 +50,14 @@ public class TraitStacking extends AbstractTrait {
         if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
-        if (newDamage > 0) {
+        if (newDamage > 0 && data.stack < MAX_STACK) {
             data.accumulated += newDamage;
             while (data.accumulated >= ACCUMULATE_THRESHOLD && data.stack < MAX_STACK) {
                 data.stack++;
                 data.accumulated -= ACCUMULATE_THRESHOLD;
+            }
+            if (data.stack >= MAX_STACK) {
+                data.accumulated = 0;
             }
             saveData(tool, data);
         }
@@ -63,9 +66,9 @@ public class TraitStacking extends AbstractTrait {
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        Data data = getData(tool);
+        int stack = modifierTag.getInteger(KEY_STACK);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
-        return ImmutableList.of(Util.translateFormatted(loc, data.stack));
+        return ImmutableList.of(Util.translateFormatted(loc, stack));
     }
 
     private static class Data {

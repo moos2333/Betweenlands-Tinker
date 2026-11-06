@@ -9,6 +9,7 @@ import net.minecraft.util.text.TextFormatting;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.utils.TagUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 public class TraitStackingArmor extends AbstractArmorTrait {
@@ -21,18 +22,18 @@ public class TraitStackingArmor extends AbstractArmorTrait {
         super("stacking", TextFormatting.GOLD);
     }
 
-    private int getStack(ItemStack armor) {
-        return TagUtil.getTagSafe(armor).getInteger(KEY_STACK);
-    }
-
-    private int getAccum(ItemStack armor) {
-        return TagUtil.getTagSafe(armor).getInteger(KEY_ACCUM);
-    }
-
-    private void setData(ItemStack armor, int stack, int accum) {
+    private Data getData(ItemStack armor) {
         NBTTagCompound root = TagUtil.getTagSafe(armor);
-        root.setInteger(KEY_STACK, stack);
-        root.setInteger(KEY_ACCUM, accum);
+        Data data = new Data();
+        data.stack = root.getInteger(KEY_STACK);
+        data.accumulated = root.getInteger(KEY_ACCUM);
+        return data;
+    }
+
+    private void saveData(ItemStack armor, Data data) {
+        NBTTagCompound root = TagUtil.getTagSafe(armor);
+        root.setInteger(KEY_STACK, data.stack);
+        root.setInteger(KEY_ACCUM, data.accumulated);
         armor.setTagCompound(root);
     }
 
@@ -43,26 +44,36 @@ public class TraitStackingArmor extends AbstractArmorTrait {
 
     @Override
     public int onArmorDamage(ItemStack armor, DamageSource source, int damage, int newDamage, EntityPlayer player, int slot) {
-        int stack = getStack(armor);
-        int accum = getAccum(armor);
-        if (stack > 0 && player.world.rand.nextFloat() < stack * 0.01f) {
+        if (player == null) {
+            return newDamage;
+        }
+        Data data = getData(armor);
+        if (data.stack > 0 && player.world.rand.nextFloat() < data.stack * 0.01f) {
             return 0;
         }
-        if (newDamage > 0) {
-            accum += newDamage;
-            while (accum >= ACCUMULATE_THRESHOLD && stack < MAX_STACK) {
-                stack++;
-                accum -= ACCUMULATE_THRESHOLD;
+        if (newDamage > 0 && data.stack < MAX_STACK) {
+            data.accumulated += newDamage;
+            while (data.accumulated >= ACCUMULATE_THRESHOLD && data.stack < MAX_STACK) {
+                data.stack++;
+                data.accumulated -= ACCUMULATE_THRESHOLD;
             }
-            setData(armor, stack, accum);
+            if (data.stack >= MAX_STACK) {
+                data.accumulated = 0;
+            }
+            saveData(armor, data);
         }
         return newDamage;
     }
 
     @Override
-    public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        int stackCount = getStack(tool);
+    public List<String> getExtraInfo(ItemStack armor, NBTTagCompound modifierTag) {
+        int stackCount = modifierTag.getInteger(KEY_STACK);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
-        return java.util.Collections.singletonList(Util.translateFormatted(loc, stackCount));
+        return Collections.singletonList(Util.translateFormatted(loc, stackCount));
+    }
+
+    private static class Data {
+        int stack;
+        int accumulated;
     }
 }
