@@ -8,7 +8,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
-import com.npstra.tinkerbetweenlands.config.ModConfig;
 import thebetweenlands.common.world.WorldProviderBetweenlands;
 
 public class TraitWeedShieldArmor extends AbstractArmorTrait {
@@ -30,16 +29,17 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
 
         NBTTagCompound tag = TinkerUtil.getModifierTag(armor, getModifierIdentifier());
         int shield = tag.getInteger(TAG_SHIELD);
+        long prevTick = tag.getLong(TAG_PREV_TICK);
+
         if (shield >= MAX_SHIELD) {
-            tag.removeTag(TAG_ACCUM);
-            tag.removeTag(TAG_PREV_TICK);
+            if (prevTick != 0) {
+                tag.removeTag(TAG_ACCUM);
+                tag.removeTag(TAG_PREV_TICK);
+            }
             return;
         }
 
         long currentTick = player.ticksExisted;
-        long prevTick = tag.getLong(TAG_PREV_TICK);
-        long accum = tag.getLong(TAG_ACCUM);
-
         if (prevTick == 0) {
             tag.setLong(TAG_PREV_TICK, currentTick);
             return;
@@ -47,25 +47,29 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
 
         long delta = currentTick - prevTick;
         if (delta < 0) {
-            delta = 0;
-            prevTick = currentTick;
+            tag.setLong(TAG_PREV_TICK, currentTick);
+            return;
         }
-        int interval = getInterval(world);
-        long intervalTicks = interval * 20L;
+
+        long intervalTicks = getInterval(world) * 20L;
         long maxDelta = intervalTicks * 2;
         if (delta > maxDelta) delta = maxDelta;
 
-        int oldShield = shield;
-        accum += delta;
-        while (accum >= intervalTicks) {
-            shield++;
-            accum -= intervalTicks;
-            if (shield >= MAX_SHIELD) break;
-        }
+        long accum = tag.getLong(TAG_ACCUM) + delta;
+        if (accum < intervalTicks) return;
 
-        if (shield != oldShield) tag.setInteger(TAG_SHIELD, shield);
-        tag.setLong(TAG_ACCUM, accum);
-        tag.setLong(TAG_PREV_TICK, currentTick);
+        int gained = (int) Math.min(accum / intervalTicks, MAX_SHIELD - shield);
+        shield += gained;
+        accum -= gained * intervalTicks;
+
+        tag.setInteger(TAG_SHIELD, shield);
+        if (shield >= MAX_SHIELD) {
+            tag.removeTag(TAG_ACCUM);
+            tag.removeTag(TAG_PREV_TICK);
+        } else {
+            tag.setLong(TAG_ACCUM, accum);
+            tag.setLong(TAG_PREV_TICK, currentTick);
+        }
     }
 
     private int getInterval(World world) {
