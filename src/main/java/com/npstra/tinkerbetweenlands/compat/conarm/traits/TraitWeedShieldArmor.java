@@ -31,8 +31,8 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
         NBTTagCompound tag = TinkerUtil.getModifierTag(armor, getModifierIdentifier());
         int shield = tag.getInteger(TAG_SHIELD);
         if (shield >= MAX_SHIELD) {
-            if (tag.hasKey(TAG_ACCUM)) tag.removeTag(TAG_ACCUM);
-            if (tag.hasKey(TAG_PREV_TICK)) tag.removeTag(TAG_PREV_TICK);
+            tag.removeTag(TAG_ACCUM);
+            tag.removeTag(TAG_PREV_TICK);
             return;
         }
 
@@ -42,7 +42,6 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
 
         if (prevTick == 0) {
             tag.setLong(TAG_PREV_TICK, currentTick);
-            tag.setLong(TAG_ACCUM, accum);
             return;
         }
 
@@ -56,15 +55,15 @@ public class TraitWeedShieldArmor extends AbstractArmorTrait {
         long maxDelta = intervalTicks * 2;
         if (delta > maxDelta) delta = maxDelta;
 
+        int oldShield = shield;
         accum += delta;
         while (accum >= intervalTicks) {
             shield++;
             accum -= intervalTicks;
             if (shield >= MAX_SHIELD) break;
         }
-        if (shield > MAX_SHIELD) shield = MAX_SHIELD;
 
-        tag.setInteger(TAG_SHIELD, shield);
+        if (shield != oldShield) tag.setInteger(TAG_SHIELD, shield);
         tag.setLong(TAG_ACCUM, accum);
         tag.setLong(TAG_PREV_TICK, currentTick);
     }
