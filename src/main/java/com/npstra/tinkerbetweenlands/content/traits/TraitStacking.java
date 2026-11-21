@@ -21,21 +21,6 @@ public class TraitStacking extends AbstractTrait {
         super("stacking", 0x00AA00);
     }
 
-    private Data getData(ItemStack tool) {
-        NBTTagCompound root = TagUtil.getTagSafe(tool);
-        Data data = new Data();
-        data.stack = root.getInteger(KEY_STACK);
-        data.accumulated = root.getInteger(KEY_ACCUM);
-        return data;
-    }
-
-    private void saveData(ItemStack tool, Data data) {
-        NBTTagCompound root = TagUtil.getTagSafe(tool);
-        root.setInteger(KEY_STACK, data.stack);
-        root.setInteger(KEY_ACCUM, data.accumulated);
-        tool.setTagCompound(root);
-    }
-
     @Override
     public int onToolHeal(ItemStack tool, int amount, int newAmount, EntityLivingBase entity) {
         return newAmount / 5;
@@ -46,36 +31,34 @@ public class TraitStacking extends AbstractTrait {
         if (entity == null) {
             return newDamage;
         }
-        Data data = getData(tool);
-        if (data.stack >= MAX_STACK) {
+        NBTTagCompound root = TagUtil.getTagSafe(tool);
+        int stack = root.getInteger(KEY_STACK);
+        if (stack >= MAX_STACK) {
             return 0;
         }
-        if (data.stack > 0 && entity.world.rand.nextFloat() < data.stack * 0.01f) {
+        if (stack > 0 && entity.world.rand.nextFloat() < stack * 0.01f) {
             return 0;
         }
-        if (newDamage > 0) {
-            data.accumulated += newDamage;
-            while (data.accumulated >= ACCUMULATE_THRESHOLD && data.stack < MAX_STACK) {
-                data.stack++;
-                data.accumulated -= ACCUMULATE_THRESHOLD;
-            }
-            if (data.stack >= MAX_STACK) {
-                data.accumulated = 0;
-            }
-            saveData(tool, data);
+        if (newDamage <= 0) {
+            return newDamage;
         }
+        int accumulated = root.getInteger(KEY_ACCUM) + newDamage;
+        while (accumulated >= ACCUMULATE_THRESHOLD && stack < MAX_STACK) {
+            stack++;
+            accumulated -= ACCUMULATE_THRESHOLD;
+        }
+        if (stack >= MAX_STACK) {
+            accumulated = 0;
+        }
+        root.setInteger(KEY_STACK, stack);
+        root.setInteger(KEY_ACCUM, accumulated);
+        tool.setTagCompound(root);
         return newDamage;
     }
 
     @Override
     public List<String> getExtraInfo(ItemStack tool, NBTTagCompound modifierTag) {
-        Data data = getData(tool);
         String loc = String.format(LOC_Extra, getModifierIdentifier());
-        return ImmutableList.of(Util.translateFormatted(loc, data.stack));
-    }
-
-    private static class Data {
-        int stack;
-        int accumulated;
+        return ImmutableList.of(Util.translateFormatted(loc, TagUtil.getTagSafe(tool).getInteger(KEY_STACK)));
     }
 }

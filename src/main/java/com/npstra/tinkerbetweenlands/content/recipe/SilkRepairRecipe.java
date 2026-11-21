@@ -42,7 +42,7 @@ public class SilkRepairRecipe extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
             if (slot.getItem() instanceof ToolCore) {
                 if (tool != null) return ItemStack.EMPTY;
-                tool = slot.copy();
+                tool = slot;
                 continue;
             }
 
@@ -61,16 +61,15 @@ public class SilkRepairRecipe extends IForgeRegistryEntry.Impl<IRecipe> implemen
         int maxRepairable = maxDamage * (100 - MAX_REPAIR_PERCENT) / 100;
         if (currentDamage <= maxRepairable) return ItemStack.EMPTY;
 
+        if (simulate) return tool;
+
         int maxSilk = Math.min(silkCount, 8);
         int repairAmount = (int) (maxDamage * REPAIR_PER_SILK / 100.0f * maxSilk);
         int newDamage = Math.max(maxRepairable, currentDamage - repairAmount);
 
-        if (!simulate) {
-            ToolHelper.repairTool(tool, currentDamage - newDamage);
-        } else {
-            tool.setItemDamage(newDamage);
-        }
-        return tool;
+        ItemStack repaired = tool.copy();
+        ToolHelper.repairTool(repaired, currentDamage - newDamage);
+        return repaired;
     }
 
     @Override
