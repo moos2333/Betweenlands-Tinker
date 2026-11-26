@@ -21,7 +21,7 @@ public class ToolConversionJei extends AnimatorRecipe {
     private static final ToolCore OUTPUT_ITEM = ModTools.BETWEEN_BROADSWORD;
 
     public ToolConversionJei() {
-        super(withLore(createToolItem(INPUT_ITEM, getMaterial())), 16, 25, createToolItem(OUTPUT_ITEM, getMaterial()));
+        super(withLore(createToolItem(INPUT_ITEM, getMaterial())), 16, 32, createToolItem(OUTPUT_ITEM, getMaterial()));
     }
 
     private static Material getMaterial() {

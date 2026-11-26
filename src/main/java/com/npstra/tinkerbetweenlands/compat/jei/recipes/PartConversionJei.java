@@ -14,7 +14,7 @@ import com.npstra.tinkerbetweenlands.content.parts.ModParts;
 
 public class PartConversionJei extends AnimatorRecipe {
     public PartConversionJei() {
-        super(withLore(TinkerTools.toolRod.getItemstackWithMaterial(getMaterial())), 2, 5, ModParts.BETWEEN_HANDLE.getItemstackWithMaterial(getMaterial()));
+        super(withLore(TinkerTools.toolRod.getItemstackWithMaterial(getMaterial())), 8, 16, ModParts.BETWEEN_HANDLE.getItemstackWithMaterial(getMaterial()));
     }
 
     private static Material getMaterial() {

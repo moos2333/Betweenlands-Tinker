@@ -34,7 +34,7 @@ public class SilkRepairRecipe extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
     private ItemStack getRepairedTool(InventoryCrafting inv, boolean simulate) {
         ItemStack tool = null;
-        int silkCount = 0;
+        int silkStacks = 0;
 
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack slot = inv.getStackInSlot(i);
@@ -47,13 +47,13 @@ public class SilkRepairRecipe extends IForgeRegistryEntry.Impl<IRecipe> implemen
             }
 
             if (slot.getItem() == ItemRegistry.ITEMS_MISC && slot.getMetadata() == 63) {
-                silkCount += slot.getCount();
+                silkStacks++;
             } else {
                 return ItemStack.EMPTY;
             }
         }
 
-        if (tool == null || silkCount == 0) return ItemStack.EMPTY;
+        if (tool == null || silkStacks == 0) return ItemStack.EMPTY;
         if (!TinkerUtil.hasModifier(TagUtil.getTagSafe(tool), "silk_thread")) return ItemStack.EMPTY;
 
         int maxDamage = tool.getMaxDamage();
@@ -63,7 +63,7 @@ public class SilkRepairRecipe extends IForgeRegistryEntry.Impl<IRecipe> implemen
 
         if (simulate) return tool;
 
-        int maxSilk = Math.min(silkCount, 8);
+        int maxSilk = Math.min(silkStacks, 8);
         int repairAmount = (int) (maxDamage * REPAIR_PER_SILK / 100.0f * maxSilk);
         int newDamage = Math.max(maxRepairable, currentDamage - repairAmount);
 
